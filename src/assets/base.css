@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Tusker Grotesk";
+  src: url("/fonts/tusker-grotesk.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@theme {
+  --font-ibm: "IBM Plex Sans", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-tusker: "Tusker Grotesk", sans-serif;
+
+  --color-rojo: oklch(59.998% 0.24594 29.269);
+  --color-rojo-50: oklch(81.881% 0.10186 19.49);
+  --color-rojo-100: oklch(78.087% 0.1279 20.967);
+  --color-rojo-200: oklch(71.289% 0.18012 23.162);
+  --color-rojo-300: oklch(66.259% 0.22404 25.803);
+  --color-rojo-400: oklch(63.499% 0.25057 28.498);
+  --color-rojo-500: oklch(59.998% 0.24594 29.269);
+  --color-rojo-600: oklch(49.172% 0.20139 29.297);
+  --color-rojo-700: oklch(37.717% 0.15412 29.375);
+  --color-rojo-800: oklch(25.223% 0.1035 29.234);
+  --color-rojo-900: oklch(10.866% 0.04459 29.234);
+  --color-rojo-950: oklch(0% 0 none);
+
+  --color-amarillo: oklch(82.895% 0.15668 77.266);
+  --color-amarillo-50: oklch(98.623% 0.01422 84.583);
+  --color-amarillo-100: oklch(96.536% 0.03329 81.99);
+  --color-amarillo-200: oklch(92.901% 0.07084 82.748);
+  --color-amarillo-300: oklch(89.282% 0.10435 81.257);
+  --color-amarillo-400: oklch(86.058% 0.13462 80.288);
+  --color-amarillo-500: oklch(82.895% 0.15668 77.266);
+  --color-amarillo-600: oklch(79.093% 0.17118 70.153);
+  --color-amarillo-700: oklch(65.817% 0.14186 70.844);
+  --color-amarillo-800: oklch(51.83% 0.11096 72.031);
+  --color-amarillo-900: oklch(36.816% 0.07783 74.542);
+  --color-amarillo-950: oklch(28.729% 0.06005 77.241);
+
+  --color-negro: oklch(0% 0 none);
+  --color-negro-50: oklch(78.26% 0 none);
+  --color-negro-100: oklch(74.763% 0 none);
+  --color-negro-200: oklch(68.295% 0 none);
+  --color-negro-300: oklch(61.671% 0 none);
+  --color-negro-400: oklch(54.517% 0 none);
+  --color-negro-500: oklch(47.478% 0 none);
+  --color-negro-600: oklch(39.793% 0 none);
+  --color-negro-700: oklch(32.109% 0 none);
+  --color-negro-800: oklch(23.929% 0 none);
+  --color-negro-900: oklch(14.479% 0 none);
+  --color-negro-950: oklch(0% 0 none);
+}
