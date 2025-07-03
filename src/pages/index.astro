@@ -1,14 +1,20 @@
 ---
-import React from '../components/React.tsx';
-import Layout from '../layouts/Layout.astro';
-import Welcome from '../components/Welcome.astro';
-import '../assets/base.css';
+import React from "../components/React.tsx";
+import Layout from "../layouts/Layout.astro";
+import Welcome from "../components/Welcome.astro";
+import "../assets/base.css";
+import Programacion from "../components/Programacion.astro";
+import Agenda from "../components/Agenda.astro";
+import Playlists from "../components/Playlists.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome client:load />
-	<React client:load />
+  <Welcome />
+  <React client:load />
+  <Programacion />
+  <Agenda />
+  <Playlists />
 </Layout>

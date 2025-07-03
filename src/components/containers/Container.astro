@@ -1,0 +1,15 @@
+---
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+  class?: string;
+}
+
+const { class: classes = "" } = Astro.props;
+const cn = (...inputs: unknown[]) => twMerge(clsx(inputs));
+---
+
+<div class={cn("max-w-[90vw] mx-auto", classes)}>
+  <slot />
+</div>

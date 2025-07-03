@@ -1,11 +1,8 @@
 ---
----
+import { secureFetch } from "../lib/secureFetch";
 
-<div>
-	<h1 id="title">Hola :D</h1>
-	<div class="box w-10 h-10 bg-red-500"></div>
-	<div class="box w-10 h-10 bg-rojo"></div>
-</div>
+const playlists = await secureFetch("playlists");
+---
 
 <script type="module">
   import { animate } from "motion";
