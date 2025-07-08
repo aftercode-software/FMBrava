@@ -1,0 +1,64 @@
+.embla {
+  
+  --featured-width: 35%;
+  --slide-gap: 1rem;
+  --regular-width: 20%;
+  position: relative;
+  overflow: hidden;
+}
+
+.embla__featured {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--featured-width);
+  height: 100%;
+  padding-right: var(--slide-gap);
+  z-index: 10;
+}
+
+.embla__featured-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+
+.embla__viewport {
+  height: 100%;
+  margin-left: calc(var(--featured-width) + var(--slide-gap));
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  gap: var(--slide-gap);
+  align-items: center;
+  height: 100%;
+}
+
+.embla__slide {
+  flex: 0 0 var(--regular-width);
+  min-width: var(--regular-width);
+  height: 100%;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.embla__slide:hover img {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+.embla__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+}
