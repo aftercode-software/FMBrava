@@ -31,8 +31,12 @@ export async function fetchProgramas(): Promise<Programa[]> {
   const { docs } = await secureFetch<{ docs: ProgramaRaw[] }>("programacion");
   if (!docs) throw new Error("Error fetching programas");
 
+  const filteredDocs = docs.filter(
+    (item) => new Date(item.fechaFin) > new Date()
+  );
+
   return Promise.all(
-    docs.map(async (item) => {
+    filteredDocs.map(async (item) => {
       const presignedUrl = await fetchImagenPresign(item.imagenPrincipal.url);
       return {
         id: item.id,

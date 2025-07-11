@@ -1,0 +1,29 @@
+---
+export const prerender = true;
+export const revalidate = 3600;
+import Layout from "../layouts/Layout.astro";
+import "../assets/base.css";
+
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=300, s-maxage=3600"
+);
+
+import { fetchProgramas, type Programa } fr om "../utils/fetchProgramas";
+
+import { fetchBlogs } from "@/utils/fetchBlogs";
+
+const programas: Programa[] = await fetchProgramas();
+
+// Ensure blogs is a SerializedEditorState object with a 'root' property
+const blogs = await fetchBlogs();
+// If fetchBlogs returns an array, select the first item or transform as needed
+const richTextData = Array.isArray(blogs) ? blogs[0] : blogs;
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout>
+  <!-- <Hero /> -->
+  <RichTextRenderer data={richTextData} />
+</Layout>
