@@ -1,0 +1,16 @@
+---
+const { event } = Astro.props;
+const date = new Date(event.dia);
+const day = date.getDate();
+const month = date.toLocaleDateString("es-AR", { month: "long" });
+---
+
+<div class="text-center text-white">
+    <img
+        src={event.imagen.url}
+        alt={event.imagen.alt}
+        class="w-full rounded-lg object-cover aspect-square"
+    />
+    <p class="text-4xl font-bold mt-2">{day}</p>
+    <p class="text-muted-foreground font-inter">{month}</p>
+</div>

@@ -1,0 +1,36 @@
+---
+import { fetchAgenda } from "@/utils/fetchAgenda";
+
+import ViewAllButton from "../ViewAllButton.astro";
+import EventCard from "./EventCard.astro";
+import FeaturedEvent from "./FeaturedEvent.astro";
+import Container from "../containers/Container.astro";
+
+const events = await fetchAgenda();
+if (!events || events.length === 0) throw new Error("No events found");
+
+const [featured, ...rest] = events;
+---
+
+<Container class="py-10 md:py-16 px-4">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h2
+                class="text-muted-foreground text-sm font-inter uppercase tracking-wider"
+            >
+                Coming soon
+            </h2>
+            <p class="text-xl md:text-2xl font-bold font-tusker">
+                Check our upcoming releases
+            </p>
+        </div>
+        <ViewAllButton count={events.length} />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
+        <FeaturedEvent event={featured} />
+        <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
+            {rest.map((event) => <EventCard key={event.id} event={event} />)}
+        </div>
+    </div>
+</Container>

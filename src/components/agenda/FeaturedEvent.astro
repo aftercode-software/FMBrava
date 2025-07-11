@@ -1,0 +1,24 @@
+---
+const { event } = Astro.props;
+
+const date = new Date(event.dia);
+const day = date.getDate();
+const month = date.toLocaleDateString("es-AR", { month: "long" });
+---
+
+<div class="relative overflow-hidden rounded-2xl bg-rojo-500">
+    <img
+        src={event.imagen.url}
+        alt={event.imagen.alt}
+        class="w-full h-full object-cover"
+    />
+    <div
+        class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end"
+    >
+        <h3 class="text-white text-xl md:text-2xl font-bold">{event.nombre}</h3>
+        <p class="text-white text-5xl font-extrabold font-inter mt-1">{day}</p>
+        <p class="text-white font-semibold text-sm uppercase tracking-wider">
+            {month}
+        </p>
+    </div>
+</div>
