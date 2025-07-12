@@ -5,21 +5,21 @@ const day = date.getDate();
 const month = date.toLocaleDateString("es-AR", { month: "long" });
 ---
 
-<div class="flex items-center gap-[4px] h-full text-white/40">
-    <div class="flex flex-col justify-center text-right">
+<div class="flex items-center gap-[4px] h-full w-full text-white/40">
+    <div class="w-[50%] flex flex-col justify-center text-right">
+        <p class="text-[28px] font-inter">
+            {month}
+        </p>
         <p class="text-[128px] font-bold leading-none">
             {day}
         </p>
-        <p class="text-[28px] font-inter -mt-1">
-            {month}
-        </p>
     </div>
 
-    <div class="flex-1 h-full">
+    <div class="w-[50%] flex-1 h-full overflow-hidden">
         <img
             src={event.imagen.url}
             alt={event.imagen.alt}
-            class="w-full h-full object-contain"
+            class="w-[82%] h-full object-cover rounded-[8px_8px_76px_8px]"
         />
     </div>
 </div>

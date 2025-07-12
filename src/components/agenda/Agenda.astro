@@ -13,18 +13,24 @@ const [featured, ...rest] = events;
 ---
 
 <Container class="py-10 md:py-16 px-4">
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center mb-6">
+        <div>
+            <img
+                src="../../../public/images/agenda.png"
+                alt="Agenda"
+                class="w-24 md:w-32 mb-2"
+            />
+        </div>
         <div>
             <h2
                 class="text-muted-foreground text-sm font-inter uppercase tracking-wider"
             >
                 Proximamente
             </h2>
-            <p class="text-xl md:text-2xl font-bold font-tusker">
+            <p class="text-xl md:text-2xl font-bold text-white">
                 Consultá nuestros próximos estrenos
             </p>
         </div>
-        <ViewAllButton count={events.length} />
     </div>
 
     <section class="relative h-[55vh]">
@@ -33,7 +39,7 @@ const [featured, ...rest] = events;
                 <FeaturedEvent event={featured} />
             </div>
             <div
-                class="flex-1 col-span-2 grid grid-cols-2 grid-rows-2 gap-4 h-full"
+                class="flex-1 col-span-2 grid grid-cols-2 grid-rows-2 gap-x-4 gap-y-10 h-full"
             >
                 {
                     rest.map((event) => (
