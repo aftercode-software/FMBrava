@@ -18,19 +18,29 @@ const [featured, ...rest] = events;
             <h2
                 class="text-muted-foreground text-sm font-inter uppercase tracking-wider"
             >
-                Coming soon
+                Proximamente
             </h2>
             <p class="text-xl md:text-2xl font-bold font-tusker">
-                Check our upcoming releases
+                Consultá nuestros próximos estrenos
             </p>
         </div>
         <ViewAllButton count={events.length} />
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
-        <FeaturedEvent event={featured} />
-        <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
-            {rest.map((event) => <EventCard key={event.id} event={event} />)}
+    <section class="relative h-[55vh]">
+        <div class="flex h-full w-full gap-6">
+            <div class="w-[30%] h-full">
+                <FeaturedEvent event={featured} />
+            </div>
+            <div
+                class="flex-1 col-span-2 grid grid-cols-2 grid-rows-2 gap-4 h-full"
+            >
+                {
+                    rest.map((event) => (
+                        <EventCard key={event.id} event={event} />
+                    ))
+                }
+            </div>
         </div>
-    </div>
+    </section>
 </Container>
