@@ -1,0 +1,16 @@
+---
+import Container from "../containers/Container.astro";
+import HeaderRRSS from "./HeaderRRSS.astro";
+import InstagramCarousel from "./InstagramCarousel";
+import TiktokCarousel from "./TiktokCarousel";
+---
+<Container>
+    <section class="my-12">
+        <HeaderRRSS socialLink="https://www.instagram.com/bravaoficial/" socialName="@bravaoficial" socialImageUrl="/public/logo.png" socialBrandImageUrl="/public/logo.png" />
+        <InstagramCarousel client:load/>
+    </section>
+    <section class="my-20">
+        <HeaderRRSS socialLink="https://www.tiktok.com/@bravaoficial" socialName="@bravaoficial" socialImageUrl="/public/logo.png" socialBrandImageUrl="/public/logo.png" />
+        <TiktokCarousel client:load/>
+    </section>
+</Container>
