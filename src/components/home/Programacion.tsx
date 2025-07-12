@@ -33,7 +33,7 @@ export default function ProgramacionCarousel({ programas }: Props) {
   }, [emblaApi]);
 
   return (
-    <Container className="flex flex-col mt-40">
+    <Container className="flex flex-col mt-20">
       <h2 className="font-inter text-white font-semibold text-2xl">
         Nuestros programas
       </h2>

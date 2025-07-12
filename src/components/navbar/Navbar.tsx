@@ -6,7 +6,7 @@ import RadioSelector from "./RadioSelector";
 
 const navigationItems = [
   { name: "Inicio", href: "/" },
-  { name: "Programas", href: "/programas" },
+  { name: "Programas", href: "/brava-news" },
   { name: "Agenda", href: "/agenda" },
   { name: "Brava News", href: "/brava-news" },
 ];
@@ -49,9 +49,9 @@ export default function Navbar() {
         transition={{ duration: 0.5 }}
       >
         <Container className="flex items-center justify-between w-full">
-          <motion.div className="flex items-center">
+          <motion.a className="flex items-center" href="/">
             <img src="/logo.png" alt="Brava Radio" className="h-12 w-auto" />
-          </motion.div>
+          </motion.a>
 
           <div className="flex items-center space-x-8">
             {navigationItems.map((item, index) => {
@@ -91,7 +91,7 @@ export default function Navbar() {
       {/* Mobile Navbar */}
       <motion.nav
         className={`
-          lg:hidden fixed top-0 left-0 w-full py-6 bg-gradient-to-r from-black via-gray-900 to-black border-b border-gray-800 z-50
+          lg:hidden fixed top-0 left-0 w-full py-6 bg-negro border-gray-800 z-50
           ${navBgClass} ${transitionClass}
         `}
         initial={{ y: -100 }}
@@ -99,17 +99,18 @@ export default function Navbar() {
         transition={{ duration: 0.5 }}
       >
         <Container className="flex items-center justify-between w-full">
-          <motion.div
+          <motion.a
             className="flex items-center"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
+            href="/"
           >
             <img
               src="/logo.png"
               alt="Brava Radio"
               className="h-10 w-auto z-60"
             />
-          </motion.div>
+          </motion.a>
 
           <button
             onClick={toggleMenu}

@@ -1,0 +1,44 @@
+---
+import Container from "@/components/containers/Container.astro";
+import { RichTextRenderer } from "@/components/RichText";
+import Layout from "@/layouts/Layout.astro";
+import { fetchBlogs } from "@/utils/fetchBlogs";
+import BlogHero from "@/components/brava-news/BlogHero.tsx";
+
+export async function getStaticPaths() {
+  const blogs = await fetchBlogs();
+
+  return blogs.map((post) => ({
+    params: { slug: post.id },
+  }));
+}
+
+const { slug } = Astro.params;
+const blogs = await fetchBlogs();
+const blog = blogs.find((post) => post.slug === slug);
+console.log("Blog:", blog);
+---
+
+<Layout>
+  {
+    blog ? (
+      <main class="flex flex-col gap-10 w-full">
+        <BlogHero b={blog} />
+        <Container class="md:max-w-[65vw]">
+          <RichTextRenderer nodes={blog.content} />
+        </Container>
+      </main>
+    ) : (
+      <Container class="mt-40">
+        <p>Blog no encontrado.</p>
+      </Container>
+    )
+  }
+</Layout>
+
+) : (
+<Container class="mt-40">
+  <p>Blog no encontrado.</p>
+</Container>
+) }
+

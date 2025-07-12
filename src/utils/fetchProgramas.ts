@@ -1,3 +1,4 @@
+import { CACHE_DURATION } from "@/constants/cache";
 import { secureFetch } from "../lib/secureFetch";
 import { fetchImagenPresign } from "./fetchImagen";
 
@@ -27,17 +28,24 @@ interface ProgramaRaw {
   imagenPrincipal: { url: string; alt: string };
 }
 
+let cachedProgramas: Programa[] | null = null;
+let cacheTimestamp: number = 0;
+
 export async function fetchProgramas(): Promise<Programa[]> {
+  const now = Date.now();
+
+  if (cachedProgramas && now - cacheTimestamp < CACHE_DURATION) {
+    return cachedProgramas;
+  }
+
   const { docs } = await secureFetch<{ docs: ProgramaRaw[] }>("programacion");
   if (!docs) throw new Error("Error fetching programas");
 
-  const filteredDocs = docs.filter(
-    (item) => new Date(item.fechaFin) > new Date()
-  );
+  const filtered = docs.filter((item) => new Date(item.fechaFin) > new Date());
 
-  return Promise.all(
-    filteredDocs.map(async (item) => {
-      const presignedUrl = await fetchImagenPresign(item.imagenPrincipal.url);
+  const programas = await Promise.all(
+    filtered.map(async (item) => {
+      const url = await fetchImagenPresign(item.imagenPrincipal.url);
       return {
         id: item.id,
         nombre: item.nombre,
@@ -47,15 +55,14 @@ export async function fetchProgramas(): Promise<Programa[]> {
         diasSemana: item.diasSemana,
         fechaInicio: item.fechaInicio,
         fechaFin: item.fechaFin,
-        participantes: item.participantes.map((p) => ({
-          id: p.id,
-          nombre: p.nombre,
-        })),
-        imagen: {
-          url: presignedUrl,
-          alt: item.imagenPrincipal.alt || "",
-        },
+        participantes: item.participantes,
+        imagen: { url, alt: item.imagenPrincipal.alt || "" },
       };
     })
   );
+
+  cachedProgramas = programas;
+  cacheTimestamp = now;
+
+  return programas;
 }

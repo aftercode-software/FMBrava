@@ -1,23 +1,17 @@
 ---
-export const prerender = true;
-export const revalidate = 3600;
 import React from "../components/React.tsx";
 import Layout from "../layouts/Layout.astro";
 import Welcome from "../components/Welcome.astro";
-import "../assets/base.css";
-
 import Agenda from "../components/Agenda.astro";
 import Playlists from "../components/Playlists.astro";
 import Hero from "../components/home/Hero.astro";
 
-Astro.response.headers.set(
-  "Cache-Control",
-  "public, max-age=300, s-maxage=3600"
-);
-
 import { fetchProgramas, type Programa } from "../utils/fetchProgramas";
 import ProgramacionCarousel from "@/components/home/Programacion";
+import BravaNews from "@/components/BravaNews";
+import { fetchBlogs } from "@/utils/fetchBlogs";
 const programas: Programa[] = await fetchProgramas();
+const blogs = await fetchBlogs();
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
@@ -27,6 +21,7 @@ const programas: Programa[] = await fetchProgramas();
   <Welcome />
   <React client:load />
   <ProgramacionCarousel programas={programas} client:load />
+  <BravaNews blogs={blogs} client:load />
   <Agenda />
   <Playlists />
 </Layout>

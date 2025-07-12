@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchImagenPresign } from "@/utils/fetchImagen";
 import React from "react";
 
 // Define the union of possible node types
@@ -31,6 +32,7 @@ interface RichTextHeading extends BaseNode {
 interface RichTextParagraph extends BaseNode {
   type: "paragraph";
   children: RichTextNode[];
+  indent?: number;
 }
 
 interface RichTextLink extends BaseNode {
@@ -67,15 +69,9 @@ function renderInlineText(textNode: RichTextText) {
   const { format = 0 } = textNode;
 
   // format bitmask: 1=bold, 2=italic, 4=strikethrough
-  if (format & 4) {
-    content = <s key="strike">{content}</s>;
-  }
-  if (format & 2) {
-    content = <em key="italic">{content}</em>;
-  }
-  if (format & 1) {
-    content = <strong key="bold">{content}</strong>;
-  }
+  if (format & 4) content = <s key="strike">{content}</s>;
+  if (format & 2) content = <em key="italic">{content}</em>;
+  if (format & 1) content = <strong key="bold">{content}</strong>;
 
   return content;
 }
@@ -86,8 +82,34 @@ export function RichTextRenderer({
   payloadBaseUrl = "",
   overrides = {},
 }: RichTextRendererProps) {
+  const [imageUrls, setImageUrls] = React.useState<Record<string, string>>({});
+
+  React.useEffect(() => {
+    // Preload all upload image URLs
+    const uploads = nodes.flatMap(function findUploads(
+      node: RichTextNode
+    ): RichTextUpload[] {
+      if (node.type === "upload") return [node as RichTextUpload];
+      if ("children" in node && node.children) {
+        return node.children.flatMap(findUploads);
+      }
+      return [];
+    });
+    Promise.all(
+      uploads.map(async (upload) => {
+        const src = await fetchImagenPresign(upload.value.url);
+        return { url: upload.value.url, src };
+      })
+    ).then((results) => {
+      const urlMap: Record<string, string> = {};
+      results.forEach(({ url, src }) => {
+        urlMap[url] = src;
+      });
+      setImageUrls(urlMap);
+    });
+  }, [nodes]);
+
   const renderNode = (node: RichTextNode, index: number): React.ReactNode => {
-    // Allow override for this type
     if (overrides[node.type]) {
       const Component = overrides[node.type]!;
       return <Component key={index} node={node} />;
@@ -98,24 +120,39 @@ export function RichTextRenderer({
         const tag = (node as RichTextHeading).tag || "h2";
         return React.createElement(
           tag,
-          { key: index },
+          { key: index, className: "text-white font-inter font-bold text-2xl" },
           (node as RichTextHeading).children.map((child, idx) =>
             renderInlineText(child)
           )
         );
       }
-
-      case "paragraph":
+      case "paragraph": {
+        const pNode = node as RichTextParagraph;
+        if (pNode.indent && pNode.indent > 0) {
+          return (
+            <div
+              key={index}
+              className="font-inter text-gray-200 mb-8 border-l-4 border-[#FADC48] pl-6"
+            >
+              {pNode.children.map((c, i) =>
+                c.type === "text"
+                  ? renderInlineText(c as RichTextText)
+                  : renderNode(c as RichTextNode, i)
+              )}
+            </div>
+          );
+        }
+        // Si no, seguimos con el párrafo normal
         return (
-          <p key={index}>
-            {(node as RichTextParagraph).children.map((child, idx) => {
-              if (child.type === "text")
-                return renderInlineText(child as RichTextText);
-              return renderNode(child as RichTextNode, idx);
-            })}
+          <p key={index} className="text-white font-inter mb-4">
+            {pNode.children.map((c, i) =>
+              c.type === "text"
+                ? renderInlineText(c as RichTextText)
+                : renderNode(c as RichTextNode, i)
+            )}
           </p>
         );
-
+      }
       case "link": {
         const { url, newTab } = (node as RichTextLink).fields;
         return (
@@ -124,6 +161,7 @@ export function RichTextRenderer({
             href={url}
             target={newTab ? "_blank" : undefined}
             rel={newTab ? "noopener noreferrer" : undefined}
+            className="text-white font-inter underline"
           >
             {(node as RichTextLink).children.map((child, idx) =>
               renderInlineText(child)
@@ -131,43 +169,41 @@ export function RichTextRenderer({
           </a>
         );
       }
-
       case "youtube": {
         const videoId = (node as RichTextYoutube).id;
         return (
-          <div key={index} className="video-container">
+          <div key={index} className="video-container my-4">
             <iframe
               width="560"
-              height="315"
+              height="560"
+              className="w-full"
               src={`https://www.youtube.com/embed/${videoId}`}
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </div>
         );
       }
-
       case "upload": {
         const { url, alt } = (node as RichTextUpload).value;
-        return (
+        const src = imageUrls[url];
+        return src ? (
           <img
             key={index}
-            src={`${payloadBaseUrl}${url}`}
+            src={src}
             alt={alt || ""}
-            style={{ maxWidth: "100%", height: "auto" }}
+            className="max-w-full h-auto"
           />
+        ) : (
+          <span key={index}>Cargando imagen...</span>
         );
       }
-
       case "text":
-        // Plain text node
         return (
           <React.Fragment key={index}>
             {renderInlineText(node as RichTextText)}
           </React.Fragment>
         );
-
       case "root":
         return (
           <>
@@ -176,12 +212,65 @@ export function RichTextRenderer({
             )}
           </>
         );
-
       default:
-        // Unhandled node types
         return null;
     }
   };
 
   return <>{nodes.map((node, idx) => renderNode(node, idx))}</>;
+}
+
+// --- Blog components ---
+
+export interface BlogDoc {
+  id: string;
+  title: string;
+  publishedAt?: string;
+  smallImage?: { url: string; alt?: string };
+  content: { root: { children: RichTextNode[] } };
+}
+
+interface BlogEntryProps {
+  blog: BlogDoc;
+  payloadBaseUrl?: string; // no longer needed for image
+}
+
+export async function BlogEntry({ blog }: BlogEntryProps) {
+  const { title, publishedAt, smallImage, content } = blog;
+  const nodes = content.root.children;
+
+  const imageSrc = smallImage ? await fetchImagenPresign(smallImage.url) : null;
+
+  return (
+    <article className="max-w-\[720px\] mx-auto p-4 text-white font-inter">
+      <h1 className="text-white font-inter text-3xl mb-2">{title}</h1>
+      {publishedAt && (
+        <p className="mb-2 text-sm text-gray-300">
+          <small>Publicado: {new Date(publishedAt).toLocaleDateString()}</small>
+        </p>
+      )}
+      {imageSrc && (
+        <img
+          src={imageSrc}
+          alt={smallImage?.alt || ""}
+          className="max-w-full h-auto mb-4"
+        />
+      )}
+      <RichTextRenderer nodes={nodes} />
+    </article>
+  );
+}
+
+interface BlogListProps {
+  docs: BlogDoc[];
+}
+
+export function BlogList({ docs }: BlogListProps) {
+  return (
+    <div className="space-y-8">
+      {docs.map((doc) => (
+        <BlogEntry key={doc.id} blog={doc} />
+      ))}
+    </div>
+  );
 }
