@@ -6,13 +6,13 @@ import TikTokCard, { type TikTokPost } from "./TiktokCard";
 const tiktokPosts: TikTokPost[] = [
   {
     href: "https://www.tiktok.com/@bravaoficial/video/7248300000000000000",
-    imageUrl: "/public/images/test.jpg",
+    imageUrl: "/images/test.jpg",
     title: "Post de tiktok :)",
     visualizations: "1000",
   },
   {
     href: "https://www.tiktok.com/@bravaoficial/video/7248300000000000000",
-    imageUrl: "/public/images/test.jpg",
+    imageUrl: "/images/test.jpg",
     title: "Post de tiktok :)",
     visualizations: "1000",
   },
