@@ -1,8 +1,7 @@
 .embla {
-  
   --featured-width: 35%;
   --slide-gap: 1rem;
-  --regular-width: 20%;
+  --regular-width: 15%;
   position: relative;
   overflow: hidden;
 }
@@ -46,12 +45,21 @@
   min-width: var(--regular-width);
   height: 100%;
   position: relative;
-  transition: transform 0.3s ease;
 }
+
 
 .embla__slide:hover img {
   transform: scale(1.05);
   transition: transform 0.3s;
+}
+
+.embla__slide:first-child {
+  margin-left: var(--slide-gap);
+}
+
+/* espacio después del último */
+.embla__slide:last-child {
+  margin-right: var(--slide-gap);
 }
 
 .embla__caption {

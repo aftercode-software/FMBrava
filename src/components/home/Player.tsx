@@ -13,7 +13,7 @@ export default function Player() {
     <div className="w-full h-full relative">
       <div className="hidden md:block bg-rojo h-[50%] w-[50%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[300px] pointer-events-none"></div>
 
-      {scrollY > 400 && (
+      {/* {scrollY > 400 && (
         <FixedPlayer
           playing={playing}
           setIsPlaying={setPlaying}
@@ -21,7 +21,7 @@ export default function Player() {
           volume={volume}
           setVolume={setVolume}
         />
-      )}
+      )} */}
       <div
         className={`w-full h-[50vh] rounded-lg overflow-hidden z-50 ${
           scrollY > 400 ? "hidden" : ""

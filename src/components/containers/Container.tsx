@@ -14,7 +14,7 @@ export const Container: React.FC<ContainerProps> = ({
   ...rest
 }: ContainerProps) => {
   return (
-    <div className={cn("max-w-[90vw] mx-auto h-full", className)} {...rest}>
+    <div className={cn("max-w-[90vw] mx-auto", className)} {...rest}>
       {children}
     </div>
   );
