@@ -1,0 +1,18 @@
+---
+import Hero from "@/components/agenda/Hero.astro";
+import BravaNews from "@/components/BravaNews";
+import Container from "@/components/containers/Container.astro";
+import Layout from "@/layouts/Layout.astro";
+import { fetchBlogs } from "@/utils/fetchBlogs";
+
+// src/pages/brava-news/index.astro
+
+// Fetch de ejemplo: lista completa de posts
+const blogs = await fetchBlogs();
+---
+
+<Layout>
+    <Container class="mt-40">
+        <Hero />
+    </Container>
+</Layout>

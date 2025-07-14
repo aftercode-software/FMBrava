@@ -9,6 +9,7 @@ const navigationItems = [
   { name: "Programas", href: "/brava-news" },
   { name: "Agenda", href: "/agenda" },
   { name: "Brava News", href: "/brava-news" },
+
 ];
 
 export default function Navbar() {

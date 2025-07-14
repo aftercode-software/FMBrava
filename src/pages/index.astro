@@ -2,7 +2,7 @@
 import React from "../components/React.tsx";
 import Layout from "../layouts/Layout.astro";
 import Welcome from "../components/Welcome.astro";
-import Agenda from "../components/Agenda.astro";
+import Agenda from "../components/agenda/Agenda.astro";
 import Playlists from "../components/Playlists.astro";
 import Hero from "../components/home/Hero.astro";
 
@@ -27,6 +27,7 @@ const blogs = await fetchBlogs();
   <EntreSecciones />
   <BravaNews blogs={blogs} client:load />
   <Destacadas />
+  <Agenda />
   <!-- <Agenda />
   <Playlists /> -->
 </Layout>
