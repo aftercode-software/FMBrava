@@ -38,8 +38,8 @@ export default function TiktokCarousel() {
           <TikTokCard
             key={p.href}
             post={p}
-            className={`flex-shrink-0 w-[45%] md:w-[35%] lg:w-[23%] h-full ${
-              i === posts.length - 1 ? "ml-[.8rem]" : ""
+            className={`flex-shrink-0 w-[85%] md:w-[35%] lg:w-[23%] h-full ${
+              i === 0 ? "ml-[1.5rem]" : ""
             }`}
           />
         ))}
