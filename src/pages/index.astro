@@ -10,8 +10,9 @@ import { fetchProgramas, type Programa } from "../utils/fetchProgramas";
 import ProgramacionCarousel from "@/components/home/Programacion";
 import BravaNews from "@/components/BravaNews";
 import { fetchBlogs } from "@/utils/fetchBlogs";
-import Add from "@/components/Add.astro";
+
 import Destacadas from "@/components/Destacadas.astro";
+import EntreSecciones from "@/components/ads/EntreSecciones.astro";
 const programas: Programa[] = await fetchProgramas();
 const blogs = await fetchBlogs();
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -23,7 +24,7 @@ const blogs = await fetchBlogs();
   <Welcome />
   <React client:load />
   <ProgramacionCarousel programas={programas} client:load />
-  <Add />
+  <EntreSecciones />
   <BravaNews blogs={blogs} client:load />
   <Destacadas />
   <!-- <Agenda />

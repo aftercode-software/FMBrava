@@ -1,6 +1,6 @@
 ---
 import { fetchAnunciosEntreSecciones } from "@/utils/fetchAnuncios";
-import Container from "./containers/Container.astro";
+import Container from "../containers/Container.astro";
 
 const anuncios = await fetchAnunciosEntreSecciones();
 const anuncio = anuncios.length > 0
@@ -9,24 +9,30 @@ const anuncio = anuncios.length > 0
 ---
 
 <Container class="flex flex-col items-center w-full my-20">
-    <div
+  <div
     id="anuncio-entre-secciones"
     class={`w-[950px] overflow-hidden cursor-pointer ${anuncio ? 'h-[200px]' : 'h-0'}`}
-    >
+  >
     {anuncio && (
-        <a  href={anuncio.link} target="_blank" rel="noopener noreferrer">
-      <img
-        src={anuncio.image.url}
-        alt={anuncio.image.alt}
-        class="w-full h-full object-cover"
+      <a
+        id="anuncio-link"
+        href={anuncio.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block w-full h-full"
+      >
+        <img
+          src={anuncio.image.url}
+          alt={anuncio.image.alt}
+          class="w-full h-full object-cover"
         />
-    </a>
-  )}
-</div>
+      </a>
+    )}
+  </div>
 </Container>
 
 {anuncio && (
-    <script type="module">
+  <script type="module">
 import { incrementClicks, incrementViews } from "@/utils/fetchAnuncios";
 
         const container = document.getElementById('anuncio-entre-secciones');
