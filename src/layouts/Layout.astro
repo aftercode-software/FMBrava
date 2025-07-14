@@ -1,6 +1,8 @@
 ---
 import Navbar from "@/components/navbar/Navbar";
 import "../assets/base.css";
+import Footer from "@/components/Footer.astro";
+import SplashVideo from "@/components/SplashVideo";
 export const revalidate = 21600;
 Astro.response.headers.set(
   "Cache-Control",
@@ -33,8 +35,10 @@ Astro.response.headers.set(
     <title>Brava 94.9</title>
   </head>
   <body class="bg-negro-900">
+    <SplashVideo client:load />
     <Navbar client:only="react" />
     <slot />
+    <Footer />
   </body>
 </html>
 

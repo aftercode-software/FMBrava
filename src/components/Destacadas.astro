@@ -1,0 +1,45 @@
+---
+import { fetchDestacadas } from "@/utils/fetchDestacadas";
+import Container from "./containers/Container.astro";
+
+const destacadas = await fetchDestacadas();
+---
+
+<Container class="grid grid-cols-2 lg:grid-cols-3 gap-6 my-10 min-h-[200px]">
+  {
+    destacadas.map((d) =>
+      d.link ? (
+        <a
+          href={d.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex flex-col group transition-transform duration-200"
+        >
+          <div class="w-full aspect-square overflow-hidden rounded-lg">
+            <img
+              src={d.image.url}
+              alt={d.image.alt}
+              class="w-full h-full object-cover rounded-sm group-hover:scale-101 transition-transform duration-300"
+            />
+          </div>
+          <span class="font-ibm text-white font-medium uppercase mt-2 group-hover:font-semibold transitions-all duration-300">
+            {d.title}
+          </span>
+        </a>
+      ) : (
+        <div class="flex flex-col group transition-transform duration-200">
+          <div class="w-full aspect-square overflow-hidden rounded-lg">
+            <img
+              src={d.image.url}
+              alt={d.image.alt}
+              class="w-full h-full object-cover rounded-sm group-hover:scale-101 transition-transform duration-300"
+            />
+          </div>
+          <p class="font-ibm text-white font-medium uppercase mt-2 group-hover:font-semibold transitions-all duration-300">
+            {d.title}
+          </p>
+        </div>
+      )
+    )
+  }
+</Container>

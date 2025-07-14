@@ -1,9 +1,9 @@
 ---
 import Container from "@/components/containers/Container.astro";
-import { RichTextRenderer } from "@/components/RichText";
 import Layout from "@/layouts/Layout.astro";
 import { fetchBlogs } from "@/utils/fetchBlogs";
 import BlogHero from "@/components/brava-news/BlogHero.tsx";
+import { RichTextRenderer } from "@/components/brava-news/RichTextRenderer";
 
 export async function getStaticPaths() {
   const blogs = await fetchBlogs();
@@ -24,7 +24,7 @@ console.log("Blog:", blog);
     blog ? (
       <main class="flex flex-col gap-10 w-full">
         <BlogHero b={blog} />
-        <Container class="md:max-w-[65vw]">
+        <Container class="lg:max-w-[65vw]">
           <RichTextRenderer nodes={blog.content} />
         </Container>
       </main>

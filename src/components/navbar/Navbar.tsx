@@ -31,8 +31,8 @@ export default function Navbar() {
   }, []);
 
   const navBgClass = scrolled
-    ? "bg-negro-900 border-b border-gray-800"
-    : "bg-transparent";
+    ? "bg-gradient-to-b from-negro-900 to-negro/30 backdrop-blur-sm"
+    : "bg-gradient-to-b from-negro-900/80 to-transparent";
   const transitionClass = "transition-colors duration-200";
 
   return (
@@ -91,7 +91,7 @@ export default function Navbar() {
       {/* Mobile Navbar */}
       <motion.nav
         className={`
-          lg:hidden fixed top-0 left-0 w-full py-6 bg-negro border-gray-800 z-50
+          lg:hidden fixed top-0 left-0 w-full py-6  z-50
           ${navBgClass} ${transitionClass}
         `}
         initial={{ y: -100 }}
