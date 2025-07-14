@@ -1,0 +1,14 @@
+---
+import Container from "./containers/Container.astro";
+import ImagesCarousel from "./conocenos-mas/ImagesCarousel";
+import { fetchDestacados } from "@/utils/fetchDestacados";
+
+const destacados = await fetchDestacados();
+---
+<Container>
+    <ImagesCarousel images={destacados.map((destacado) => ({
+        href: destacado.link,
+        imageUrl: destacado.image.url,
+        title: destacado.title,
+    }))} client:load />
+</Container>
