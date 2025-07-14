@@ -11,6 +11,9 @@ import RRSS from "@/components/rrss/RRSS.astro";
 import Spotify from "@/components/Spotify.astro";
 import ConocenosMas from "@/components/ConocenosMas.astro";
 import Title from "@/components/Title.astro";
+
+import Destacadas from "@/components/Destacadas.astro";
+import EntreSecciones from "@/components/ads/EntreSecciones.astro";
 const programas: Programa[] = await fetchProgramas();
 const blogs = await fetchBlogs();
 const playlists = await fetchPlaylists();
@@ -21,7 +24,9 @@ const playlists = await fetchPlaylists();
   <Title title="Brava News" subtitle="Tu espacio para enterarte de todo lo que importa, música, entretenimiento, cultura pop y lo que pasa en Mendoza, contado con el sello Brava." imageUrl="/images/test.jpg" />
   <Spotify playlists={playlists} client:load />
   <ProgramacionCarousel programas={programas} client:load />
+  <EntreSecciones />
   <BravaNews blogs={blogs} client:load />
+  <Destacadas />
   <Agenda />
   <RRSS />
   <ConocenosMas />

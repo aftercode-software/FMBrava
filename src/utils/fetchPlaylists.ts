@@ -1,6 +1,9 @@
+import { CACHE_DURATION } from "@/constants/cache";
 import { secureFetch } from "../lib/secureFetch";
 import { fetchImagenPresign } from "./fetchImagen";
 
+let cachedPlaylists: Playlist[] | null = null;
+let cacheTimestamp: number = 0;
 interface PlaylistRaw {
   id: string;
   nombre: string;
@@ -21,10 +24,16 @@ export type Playlist = {
 };
 
 export async function fetchPlaylists(): Promise<Playlist[]> {
+  const now = Date.now();
+
+  if (cachedPlaylists && now - cacheTimestamp < CACHE_DURATION) {
+    return cachedPlaylists;
+  }
+
   const { docs } = await secureFetch<{ docs: PlaylistRaw[] }>("playlists");
   if (!docs) throw new Error("Error fetching playlists");
 
-  return Promise.all(
+  cachedPlaylists = await Promise.all(
     docs.map(async (item) => {
       const presignedUrl = await fetchImagenPresign(item.imagen.url);
       return {
@@ -38,4 +47,6 @@ export async function fetchPlaylists(): Promise<Playlist[]> {
       };
     })
   );
+  cacheTimestamp = now;
+  return cachedPlaylists;
 }

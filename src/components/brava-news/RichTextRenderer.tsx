@@ -1,9 +1,6 @@
-"use client";
-
 import { fetchImagenPresign } from "@/utils/fetchImagen";
 import React from "react";
 
-// Define the union of possible node types
 export type RichTextNode =
   | RichTextBlock
   | RichTextHeading
@@ -63,12 +60,10 @@ interface RichTextRendererProps {
   overrides?: Partial<Record<string, React.FC<any>>>;
 }
 
-// Helper to render inline text with formatting
 function renderInlineText(textNode: RichTextText) {
   let content: React.ReactNode = textNode.text;
   const { format = 0 } = textNode;
 
-  // format bitmask: 1=bold, 2=italic, 4=strikethrough
   if (format & 4) content = <s key="strike">{content}</s>;
   if (format & 2) content = <em key="italic">{content}</em>;
   if (format & 1) content = <strong key="bold">{content}</strong>;
@@ -76,7 +71,6 @@ function renderInlineText(textNode: RichTextText) {
   return content;
 }
 
-// Main recursive renderer
 export function RichTextRenderer({
   nodes,
   payloadBaseUrl = "",
@@ -85,7 +79,6 @@ export function RichTextRenderer({
   const [imageUrls, setImageUrls] = React.useState<Record<string, string>>({});
 
   React.useEffect(() => {
-    // Preload all upload image URLs
     const uploads = nodes.flatMap(function findUploads(
       node: RichTextNode
     ): RichTextUpload[] {
@@ -132,7 +125,7 @@ export function RichTextRenderer({
           return (
             <div
               key={index}
-              className="font-inter text-gray-200 mb-8 border-l-4 border-[#FADC48] pl-6"
+              className="font-inter text-gray-200 mb-8 text-lg border-l-4 border-[#FADC48] pl-6"
             >
               {pNode.children.map((c, i) =>
                 c.type === "text"
@@ -142,9 +135,9 @@ export function RichTextRenderer({
             </div>
           );
         }
-        // Si no, seguimos con el párrafo normal
+
         return (
-          <p key={index} className="text-white font-inter mb-4">
+          <p key={index} className="text-white font-inter  text-lg mb-4">
             {pNode.children.map((c, i) =>
               c.type === "text"
                 ? renderInlineText(c as RichTextText)
@@ -161,7 +154,7 @@ export function RichTextRenderer({
             href={url}
             target={newTab ? "_blank" : undefined}
             rel={newTab ? "noopener noreferrer" : undefined}
-            className="text-white font-inter underline"
+            className="text-amarillo font-inter text-lg font-semibold"
           >
             {(node as RichTextLink).children.map((child, idx) =>
               renderInlineText(child)
