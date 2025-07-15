@@ -1,0 +1,16 @@
+---
+import Container from "../containers/Container.astro";
+import Agenda from "./Agenda";
+import Title from "../Title.astro";
+import { fetchAgenda } from "@/utils/fetchAgenda";
+const events = await fetchAgenda();
+---
+
+<Container class="py-10 md:py-16 px-4">
+    <Title
+        title="Proximamente"
+        subtitle="Consultá nuestros proximos estrenos"
+        imageUrl="/images/spotify.png"
+    />
+    <Agenda events={events} client:load />
+</Container>

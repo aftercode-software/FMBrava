@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Agenda from "../components/Agenda.astro";
 import Hero from "../components/home/Hero.astro";
 import { fetchPlaylists } from "../utils/fetchPlaylists";
 import { fetchProgramas, type Programa } from "../utils/fetchProgramas";
@@ -11,9 +10,10 @@ import RRSS from "@/components/rrss/RRSS.astro";
 import Spotify from "@/components/Spotify.astro";
 import ConocenosMas from "@/components/ConocenosMas.astro";
 import Title from "@/components/Title.astro";
-
+import Agenda from "@/components/agenda/Agenda.tsx";
 import Destacadas from "@/components/Destacadas.astro";
 import EntreSecciones from "@/components/ads/EntreSecciones.astro";
+import AgendaSection from "@/components/agenda/AgendaSection.astro";
 const programas: Programa[] = await fetchProgramas();
 const blogs = await fetchBlogs();
 const playlists = await fetchPlaylists();
@@ -21,13 +21,12 @@ const playlists = await fetchPlaylists();
 
 <Layout>
   <Hero />
-  <Title title="Brava News" subtitle="Tu espacio para enterarte de todo lo que importa, música, entretenimiento, cultura pop y lo que pasa en Mendoza, contado con el sello Brava." imageUrl="/images/test.jpg" />
-  <Spotify playlists={playlists} client:load />
   <ProgramacionCarousel programas={programas} client:load />
-  <EntreSecciones />
+  <AgendaSection />
   <BravaNews blogs={blogs} client:load />
-  <Destacadas />
-  <Agenda />
+  <EntreSecciones />
   <RRSS />
+  <Spotify playlists={playlists} client:load />
+  <EntreSecciones />
   <ConocenosMas />
 </Layout>

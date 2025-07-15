@@ -5,6 +5,7 @@ import Container from "../containers/Container.tsx";
 import ViewAllButton from "../ViewAllButton.astro";
 import EventCard from "./EventCard";
 import FeaturedEvent from "./FeaturedEvent";
+import Title from "../Title.astro";
 
 type Props = {
   events: AgendaType[];
@@ -18,25 +19,6 @@ export default function Agenda({ events }: Props) {
   };
 
   return (
-    <Container className="py-10 md:py-16 px-4">
-      <div className="flex items-center mb-6">
-        <div>
-          <img
-            src="../../../public/images/agenda.png"
-            alt="Agenda"
-            className="w-24 md:w-32 mb-2"
-          />
-        </div>
-        <div>
-          <h2 className="text-[32px] font-inter font-bold text-white tracking-wider">
-            Proximamente
-          </h2>
-          <p className="text-[20px] font-normal font-ibm text-white/60">
-            Consultá nuestros próximos estrenos
-          </p>
-        </div>
-      </div>
-
       <section className="relative h-full md:h-[55vh]">
         <div className="flex flex-col md:flex-row h-full w-full gap-y-10 md:gap-6">
           <div  key={featured.id} onClick={() => goToEvent(featured.id)}  className="md:w-[30%] md:h-full w-full h-[400px] cursor-pointer">
@@ -51,6 +33,5 @@ export default function Agenda({ events }: Props) {
           </div>
         </div>
       </section>
-    </Container>
   );
 }

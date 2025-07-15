@@ -4,17 +4,31 @@ type Props = {
     title: string;
     subtitle: string;
     imageUrl: string;
-}
+};
 
 const { title, subtitle, imageUrl, className } = Astro.props;
 ---
-<div class={`flex items-center justify-between mt-12 mb-6 ${className}`}>
-    <div class="flex items-center gap-6">
+
+<div class={`flex items-center mb-6 ${className}`}>
+    <div>
         <img src={imageUrl} alt={title} class="w-28 h-28" />
-        <div class="flex flex-col gap-2">
-            <h2 class="text-3xl text-white font-bold font-inter">{title}</h2>
-            <span class="font-medium text-lg font-ibm text-gray-400 max-w-1/2">{subtitle}</span>
-        </div>
     </div>
+    <div>
+        <h2 class="text-[32px] font-inter font-bold text-white tracking-wider">
+            {title}
+        </h2>
+        <p
+            class="text-[20px]
+            font-medium
+            md:text-lg
+            font-ibm
+            text-gray-400
+            max-w-1
+            2"
+        >
+            {subtitle}
+        </p>
+    </div>
+
     <slot />
 </div>
