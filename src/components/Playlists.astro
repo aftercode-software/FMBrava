@@ -1,7 +1,11 @@
 ---
-import { fetchPlaylists } from "../utils/fetchPlaylists";
+import type { Playlist } from '@/utils/fetchPlaylists';
 
-const playlists = await fetchPlaylists();
+type Props = {
+  playlists: Playlist[];
+}
+
+const { playlists } = Astro.props;  
 ---
 
 <section class="bg-gray-900 text-white py-8">

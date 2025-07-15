@@ -1,0 +1,24 @@
+---
+import Container from "./containers/Container.astro";
+import type { Playlist } from "../utils/fetchPlaylists";
+import SpotifyCard from "./spotify/SpotifyCard.astro";
+
+type Props = {
+    playlists: Playlist[];
+}
+
+const { playlists } = Astro.props;
+---
+<Container class="min-h-[50vh] sm:h-[50vh] xl:h-[60vh] my-20">
+    <h1 class="text-2xl text-white font-bold">Spotify</h1>
+    <div class="h-full flex flex-col sm:flex-row gap-4 sm:gap-10">
+        <div class="w-full sm:w-1/2">
+            <SpotifyCard imageUrl={playlists[0].imagen.url} title={playlists[0].nombre} link={playlists[0].link} />
+        </div>
+        <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 gap-10">
+            {playlists.slice(1).map((playlist) => (
+                <SpotifyCard imageUrl={playlist.imagen.url} title={playlist.nombre} link={playlist.link} />
+            ))}
+        </div>
+    </div>
+</Container>
