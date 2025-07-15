@@ -9,7 +9,7 @@ interface Props {
 
 export default function BravaNews({ blogs, showAll = false }: Props) {
   return (
-    <Container className="mt-10">
+    <Container className="mt-6">
       <h2 className="font-inter text-white font-semibold text-2xl">
         Brava News
       </h2>

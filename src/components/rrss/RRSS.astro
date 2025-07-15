@@ -9,25 +9,37 @@ const instagramData = {
     socialName: "Fm BRAVA 94.9",
     socialHandle: "@bravaoficial",
     socialImageUrl: "/images/instagram-logo.jpg",
-    socialBrandImageUrl: "/images/instagram.svg",
-}
+    socialBrandImageUrl: "/images/instagramBlack.svg",
+};
 
 const tiktokData = {
     socialLink: "https://www.tiktok.com/@bravaoficial",
-    socialName: "Brava",    
+    socialName: "Brava",
     socialHandle: "@bravaoficial",
     socialImageUrl: "/images/tiktok-logo.jpeg",
-    socialBrandImageUrl: "/images/tiktok.svg",
-}
-
+    socialBrandImageUrl: "/images/tiktokBlack.svg",
+};
 ---
+
 <Container>
     <section class="my-12">
-        <HeaderRRSS socialHandle={instagramData.socialHandle} socialLink={instagramData.socialLink} socialName={instagramData.socialName} socialImageUrl={instagramData.socialImageUrl} socialBrandImageUrl={instagramData.socialBrandImageUrl} />
-        <InstagramCarousel client:load/>
+        <HeaderRRSS
+            socialHandle={instagramData.socialHandle}
+            socialLink={instagramData.socialLink}
+            socialName={instagramData.socialName}
+            socialImageUrl={instagramData.socialImageUrl}
+            socialBrandImageUrl={instagramData.socialBrandImageUrl}
+        />
+        <InstagramCarousel client:load />
     </section>
     <section class="my-20">
-        <HeaderRRSS socialHandle={tiktokData.socialHandle} socialLink={tiktokData.socialLink} socialName={tiktokData.socialName} socialImageUrl={tiktokData.socialImageUrl} socialBrandImageUrl={tiktokData.socialBrandImageUrl} />
-        <TiktokCarousel client:load/>
+        <HeaderRRSS
+            socialHandle={tiktokData.socialHandle}
+            socialLink={tiktokData.socialLink}
+            socialName={tiktokData.socialName}
+            socialImageUrl={tiktokData.socialImageUrl}
+            socialBrandImageUrl={tiktokData.socialBrandImageUrl}
+        />
+        <TiktokCarousel client:load />
     </section>
 </Container>

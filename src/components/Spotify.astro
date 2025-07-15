@@ -10,13 +10,13 @@ type Props = {
 const { playlists } = Astro.props;
 ---
 
-<Container class="min-h-[50vh] sm:h-[50vh] xl:h-[60vh] my-20">
+<Container class="h-auto md:h-[70vh] my-20">
     <Title
         title="Sigamos en Spotify"
         subtitle="Acá tenés nuestras playlists pensadas para vos. Poné play, subite al ritmo y disfrutá de la música hecha a medida para cada momento."
         imageUrl="/images/spotify.png"
     />
-    <div class="h-full flex flex-col sm:flex-row gap-4 sm:gap-10">
+    <div class="h-auto md:h-[55vh] flex flex-col sm:flex-row gap-4 sm:gap-10">
         <div class="w-full sm:w-1/2">
             <SpotifyCard
                 imageUrl={playlists[0].imagen.url}

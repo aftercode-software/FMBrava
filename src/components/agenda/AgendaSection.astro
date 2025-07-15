@@ -6,11 +6,11 @@ import { fetchAgenda } from "@/utils/fetchAgenda";
 const events = await fetchAgenda();
 ---
 
-<Container class="py-10 md:py-16 px-4">
+<Container class="mt-6 md:py-16">
     <Title
         title="Proximamente"
         subtitle="Consultá nuestros proximos estrenos"
-        imageUrl="/images/spotify.png"
+        imageUrl="/images/agenda.png"
     />
     <Agenda events={events} client:load />
 </Container>
