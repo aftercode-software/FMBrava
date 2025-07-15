@@ -2,10 +2,11 @@
 import React from "../components/React.tsx";
 import Layout from "../layouts/Layout.astro";
 import Welcome from "../components/Welcome.astro";
-import Agenda from "../components/agenda/Agenda.astro";
+import Agenda from "../components/agenda/Agenda.tsx";
 import Playlists from "../components/Playlists.astro";
 import Hero from "../components/home/Hero.astro";
-
+import { fetchAgenda } from "@/utils/fetchAgenda";
+const events = await fetchAgenda();
 import { fetchProgramas, type Programa } from "../utils/fetchProgramas";
 import ProgramacionCarousel from "@/components/home/Programacion";
 import BravaNews from "@/components/BravaNews";
@@ -27,7 +28,7 @@ const blogs = await fetchBlogs();
   <EntreSecciones />
   <BravaNews blogs={blogs} client:load />
   <Destacadas />
-  <Agenda />
+  <Agenda events={events} client:load />
   <!-- <Agenda />
   <Playlists /> -->
 </Layout>

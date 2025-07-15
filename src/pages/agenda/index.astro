@@ -1,5 +1,8 @@
 ---
-import Hero from "@/components/agenda/Hero.astro";
+import { fetchAgenda } from "@/utils/fetchAgenda";
+const events = await fetchAgenda();
+
+import HeroAgenda from "@/components/agenda/Hero.tsx";
 import BravaNews from "@/components/BravaNews";
 import Container from "@/components/containers/Container.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -13,6 +16,6 @@ const blogs = await fetchBlogs();
 
 <Layout>
     <Container class="mt-40">
-        <Hero />
+        <HeroAgenda events={events} client:load />
     </Container>
 </Layout>
