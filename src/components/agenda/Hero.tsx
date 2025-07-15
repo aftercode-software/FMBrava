@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Agenda } from "@/utils/fetchAgenda";
 
 import Container from "../containers/Container";
@@ -9,8 +9,16 @@ import EventCard from "./EventCard";
 
 export default function AgendaHero({events}:{events:Agenda[]}){
      const [featured, setFeatured] = useState(events[0]);
-  const rest = events.filter((e) => e.id !== featured.id);
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        if (id) {
+        const selected = events.find((e) => e.id === id);
+        if (selected) setFeatured(selected);
+        }
+    }, [events]);
 
+    const rest = events.filter((e) => e.id !== featured.id);
   return(
 <section
     className="bg-negro-900 text-white py-8"
@@ -61,7 +69,7 @@ export default function AgendaHero({events}:{events:Agenda[]}){
                 className="hidden md:block bg-rojo h-[30%] w-[30%] absolute top-2/5 left-4/5 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[400px] pointer-events-none"
             >
             </div>
-            <div className="my-6  flex-1 h-[400px]  md:max-w-[20%] justify-end">
+            <div className="my-6  flex-1 h-[400px] md:max-w-[20%] justify-end">
                 <FeaturedEvent event={featured} />
             </div>
             <div className="md:hidden flex items-center gap-2 mt-6">
