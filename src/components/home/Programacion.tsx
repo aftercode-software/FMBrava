@@ -6,7 +6,8 @@ import { type Programa } from "@/utils/fetchProgramas";
 import { getStartEndDay, getStartEndHours } from "@/utils/utils";
 import { AnimatePresence, motion } from "framer-motion";
 
-type Props = { programas: Programa[] };
+type Props = { programas: Programa[] ;  onSelect?: (index: number) => void;
+ };
 
 const slideVariants = {
   hidden: { x: 20, opacity: 0 },
@@ -14,30 +15,38 @@ const slideVariants = {
   exit: { x: -10, opacity: 0 },
 };
 
-export default function ProgramacionCarousel({ programas }: Props) {
+export default function ProgramacionCarousel({ programas, onSelect }: Props) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { align: "start", loop: true },
     [Autoplay({ delay: 3000 })]
   );
   const [selected, setSelected] = useState(0);
 
-  useEffect(() => {
-    if (!emblaApi) return;
-    const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
-    emblaApi.on("select", onSelect);
-    emblaApi.on("init", onSelect);
-    return () => {
-      emblaApi.off("select", onSelect);
-      emblaApi.off("init", onSelect);
-    };
-  }, [emblaApi]);
+ useEffect(() => {
+  if (!emblaApi) return;
+
+  const onSelectEvent = () => {
+    const index = emblaApi.selectedScrollSnap();
+    setSelected(index);
+    onSelect?.(index); 
+  };
+
+  emblaApi.on("select", onSelectEvent);
+  emblaApi.on("init", onSelectEvent);
+  onSelectEvent(); 
+
+  return () => {
+    emblaApi.off("select", onSelectEvent);
+    emblaApi.off("init", onSelectEvent);
+  };
+}, [emblaApi, onSelect]);
 
   return (
     <Container className="flex flex-col mt-10">
       <h2 className="font-inter text-white font-semibold text-2xl">
         Nuestros programas
       </h2>
-      <section className="relative h-[20rem] md:h-[25rem] overflow-hidden mt-4">
+      <section className="relative h-[20rem] md:h-[40rem] overflow-hidden mt-4">
         <div className="absolute top-0 left-0 md:w-[35%] w-[45%] h-full bg-black z-10" />
         <AnimatePresence mode="wait" initial={false}>
           {programas[selected]?.imagen?.url && (

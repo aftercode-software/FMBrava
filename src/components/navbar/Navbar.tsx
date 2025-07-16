@@ -6,7 +6,7 @@ import RadioSelector from "./RadioSelector";
 
 const navigationItems = [
   { name: "Inicio", href: "/" },
-  { name: "Programas", href: "/brava-news" },
+  { name: "Programas", href: "/programas" },
   { name: "Agenda", href: "/agenda" },
   { name: "Brava News", href: "/brava-news" },
 
