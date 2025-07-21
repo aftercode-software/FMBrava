@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "vercel-build": "npm run build"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -34,6 +35,7 @@
   },
   "devDependencies": {
     "@astrojs/node": "^9.2.2",
+    "@astrojs/vercel": "^8.2.3",
     "tw-animate-css": "^1.3.5"
   }
 }
