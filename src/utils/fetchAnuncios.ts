@@ -80,13 +80,14 @@ export async function fetchAnunciosDentroBlog(): Promise<Anuncio[]> {
 export async function incrementViews(adId: string): Promise<void> {
   await secureFetch(`/ads/increment-view-count`, {
     method: "POST",
-    body: JSON.stringify({ id: adId }),
+    body: { id: adId },
   });
 }
 
 export async function incrementClicks(adId: string): Promise<void> {
+  console.log("incrementClicks called for adId:", adId);
   await secureFetch(`/ads/increment-click-count`, {
     method: "POST",
-    body: JSON.stringify({ id: adId }),
+    body: { id: adId },
   });
 }

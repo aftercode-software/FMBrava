@@ -65,7 +65,7 @@ export function BravaNewsCard({ blog }: { blog: Blog }) {
           <h3 className="mx-auto text-left lg:text-center text-sm md:text-base xl:text-lg font-bold text-white my-2 font-inter uppercase">
             {blog.title}
           </h3>
-          <p className="hidden lg:flex text-white/60 text-center text-xs font-inter font-bold">
+          <p className="hidden lg:block text-white/60 text-center text-xs font-inter font-bold">
             {blog.createdAt
               ? new Date(blog.createdAt).toLocaleDateString()
               : "Unknown date"}
