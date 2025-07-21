@@ -106,7 +106,7 @@ export default function Navbar() {
             onClick={toggleMenu}
             className="text-white transition-colors duration-200 hover:text-red-500"
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="h-6 w-6 z-30" />
           </button>
         </Container>
       </motion.nav>
@@ -115,7 +115,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="lg:hidden fixed inset-0 z-40 bg-gradient-to-b from-black via-rojo-700 to-black"
+            className="lg:hidden fixed inset-0 z-50 bg-gradient-to-b from-black via-rojo-700 to-black"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -159,8 +159,8 @@ export default function Navbar() {
                         onClick={toggleMenu}
                         className={`flex items-center space-x-3 justify-center font-inter rounded-full text-lg py-2 mx-2 transition-colors duration-200 ${
                           isActive
-                            ? "bg-white text-black font-bold"
-                            : "text-white font-normal hover:bg-white/20 hover:text-black"
+                            ? "bg-white text-black font-semibold"
+                            : "text-white font-normal hover:bg-white/20 "
                         }`}
                       >
                         <span>{item.name}</span>

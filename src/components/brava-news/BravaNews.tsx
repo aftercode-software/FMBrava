@@ -1,5 +1,5 @@
 import type { Blog } from "@/utils/fetchBlogs";
-import Container from "./containers/Container";
+import Container from "../containers/Container";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -9,18 +9,18 @@ interface Props {
 
 export default function BravaNews({ blogs, showAll = false }: Props) {
   return (
-    <Container className="mt-6">
+    <Container className="my-6">
       <div className="flex items-center mb-6">
         <img
           src="/sections-icons/brava-news-icon.webp"
           alt="Brava News"
-          className="w-15 h-15 md:w-20 md:h-20"
+          className="w-15 h-15 md:w-20 md:h-20 mr-2"
         />
         <div>
           <h2 className="text-lg md:text-2xl font-inter font-semibold text-white">
             Brava News
           </h2>
-          <p className="text-lg md:text-lg font-ibm text-gray-300 md:max-w-[70%]">
+          <p className="text-base md:text-lg font-ibm text-gray-300 md:max-w-[60%]">
             Tu espacio para enterarte de todo lo que importa, música,
             entretenimiento, cultura pop y lo que pasa en Mendoza, contado con
             el sello Brava.
@@ -58,14 +58,14 @@ export function BravaNewsCard({ blog }: { blog: Blog }) {
               "linear-gradient(to top, rgba(0,0,0,0.75) 25%, rgba(0,0,0,0.0) 100%)",
           }}
         />
-        <section className="absolute inset-0 -bottom-0 flex flex-col justify-end p-4">
-          <span className="font-bold mx-auto left-0 translate-x-1 text-sm font-inter bg-amarillo px-3 py-1 rounded-full mb-2">
+        <section className="absolute inset-0 -bottom-0 flex flex-col justify-end p-2 lg:p-4">
+          <span className="font-bold mx-auto left-0 translate-x-1 text-xs lg:text-sm font-inter bg-amarillo px-3 py-1 rounded-full mb-2">
             BRAVA NEWS
           </span>
           <h3 className="mx-auto text-left lg:text-center text-sm md:text-base xl:text-lg font-bold text-white my-2 font-inter uppercase">
             {blog.title}
           </h3>
-          <p className="text-white/60 text-center text-xs font-inter font-bold">
+          <p className="hidden lg:flex text-white/60 text-center text-xs font-inter font-bold">
             {blog.createdAt
               ? new Date(blog.createdAt).toLocaleDateString()
               : "Unknown date"}

@@ -3,7 +3,7 @@ import { fetchAgenda } from "@/utils/fetchAgenda";
 const events = await fetchAgenda();
 
 import HeroAgenda from "@/components/agenda/Hero.tsx";
-import BravaNews from "@/components/BravaNews";
+import BravaNews from "@/components/brava-news/BravaNews";
 import Container from "@/components/containers/Container.astro";
 import Layout from "@/layouts/Layout.astro";
 import { fetchBlogs } from "@/utils/fetchBlogs";
@@ -15,7 +15,7 @@ const blogs = await fetchBlogs();
 ---
 
 <Layout>
-    <Container class="mt-20">
-        <HeroAgenda events={events} client:load />
-    </Container>
+  <Container class="mt-20">
+    <HeroAgenda events={events} client:load />
+  </Container>
 </Layout>

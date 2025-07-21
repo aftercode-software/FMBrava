@@ -1,6 +1,5 @@
 import { useState } from "react";
 import type { Programa } from "@/utils/fetchProgramas";
-import { getStartEndDay, getStartEndHours } from "@/utils/utils";
 import ProgramacionCarousel from "../home/Programacion";
 
 type Props = {
