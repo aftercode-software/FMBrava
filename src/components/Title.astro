@@ -1,34 +1,26 @@
 ---
 type Props = {
-    className?: string;
-    title: string;
-    subtitle: string;
-    imageUrl: string;
+  className?: string;
+  title: string;
+  subtitle: string;
+  imageUrl: string;
 };
 
 const { title, subtitle, imageUrl, className } = Astro.props;
 ---
 
 <div class={`flex items-center mb-6 ${className}`}>
-    <div>
-        <img src={imageUrl} alt={title} class="w-15 h-15 md:w-30 md:h-30" />
-    </div>
-    <div class="flex-1">
-        <h2
-            class="text-[20px] md:text-[32px] font-inter font-semibold text-white tracking-wider"
-        >
-            {title}
-        </h2>
-        <p
-            class="text-[14px] md:text-[20px]
-            font-medium
-            md:text-lg
-            font-ibm
-            text-gray-400"
-        >
-            {subtitle}
-        </p>
-    </div>
+  <div>
+    <img src={imageUrl} alt={title} class="w-15 h-15 md:w-20 md:h-20" />
+  </div>
+  <div class="flex-1">
+    <h2 class="text-lg md:text-2xl font-inter font-semibold text-white">
+      {title}
+    </h2>
+    <p class="text-lg md:text-lg font-ibm text-gray-300 md:max-w-[60%]">
+      {subtitle}
+    </p>
+  </div>
 
-    <slot />
+  <slot />
 </div>

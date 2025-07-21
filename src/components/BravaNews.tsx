@@ -10,9 +10,23 @@ interface Props {
 export default function BravaNews({ blogs, showAll = false }: Props) {
   return (
     <Container className="mt-6">
-      <h2 className="font-inter text-white font-semibold text-2xl">
-        Brava News
-      </h2>
+      <div className="flex items-center mb-6">
+        <img
+          src="/sections-icons/brava-news-icon.webp"
+          alt="Brava News"
+          className="w-15 h-15 md:w-20 md:h-20"
+        />
+        <div>
+          <h2 className="text-lg md:text-2xl font-inter font-semibold text-white">
+            Brava News
+          </h2>
+          <p className="text-lg md:text-lg font-ibm text-gray-300 md:max-w-[70%]">
+            Tu espacio para enterarte de todo lo que importa, música,
+            entretenimiento, cultura pop y lo que pasa en Mendoza, contado con
+            el sello Brava.
+          </p>
+        </div>
+      </div>
       <div className="grid gap-6 grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mt-4">
         {(showAll ? blogs : blogs.slice(0, 4)).map((b) => (
           <BravaNewsCard key={b.id} blog={b} />

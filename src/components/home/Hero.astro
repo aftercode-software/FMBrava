@@ -2,11 +2,12 @@
 import Container from "../containers/Container.astro";
 import Button from "../Button.astro";
 import Player from "./Player.tsx";
+import { Plus } from "@lucide/astro";
 ---
 
 <section
-    class="bg-negro-900 text-white py-8"
-    style=`
+  class="bg-negro-900 text-white py-8"
+  style=`
         background-image: linear-gradient(
             to bottom, 
             rgba(6, 6, 6, 1) 0%, 
@@ -19,39 +20,38 @@ import Player from "./Player.tsx";
         background-repeat: no-repeat;
     `
 >
-    <Container
-        class="flex flex-col-reverse lg:flex-row items-center lg:h-[80vh] gap-8 lg:gap-32 mt-6"
-    >
-        <div class="w-full lg:w-2/5">
-            <span
-                class="font-inter font-extrabold text-xl tracking-[0.25em] text-negro-400"
-                >PRESENTAMOS</span
-            >
-            <h1
-                class="text-6xl lg:text-8xl 3xl:text-9xl font-bold font-tusker tracking-wide mt-4"
-            >
-                SOMOS MÁS BRAVA
-            </h1>
-            <div class="flex items-center gap-6 font-ibm text-xl mt-2">
-                <span class="text-green-400 font-medium">100% match</span>
-                <span class="font-bold">1# en Mendoza</span>
-            </div>
-            <p class="text-xl lg:text-2xl tracking-tight font-ibm mt-4">
-                Hace más de 15 años te acompañamos día y noche. Nacimos para
-                darle al público eso que necesita en su rutina: música y
-                entretenimiento. Si sos de Mendoza prendé la 94.9, o la 88.3 si
-                estás en San Juan. Escuchanos también en nuestra transmisión por
-                YouTube o Twitch.
-            </p>
-            <div class="flex items-center gap-2 mt-6">
-                <Button href="/programacion" variant="light">
-                    + Programación
-                </Button>
-                <Button href="/programacion"> Escribinos </Button>
-            </div>
-        </div>
-        <div class="w-full lg:w-3/5">
-            <!-- <Player client:load /> -->
-        </div>
-    </Container>
+  <Container
+    class="flex flex-col-reverse lg:flex-row items-center lg:h-[80vh] gap-8 lg:gap-32 mt-6"
+  >
+    <div class="w-full lg:w-2/5">
+      <span
+        class="font-inter font-extrabold text-xl tracking-[0.25em] text-negro-400"
+        >PRESENTAMOS</span
+      >
+      <h1
+        class="text-6xl lg:text-8xl 3xl:text-9xl font-bold font-tusker tracking-wide mt-4"
+      >
+        SOMOS MÁS BRAVA
+      </h1>
+      <div class="flex items-center gap-6 font-ibm text-xl mt-2">
+        <span class="text-green-400 font-medium">100% match</span>
+        <span class="font-bold">1# en Mendoza</span>
+      </div>
+      <p class="text-xl tracking-tight font-ibm mt-4">
+        Hace más de 15 años te acompañamos día y noche. Nacimos para darle al
+        público eso que necesita en su rutina: música y entretenimiento. Si sos
+        de Mendoza prendé la 94.9, o la 88.3 si estás en San Juan. Escuchanos
+        también en nuestra transmisión por YouTube o Twitch.
+      </p>
+      <div class="flex items-center gap-3 mt-6">
+        <Button href="/programacion" variant="light">
+          <Plus />Programación
+        </Button>
+        <Button href="/programacion"> Escribinos </Button>
+      </div>
+    </div>
+    <div class="w-full lg:w-3/5">
+      <!-- <Player client:load /> -->
+    </div>
+  </Container>
 </section>

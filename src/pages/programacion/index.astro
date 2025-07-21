@@ -1,0 +1,12 @@
+---
+import { fetchProgramas, type Programa } from "../../utils/fetchProgramas";
+import Container from "@/components/containers/Container.astro";
+import Layout from "@/layouts/Layout.astro";
+import ProgramasHero from "@/components/Programas/Hero";
+
+const programas: Programa[] = await fetchProgramas();
+---
+
+<Layout>
+  <ProgramasHero client:load programas={programas} />
+</Layout>

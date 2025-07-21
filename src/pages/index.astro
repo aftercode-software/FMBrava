@@ -7,13 +7,11 @@ import ProgramacionCarousel from "@/components/home/Programacion";
 import BravaNews from "@/components/BravaNews";
 import { fetchBlogs } from "@/utils/fetchBlogs";
 import RRSS from "@/components/rrss/RRSS.astro";
-import Spotify from "@/components/Spotify.astro";
 import ConocenosMas from "@/components/ConocenosMas.astro";
-import Title from "@/components/Title.astro";
-import Agenda from "@/components/agenda/Agenda.tsx";
-import Destacadas from "@/components/Destacadas.astro";
 import EntreSecciones from "@/components/ads/EntreSecciones.astro";
 import AgendaSection from "@/components/agenda/AgendaSection.astro";
+import SpotifyPlaylists from "@/components/SpotifyPlaylists.astro";
+
 const programas: Programa[] = await fetchProgramas();
 const blogs = await fetchBlogs();
 const playlists = await fetchPlaylists();
@@ -26,7 +24,7 @@ const playlists = await fetchPlaylists();
   <BravaNews blogs={blogs} client:load />
   <EntreSecciones />
   <RRSS />
-  <Spotify playlists={playlists} client:load />
+  <SpotifyPlaylists playlists={playlists} />
   <EntreSecciones />
   <ConocenosMas />
 </Layout>

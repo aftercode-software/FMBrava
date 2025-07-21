@@ -6,8 +6,7 @@ import { type Programa } from "@/utils/fetchProgramas";
 import { getStartEndDay, getStartEndHours } from "@/utils/utils";
 import { AnimatePresence, motion } from "framer-motion";
 
-type Props = { programas: Programa[] ;  onSelect?: (index: number) => void;
- };
+type Props = { programas: Programa[]; onSelect?: (index: number) => void };
 
 const slideVariants = {
   hidden: { x: 20, opacity: 0 },
@@ -22,31 +21,31 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
   );
   const [selected, setSelected] = useState(0);
 
- useEffect(() => {
-  if (!emblaApi) return;
+  useEffect(() => {
+    if (!emblaApi) return;
 
-  const onSelectEvent = () => {
-    const index = emblaApi.selectedScrollSnap();
-    setSelected(index);
-    onSelect?.(index); 
-  };
+    const onSelectEvent = () => {
+      const index = emblaApi.selectedScrollSnap();
+      setSelected(index);
+      onSelect?.(index);
+    };
 
-  emblaApi.on("select", onSelectEvent);
-  emblaApi.on("init", onSelectEvent);
-  onSelectEvent(); 
+    emblaApi.on("select", onSelectEvent);
+    emblaApi.on("init", onSelectEvent);
+    onSelectEvent();
 
-  return () => {
-    emblaApi.off("select", onSelectEvent);
-    emblaApi.off("init", onSelectEvent);
-  };
-}, [emblaApi, onSelect]);
+    return () => {
+      emblaApi.off("select", onSelectEvent);
+      emblaApi.off("init", onSelectEvent);
+    };
+  }, [emblaApi, onSelect]);
 
   return (
-    <Container className="flex flex-col mt-10">
-      <h2 className="font-inter text-white font-semibold text-2xl">
+    <Container className="flex flex-col">
+      <h2 className="font-inter text-white font-semibold text-xl lg:text-2xl">
         Nuestros programas
       </h2>
-      <section className="relative h-[20rem] md:h-[40rem] overflow-hidden mt-4">
+      <section className="relative h-[20rem] md:h-[32rem] overflow-hidden mt-4">
         <div className="absolute top-0 left-0 md:w-[35%] w-[45%] h-full bg-black z-10" />
         <AnimatePresence mode="wait" initial={false}>
           {programas[selected]?.imagen?.url && (
@@ -54,7 +53,7 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
               key={programas[selected].id}
               src={programas[selected].imagen.url}
               alt={programas[selected].imagen.alt || "Imagen del programa"}
-              className="absolute top-0 left-0 md:w-[35%] w-[45%] h-full object-cover border-white rounded-lg border-2 z-20"
+              className=" absolute top-0 left-0 md:w-[35%] w-[45%] h-full object-cover [object-position:50%_0%] border-white rounded-lg border-2 z-20 "
               variants={slideVariants}
               initial="hidden"
               animate="visible"
@@ -66,15 +65,6 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
             />
           )}
         </AnimatePresence>
-
-        {/* overlay gradient */}
-        <div
-          className="absolute inset-0 rounded-lg"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.5) 20%, rgba(0,0,0,0.0) 100%)",
-          }}
-        />
 
         <div
           ref={emblaRef}
@@ -102,35 +92,41 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
       {programas[selected] && (
         <div className="mt-3 lg:max-w-[35%] rounded-lg text-white">
           <section className="flex items-center gap-2">
-            <p className="font-ibm font-bold md:text-lg">
-              {(() => {
-                const result = getStartEndDay(programas[selected].diasSemana);
-                const dias = programas[selected].diasSemana;
-                if (typeof result === "string") {
-                  return result;
-                }
-                const { start, end } = result;
-                if (dias.length === 1) {
-                  return `Día: ${dias[0]} ${start}`;
-                }
-                return `${start?.charAt(0).toUpperCase()}${start?.slice(
-                  1
-                )} a ${end?.charAt(0).toUpperCase()}${end?.slice(1)}`;
-              })()}
-            </p>
-            <p className="font-ibm font-bold md:text-lg ">
-              {(() => {
-                const { start, end } = getStartEndHours(
-                  programas[selected].horarioInicio,
-                  programas[selected].horarioFin
-                );
-                return `${start}h a ${end}h`;
-              })()}
-            </p>
+            {onSelect ? null : (
+              <p className="font-ibm font-bold md:text-lg">
+                {(() => {
+                  const result = getStartEndDay(programas[selected].diasSemana);
+                  const dias = programas[selected].diasSemana;
+                  if (typeof result === "string") {
+                    return result;
+                  }
+                  const { start, end } = result;
+                  if (dias.length === 1) {
+                    return `Día: ${dias[0]} ${start}`;
+                  }
+                  return `${start?.charAt(0).toUpperCase()}${start?.slice(
+                    1
+                  )} a ${end?.charAt(0).toUpperCase()}${end?.slice(1)}`;
+                })()}
+              </p>
+            )}
+            {onSelect ? null : (
+              <p className="font-ibm font-bold md:text-lg">
+                {(() => {
+                  const { start, end } = getStartEndHours(
+                    programas[selected].horarioInicio,
+                    programas[selected].horarioFin
+                  );
+                  return `${start}h a ${end}h`;
+                })()}
+              </p>
+            )}
           </section>
-          <p className="md:text-lg font-ibm text-gray-300">
-            {programas[selected].descripcion}
-          </p>
+          {onSelect ? null : (
+            <p className="md:text-lg font-ibm text-gray-300">
+              {programas[selected].descripcion}
+            </p>
+          )}
         </div>
       )}
     </Container>

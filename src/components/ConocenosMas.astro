@@ -7,17 +7,17 @@ const destacados = await fetchDestacados();
 ---
 
 <Container>
-    <Title
-        title="Conocenos más"
-        subtitle="Acá tenés nuestras fotos destacadas.Explorá algunos momentos únicos y dejate inspirar"
-        imageUrl="./images/conocenosMas.png"
-    />
-    <ImagesCarousel
-        images={destacados.map((destacado) => ({
-            href: destacado.link,
-            imageUrl: destacado.image.url,
-            title: destacado.title,
-        }))}
-        client:load
-    />
+  <Title
+    title="Conocenos más"
+    subtitle="Acá tenés nuestras fotos destacadas.Explorá algunos momentos únicos y dejate inspirar"
+    imageUrl="./sections-icons/destacadas-icon.webp"
+  />
+  <ImagesCarousel
+    images={destacados.map((destacado) => ({
+      href: destacado.link,
+      imageUrl: destacado.image.url,
+      title: destacado.title,
+    }))}
+    client:load
+  />
 </Container>

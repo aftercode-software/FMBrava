@@ -39,7 +39,7 @@ export async function fetchProgramas(): Promise<Programa[]> {
   }
 
   const { docs } = await secureFetch<{ docs: ProgramaRaw[] }>("programacion");
-  if (!docs) throw new Error("Error fetching programas");
+  if (!docs) throw new Error("Error fetching programas ");
 
   const filtered = docs.filter((item) => new Date(item.fechaFin) > new Date());
 

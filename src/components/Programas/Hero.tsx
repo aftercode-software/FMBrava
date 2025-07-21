@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import type { Programa } from "@/utils/fetchProgramas";
 import { getStartEndDay, getStartEndHours } from "@/utils/utils";
@@ -14,63 +12,53 @@ export default function ProgramasHero({ programas }: Props) {
   const selected = programas[selectedIndex];
 
   return (
-    <div className="flex flex-col w-full  ">
-      <section className="relative w-full h-[75vh] md:h-[85vh] text-white overflow-hidden ">
-        {selected?.imagen?.url && (
-          <img
-            src={selected.imagen.url}
-            alt={selected.imagen.alt}
-            className="absolute right-0 top-0 w-[70%] h-full object-cover object-top z-0"
-          />
-        )}
-
-        <div className="absolute inset-0  z-10"
-        style={{background:
-      "linear-gradient(90deg, rgba(0, 0, 0, 1) 36%, rgba(255, 255, 255, 0) 100%)",}} />
-
-        <div className="relative z-20 flex flex-col  h-full p-26  max-w-[900px]">
-          <h1 className="text-6xl lg:text-8xl 3xl:text-9xl font-bold font-tusker tracking-wide mt-4">
+    <div className="w-full ">
+      <section
+        className={` w-full pl-[5vw] flex items-center overflow-hidden text-white h-auto py-12 md:py-16 md:h-[70vh] `}
+      >
+        <div className="w-full md:w-1/2 flex flex-col justify-center mt-20">
+          <span className="font-inter font-extrabold lg:text-xl tracking-[0.25em] text-negro-400">
+            BRAVA PRESENTA
+          </span>
+          <h1 className="text-5xl lg:text-8xl 3xl:text-9xl font-bold font-tusker tracking-wide mt-4 uppercase">
             {selected?.nombre}
           </h1>
-
-          <div className="gap-6 flex flex-wrap items-center text-lg md:text-xl font-semibold text-white/90 mb-2">
-                <span className="text-green-400 font-medium">100% Para Vos</span>
-            <p>
-              {(() => {
-                const result = getStartEndDay(selected.diasSemana);
-                if (typeof result === "string") return result;
-                const { start, end } = result;
-                return `${start} a ${end}`;
-              })()}
-            </p>
-            <p>
-              {(() => {
-                const { start, end } = getStartEndHours(
-                  selected.horarioInicio,
-                  selected.horarioFin
-                );
-                return `${start}hs a ${end}hs`;
-              })()}
-            </p>
-          </div>
-
-          <p className="text-xl text-[#F6F6F6]/68 lg:text-2xl tracking-tight font-ibm mt-4">
-            {selected?.descripcion}
+          <p className="text-lg lg:text-xl font-ibm text-white mt-2">
+            {selected.descripcion}
           </p>
-          <div>
-            {selected.participantes?.map((participante) => (
-              <p className="gap-6 flex flex-wrap items-center text-lg md:text-xl font-semibold text-[#F6F6F6]/68 mb-2" key={participante.id}>Elenco:{participante.nombre}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {selected.participantes?.map((p) => (
+              <span
+                key={p.id}
+                className="font-ibm lg:text-lg font-medium lg:font-semibold bg-white/30 px-4 py-1 rounded-full"
+              >
+                {p.nombre}
+              </span>
             ))}
           </div>
         </div>
+
+        <div className="w-full md:w-1/2 lg:flex justify-end relative hidden">
+          <img
+            src={selected.imagen.url}
+            alt={selected.imagen.alt || ""}
+            className={`
+              object-cover 
+              [object-position:50%_0%]
+              max-h-[60vh]
+              w-full
+              rounded-lg
+              shadow-lg
+            `}
+          />
+          <div className=" absolute inset-y-0 left-0 w-1/2 rounded-l-lg pointer-events-none bg-gradient-to-r from-black to-transparent " />
+        </div>
       </section>
 
-      <div className="mt-[-4rem] z-30 relative px-4">
-        <ProgramacionCarousel
-          programas={programas}
-          onSelect={(index) => setSelectedIndex(index)}
-        />
-      </div>
+      <ProgramacionCarousel
+        programas={programas}
+        onSelect={(idx) => setSelectedIndex(idx)}
+      />
     </div>
   );
 }

@@ -6,11 +6,11 @@ import { fetchAgenda } from "@/utils/fetchAgenda";
 const events = await fetchAgenda();
 ---
 
-<Container class="mt-6 md:py-16">
-    <Title
-        title="Proximamente"
-        subtitle="Consultá nuestros proximos estrenos"
-        imageUrl="/images/agenda.png"
-    />
-    <Agenda events={events} client:load />
+<Container class="my-20">
+  <Title
+    title="Próximamente"
+    subtitle="Consultá nuestra agenda para no perderte ningún evento"
+    imageUrl="/sections-icons/agenda-icon.webp"
+  />
+  <Agenda events={events} client:load />
 </Container>
