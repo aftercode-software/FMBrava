@@ -8,5 +8,7 @@ const programas: Programa[] = await fetchProgramas();
 ---
 
 <Layout>
-  <ProgramasHero client:load programas={programas} />
+  <Container class="mt-40">
+    <ProgramasHero client:load programas={programas} />
+  </Container>
 </Layout>
