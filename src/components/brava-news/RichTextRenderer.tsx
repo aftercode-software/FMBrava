@@ -1,108 +1,47 @@
 import { fetchImagenPresign } from "@/utils/fetchImagen";
-import React from "react";
-
-export type RichTextNode =
-  | RichTextBlock
-  | RichTextHeading
-  | RichTextParagraph
-  | RichTextLink
-  | RichTextYoutube
-  | RichTextUpload
-  | RichTextText;
-
-interface BaseNode {
-  type: string;
-  children?: RichTextNode[];
-}
-
-interface RichTextBlock extends BaseNode {
-  type: "root";
-  children: RichTextNode[];
-}
-
-interface RichTextHeading extends BaseNode {
-  type: "heading";
-  tag?: string;
-  children: RichTextText[];
-}
-
-interface RichTextParagraph extends BaseNode {
-  type: "paragraph";
-  children: RichTextNode[];
-  indent?: number;
-}
-
-interface RichTextLink extends BaseNode {
-  type: "link";
-  fields: { url: string; newTab?: boolean };
-  children: RichTextText[];
-}
-
-interface RichTextYoutube extends BaseNode {
-  type: "youtube";
-  id: string;
-}
-
-interface RichTextUpload extends BaseNode {
-  type: "upload";
-  value: { url: string; alt?: string };
-}
-
-interface RichTextText {
-  type: "text";
-  text: string;
-  format?: number;
-}
-
-interface RichTextRendererProps {
-  nodes: RichTextNode[];
-  payloadBaseUrl?: string;
-  overrides?: Partial<Record<string, React.FC<any>>>;
-}
+import {
+  createElement,
+  Fragment,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+import DentroBlog from "../ads/DentroBlog";
+import type {
+  BlogEntryProps,
+  BlogListProps,
+  RichTextBlock,
+  RichTextHeading,
+  RichTextLink,
+  RichTextList,
+  RichTextListItem,
+  RichTextNode,
+  RichTextParagraph,
+  RichTextRelationship,
+  RichTextRendererProps,
+  RichTextText,
+  RichTextUpload,
+  RichTextYoutube,
+} from "@/interfaces/richText";
+import Image from "./Image";
 
 function renderInlineText(textNode: RichTextText) {
-  let content: React.ReactNode = textNode.text;
+  let content: ReactNode = textNode.text;
   const { format = 0 } = textNode;
 
   if (format & 4) content = <s key="strike">{content}</s>;
   if (format & 2) content = <em key="italic">{content}</em>;
   if (format & 1) content = <strong key="bold">{content}</strong>;
-
+  if (format & 32) content = <sub key="sub">{content}</sub>;
+  if (format & 64) content = <sup key="sup">{content}</sup>;
   return content;
 }
 
 export function RichTextRenderer({
   nodes,
-  payloadBaseUrl = "",
   overrides = {},
 }: RichTextRendererProps) {
-  const [imageUrls, setImageUrls] = React.useState<Record<string, string>>({});
-
-  React.useEffect(() => {
-    const uploads = nodes.flatMap(function findUploads(
-      node: RichTextNode
-    ): RichTextUpload[] {
-      if (node.type === "upload") return [node as RichTextUpload];
-      if ("children" in node && node.children) {
-        return node.children.flatMap(findUploads);
-      }
-      return [];
-    });
-    Promise.all(
-      uploads.map(async (upload) => {
-        const src = await fetchImagenPresign(upload.value.url);
-        return { url: upload.value.url, src };
-      })
-    ).then((results) => {
-      const urlMap: Record<string, string> = {};
-      results.forEach(({ url, src }) => {
-        urlMap[url] = src;
-      });
-      setImageUrls(urlMap);
-    });
-  }, [nodes]);
-
-  const renderNode = (node: RichTextNode, index: number): React.ReactNode => {
+  const renderNode = (node: RichTextNode, index: number): ReactNode => {
     if (overrides[node.type]) {
       const Component = overrides[node.type]!;
       return <Component key={index} node={node} />;
@@ -111,12 +50,12 @@ export function RichTextRenderer({
     switch (node.type) {
       case "heading": {
         const tag = (node as RichTextHeading).tag || "h2";
-        return React.createElement(
+        return createElement(
           tag,
           { key: index, className: "text-white font-inter font-bold text-2xl" },
-          (node as RichTextHeading).children.map((child, idx) =>
-            renderInlineText(child)
-          )
+          (node as RichTextHeading).children.map((child, idx) => (
+            <Fragment key={idx}>{renderInlineText(child)}</Fragment>
+          ))
         );
       }
       case "paragraph": {
@@ -137,12 +76,14 @@ export function RichTextRenderer({
         }
 
         return (
-          <p key={index} className="text-white font-inter  text-lg mb-4">
-            {pNode.children.map((c, i) =>
-              c.type === "text"
-                ? renderInlineText(c as RichTextText)
-                : renderNode(c as RichTextNode, i)
-            )}
+          <p key={index} className="text-white font-inter text-lg my-2">
+            <Fragment key={index}>
+              {pNode.children.map((c, i) =>
+                c.type === "text"
+                  ? renderInlineText(c as RichTextText)
+                  : renderNode(c as RichTextNode, i)
+              )}
+            </Fragment>
           </p>
         );
       }
@@ -178,25 +119,87 @@ export function RichTextRenderer({
         );
       }
       case "upload": {
+        console.log("upload node:", node);
         const { url, alt } = (node as RichTextUpload).value;
-        const src = imageUrls[url];
-        return src ? (
-          <img
-            key={index}
-            src={src}
-            alt={alt || ""}
-            className="max-w-full h-auto"
-          />
-        ) : (
-          <span key={index}>Cargando imagen...</span>
-        );
+        if (!url) {
+          return null;
+        }
+        return <Image key={index} url={url} alt={alt} />;
       }
       case "text":
         return (
-          <React.Fragment key={index}>
+          <Fragment key={index}>
             {renderInlineText(node as RichTextText)}
-          </React.Fragment>
+          </Fragment>
         );
+      case "list": {
+        const listNode = node as RichTextList;
+        const Tag = listNode.listType === "number" ? "ol" : "ul";
+
+        const attrs: Record<string, any> = {
+          key: index,
+          className:
+            listNode.listType === "check"
+              ? ""
+              : listNode.listType === "number"
+              ? "list-decimal ml-6"
+              : "list-disc ml-6",
+        };
+        if (listNode.listType === "number" && listNode.start !== undefined) {
+          attrs.start = listNode.start;
+        }
+        return createElement(
+          Tag,
+          attrs,
+          listNode.children.map((item, i) => renderNode(item, i))
+        );
+      }
+
+      case "listitem": {
+        const li = node as RichTextListItem;
+        if (typeof li.checked === "boolean") {
+          return (
+            <li
+              key={index}
+              className="flex items-center space-x-2 text-white font-inter text-lg"
+            >
+              <input
+                type="checkbox"
+                checked={li.checked}
+                readOnly
+                className="accent-amarillo"
+              />
+              <span className={li.checked ? "line-through" : ""}>
+                {li.children.map((c, i) =>
+                  c.type === "text"
+                    ? renderInlineText(c as RichTextText)
+                    : renderNode(c, i)
+                )}
+              </span>
+            </li>
+          );
+        }
+        return (
+          <li key={index} className="text-white font-inter text-lg">
+            {li.children.map((c, i) =>
+              c.type === "text"
+                ? renderInlineText(c as RichTextText)
+                : renderNode(c, i)
+            )}
+          </li>
+        );
+      }
+
+      case "relationship": {
+        const rel = node as RichTextRelationship;
+        if (rel.relationTo === "ads") {
+          return <DentroBlog key={index} ad={rel.value} />;
+        }
+        return null;
+      }
+
+      case "horizontalrule":
+        return <hr key={index} className="my-6 border-gray-600" />;
       case "root":
         return (
           <>
@@ -211,21 +214,6 @@ export function RichTextRenderer({
   };
 
   return <>{nodes.map((node, idx) => renderNode(node, idx))}</>;
-}
-
-// --- Blog components ---
-
-export interface BlogDoc {
-  id: string;
-  title: string;
-  publishedAt?: string;
-  smallImage?: { url: string; alt?: string };
-  content: { root: { children: RichTextNode[] } };
-}
-
-interface BlogEntryProps {
-  blog: BlogDoc;
-  payloadBaseUrl?: string; // no longer needed for image
 }
 
 export async function BlogEntry({ blog }: BlogEntryProps) {
@@ -252,10 +240,6 @@ export async function BlogEntry({ blog }: BlogEntryProps) {
       <RichTextRenderer nodes={nodes} />
     </article>
   );
-}
-
-interface BlogListProps {
-  docs: BlogDoc[];
 }
 
 export function BlogList({ docs }: BlogListProps) {

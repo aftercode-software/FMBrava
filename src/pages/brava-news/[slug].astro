@@ -16,7 +16,6 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const blogs = await fetchBlogs();
 const blog = blogs.find((post) => post.slug === slug);
-console.log("Blog:", blog);
 ---
 
 <Layout>
@@ -25,7 +24,7 @@ console.log("Blog:", blog);
       <main class="flex flex-col gap-10 w-full">
         <BlogHero b={blog} />
         <Container class="lg:max-w-[65vw]">
-          <RichTextRenderer nodes={blog.content} />
+          <RichTextRenderer nodes={blog.content} client:load />
         </Container>
       </main>
     ) : (
