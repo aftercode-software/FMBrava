@@ -35,7 +35,7 @@ export default function FixedPlayer({
     <>
       {showVolumeModal && (
         <div
-          className="fixed inset-0 bg-gradient-to-b from-negro-900 to-negro/30 backdrop-blur-sm z-9CC0 flex items-center justify-center sm:hidden"
+          className="fixed inset-0 bg-gradient-to-b from-negro-900 to-negro/30 backdrop-blur-sm z-90 flex items-center justify-center sm:hidden"
           onClick={() => setShowVolumeModal(false)}
         >
           <div className="bg-negro-900 backdrop-blur-xl rounded-2xl p-6 mx-4 w-full max-w-sm border border-gray-700">
@@ -62,7 +62,7 @@ export default function FixedPlayer({
         </div>
       )}
 
-      <div className="fixed bottom-0 left-0 h-22 md:h-28 w-full pt-2  backdrop-blur-xl z-50">
+      <div className="fixed bottom-0 left-0 h-22 md:h-28 w-full pt-2 bg-gradient-to-t from-negro-900 to-negro/30 backdrop-blur-xl z-50">
         <Container className="py-3 sm:py-4">
           <div className="relative flex items-center h-full">
             {/* Left Section - Album Art & Info */}
