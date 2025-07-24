@@ -35,7 +35,7 @@ export default function FixedPlayer({
     <>
       {showVolumeModal && (
         <div
-          className="fixed inset-0 bg-gradient-to-b from-negro-900 to-negro/30 backdrop-blur-sm z-40 flex items-center justify-center sm:hidden"
+          className="fixed inset-0  backdrop-blur-sm z-40 flex items-center justify-center sm:hidden"
           onClick={() => setShowVolumeModal(false)}
         >
           <div className="bg-negro-900 backdrop-blur-xl rounded-2xl p-6 mx-4 w-full max-w-sm border border-gray-700">
