@@ -1,26 +1,44 @@
 ---
+import { ChevronRight } from "@lucide/astro";
+import VerMasButton from "./VerMasButton.astro";
+
 type Props = {
   className?: string;
   title: string;
   subtitle: string;
   imageUrl: string;
+  cantidad?: number;
+  link?: string;
+  verTodasTexto?: "todas" | "todos";
 };
 
-const { title, subtitle, imageUrl, className } = Astro.props;
+const { title, subtitle, imageUrl, className, cantidad, link, verTodasTexto } =
+  Astro.props;
 ---
 
-<div class={`flex items-center mb-6 ${className}`}>
-  <div>
-    <img src={imageUrl} alt={title} class="w-15 h-15 md:w-20 md:h-20 mr-2" />
-  </div>
-  <div class="flex-1">
-    <h2 class="text-lg md:text-2xl font-inter font-semibold text-white">
-      {title}
-    </h2>
-    <p class="text-base md:text-lg font-ibm text-gray-300 md:max-w-[60%]">
-      {subtitle}
-    </p>
-  </div>
-
-  <slot />
+<div class={`flex justify-between w-full items-center mt-40 ${className}`}>
+  <aside class="flex items-center">
+    <div>
+      <img src={imageUrl} alt={title} class="w-18 h-18 md:w-24 md:h-24 mr-2" />
+    </div>
+    <div class="flex-1 md:min-w-[50%]">
+      <h2 class="font-inter text-white font-semibold text-xl lg:text-2xl">
+        {title}
+      </h2>
+      <p class="text-base md:text-lg font-ibm text-gray-300">
+        {subtitle}
+      </p>
+    </div>
+  </aside>
+  {
+    link && verTodasTexto && cantidad !== undefined && (
+      <aside class="items-center hidden md:flex">
+        <VerMasButton
+          cantidad={cantidad}
+          link={link}
+          verTodasTexto={verTodasTexto}
+        />
+      </aside>
+    )
+  }
 </div>

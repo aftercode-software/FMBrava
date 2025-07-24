@@ -4,7 +4,7 @@ import useScrollOffset from "../../hooks/useScrollOffset";
 import FixedPlayer from "./FixedPlayer";
 
 export default function Player() {
-  const [playing, setPlaying] = useState(true);
+  const [playing, setPlaying] = useState(false);
   const scrollY = useScrollOffset();
   const playerRef = useRef<any>(null);
   const [volume, setVolume] = useState(0.5);

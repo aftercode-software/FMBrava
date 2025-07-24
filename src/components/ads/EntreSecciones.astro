@@ -14,7 +14,7 @@ const uniqueId = `anuncio-entre-secciones-${Math.random().toString(36).substr(2,
   <div
     id={uniqueId}
     data-anuncio-id={anuncio?.id}
-    class={`overflow-hidden cursor-pointer ${anuncio ? '' : 'h-0'}`}
+    class={`overflow-hidden cursor-pointer ${anuncio ? 'max-h-96' : 'h-0'}`}
   >
     {anuncio && (
       <a

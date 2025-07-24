@@ -1,0 +1,21 @@
+---
+import { ChevronRight } from "lucide-react";
+
+type Props = {
+  cantidad?: number;
+  link?: string;
+  verTodasTexto?: "todas" | "todos";
+};
+const { cantidad, link, verTodasTexto } = Astro.props;
+---
+
+<a
+  href={link}
+  class="font-inter flex gap-3 md:gap-4 items-center font-semibold md:font-bold text-white md:text-lg"
+>
+  Ver {verTodasTexto}
+  <span class="bg-white/30 px-6 py-2 rounded-full">
+    {cantidad}
+  </span>
+  <ChevronRight />
+</a>

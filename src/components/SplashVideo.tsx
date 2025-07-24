@@ -26,14 +26,14 @@ export default function SplashVideo() {
   if (!showSplash) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#1f1f1f] flex items-center justify-center">
+    <div className="fixed inset-0 z-80 bg-[#1f1f1f] flex items-center justify-center">
       <video
         ref={videoRef}
         src="/video/480.webm"
         autoPlay
         onEnded={handleEnded}
         muted
-        className="w-[50%] h-[50%] object-cover"
+        className="md:w-[50%] md:h-[50%] object-cover"
         playsInline
         preload="metadata"
       />

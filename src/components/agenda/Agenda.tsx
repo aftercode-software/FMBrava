@@ -4,9 +4,10 @@ import FeaturedEvent from "./FeaturedEvent";
 
 type Props = {
   events: Agenda[];
+  cantidad?: number;
 };
 
-export default function Agenda({ events }: Props) {
+export default function Agenda({ events, cantidad }: Props) {
   const featured = events[0];
   const rest = events.slice(1);
   const goToEvent = (id: string) => {
@@ -14,7 +15,7 @@ export default function Agenda({ events }: Props) {
   };
 
   return (
-    <section>
+    <section className="mt-16">
       <div className="flex flex-col md:flex-row md:min-h-[600px] h-full w-full gap-y-10 md:gap-6">
         <div
           key={featured.id}
@@ -24,7 +25,7 @@ export default function Agenda({ events }: Props) {
           <FeaturedEvent event={featured} />
         </div>
         <div className="w-full md:flex-1 grid grid-cols-2 gap-x-4 gap-y-6 md:gap-y-10 md:h-full">
-          {rest.map((event) => (
+          {rest.slice(0, cantidad).map((event) => (
             <div
               key={event.id}
               onClick={() => goToEvent(event.id)}

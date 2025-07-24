@@ -91,9 +91,9 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
 
       {programas[selected] && (
         <div className="mt-3 lg:max-w-[35%] rounded-lg text-white">
-          <section className="flex items-center gap-2">
+          <section className="flex items-center gap-2 *:md:text-lg">
             {onSelect ? null : (
-              <p className="font-ibm font-bold md:text-lg">
+              <p className="font-ibm font-bold">
                 {(() => {
                   const result = getStartEndDay(programas[selected].diasSemana);
                   const dias = programas[selected].diasSemana;
@@ -111,7 +111,7 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
               </p>
             )}
             {onSelect ? null : (
-              <p className="font-ibm font-bold md:text-lg">
+              <p className="font-ibm font-bold">
                 {(() => {
                   const { start, end } = getStartEndHours(
                     programas[selected].horarioInicio,

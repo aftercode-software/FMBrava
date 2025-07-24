@@ -44,7 +44,11 @@ export default function Navbar() {
       >
         <Container className="flex items-center justify-between w-full">
           <motion.a className="flex items-center" href="/">
-            <img src="/logo.png" alt="Brava Radio" className="h-12 w-auto" />
+            <img
+              src="/logo-white.png"
+              alt="Brava Radio"
+              className="h-12 w-auto"
+            />
           </motion.a>
 
           <div className="flex items-center space-x-8">
@@ -65,7 +69,7 @@ export default function Navbar() {
                 >
                   <a
                     href={item.href}
-                    className={`flex items-center space-x-2 font-inter font-medium rounded-full px-5 py-1 transition-colors duration-200 ${
+                    className={`flex items-center space-x-2 font-inter font-medium text-lg rounded-full px-5 py-1 transition-colors duration-200 ${
                       isActive
                         ? "bg-white text-black"
                         : "text-white hover:bg-white/20"
@@ -99,7 +103,11 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             href="/"
           >
-            <img src="/logo.png" alt="Brava Radio" className="h-10 w-auto" />
+            <img
+              src="/logo-white.png"
+              alt="Brava Radio"
+              className="h-10 w-auto"
+            />
           </motion.a>
 
           <button

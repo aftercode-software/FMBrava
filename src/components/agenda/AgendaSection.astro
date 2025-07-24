@@ -3,14 +3,25 @@ import Container from "../containers/Container.astro";
 import Agenda from "./Agenda";
 import Title from "../Title.astro";
 import { fetchAgenda } from "@/utils/fetchAgenda";
+import VerMasButton from "../VerMasButton.astro";
 const events = await fetchAgenda();
 ---
 
 <Container class="my-20">
   <Title
     title="Próximamente"
+    verTodasTexto="todos"
     subtitle="Consultá nuestra agenda para no perderte ningún evento"
     imageUrl="/sections-icons/agenda-icon.webp"
+    cantidad={events.length}
+    link="/agenda"
   />
-  <Agenda events={events} client:load />
+  <Agenda events={events} cantidad={4} client:load />
+  <div class="flex md:hidden w-full justify-end items-center mt-10">
+    <VerMasButton
+      cantidad={events.length}
+      link="/agenda"
+      verTodasTexto="todos"
+    />
+  </div>
 </Container>

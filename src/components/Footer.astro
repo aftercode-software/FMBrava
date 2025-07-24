@@ -3,7 +3,7 @@ import Container from "./containers/Container.astro";
 import SomosMasFooter from "./SomosMasFooter";
 ---
 
-<footer class="flex flex-col items-center w-full bg-negro-900 lg:mt-20">
+<footer class="flex flex-col items-center w-full bg-negro-900 mb-20 lg:my-20">
   <div class="relative w-full flex justify-center pt-12">
     <div class="w-full flex justify-center">
       <SomosMasFooter client:idle />
@@ -26,26 +26,26 @@ import SomosMasFooter from "./SomosMasFooter";
       class="flex flex-col lg:flex-row justify-between items-left w-full px-4"
     >
       <div class="flex">
-        <p class="font-ibm text-negro-900 lg:text-lg">
-          <b class="font-semibold"
+        <p class="font-ibm text-negro-900 text-sm lg:text-lg">
+          <b class="font-medium md:font-semibold"
             >Copyright ©{new Date().getFullYear()} Brava</b
           >
         </p>
       </div>
-      <div class="flex space-x-8">
+      <div class="flex space-x-8 md:flex-row flex-col gap-2 mt-4 md:mt-0">
         <a
           href="/programas"
-          class="font-ibm text-negro-900 lg:text-lg hover:font-semibold transition-all"
+          class="font-ibm text-lg text-negro-900 hover:font-semibold transition-all"
           >Programas</a
         >
         <a
           href="/agenda"
-          class="font-ibm text-negro-900 lg:text-lg hover:font-semibold transition-all"
+          class="font-ibm text-lg text-negro-90 hover:font-semibold transition-all"
           >Agenda</a
         >
         <a
           href="/brava-news"
-          class="font-ibm text-negro-900 lg:text-lg hover:font-semibold transition-all"
+          class="font-ibm text-lg text-negro-90 hover:font-semibold transition-all"
           >Brava News</a
         >
       </div>

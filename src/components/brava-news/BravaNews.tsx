@@ -1,6 +1,7 @@
 import type { Blog } from "@/utils/fetchBlogs";
 import Container from "../containers/Container";
 import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
 
 interface Props {
   showAll?: boolean;
@@ -8,30 +9,58 @@ interface Props {
 }
 
 export default function BravaNews({ blogs, showAll = false }: Props) {
+  if (blogs.length === 0) return null;
   return (
     <Container className="my-6">
-      <div className="flex items-center mb-6">
-        <img
-          src="/sections-icons/brava-news-icon.webp"
-          alt="Brava News"
-          className="w-15 h-15 md:w-20 md:h-20 mr-2"
-        />
-        <div>
-          <h2 className="text-lg md:text-2xl font-inter font-semibold text-white">
-            Brava News
-          </h2>
-          <p className="text-base md:text-lg font-ibm text-gray-300 md:max-w-[60%]">
-            Tu espacio para enterarte de todo lo que importa, música,
-            entretenimiento, cultura pop y lo que pasa en Mendoza, contado con
-            el sello Brava.
-          </p>
-        </div>
+      <div className="flex justify-between w-full items-center mt-40 mb-6">
+        <aside className="flex items-center">
+          <div>
+            <img
+              src="/sections-icons/brava-news-icon.webp"
+              alt="Brava News"
+              className="w-18 h-18 md:w-24 md:h-24 mr-2"
+            />
+          </div>
+          <div className="flex-1 md:min-w-[50%]">
+            <h2 className="font-inter text-white font-semibold text-xl lg:text-2xl">
+              Brava News
+            </h2>
+            <p className="text-base md:text-lg font-ibm text-gray-300">
+              Noticias de música, entretenimiento y cultura pop en Mendoza, con
+              el sello Brava.
+            </p>
+          </div>
+        </aside>
+        <aside className="hidden md:block">
+          <a
+            href="/brava-news"
+            className="font-inter flex gap-3 md:gap-4 items-center font-semibold md:font-bold text-white md:text-lg"
+          >
+            Ver todas
+            <span className="bg-white/30 px-6 py-2 rounded-full">
+              {blogs.length}
+            </span>
+            <ChevronRight />
+          </a>
+        </aside>
       </div>
-      <div className="grid gap-6 grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mt-4">
+      <div className="mt-16 grid gap-6 grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
         {(showAll ? blogs : blogs.slice(0, 4)).map((b) => (
           <BravaNewsCard key={b.id} blog={b} />
         ))}
       </div>
+      <aside className="flex md:hidden w-full justify-end items-center mt-10">
+        <a
+          href="/brava-news"
+          className="font-inter flex gap-3 md:gap-4 items-center font-semibold md:font-bold text-white md:text-lg"
+        >
+          Ver todas
+          <span className="bg-white/30 px-6 py-2 rounded-full">
+            {blogs.length}
+          </span>
+          <ChevronRight />
+        </a>
+      </aside>
     </Container>
   );
 }
