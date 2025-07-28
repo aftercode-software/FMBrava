@@ -1,5 +1,4 @@
-const BRAVA_ID = "17841400957296979";
-const FM_ID = "17841400207200583";
+import { BRAVA_ID } from "@/constants/rrss";
 
 type InstagramMediaType = "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM" | "REEL";
 
@@ -17,16 +16,29 @@ export interface InstagramPost {
 export type InstagramResponse = InstagramPost[];
 
 export async function fetchRRSS(): Promise<InstagramResponse> {
-  const bravaResponse = await fetch(
-    `https://graph.facebook.com/v19.0/${BRAVA_ID}/media?fields=user_id,caption,media_type,media_url,permalink,timestamp,like_count,comments_count&limit=10`,
-    {
-      headers: {
-        Authorization: `Bearer ${import.meta.env.FACEBOOK_TOKEN}`,
-      },
+  if (import.meta.env.SSR) {
+    const response = await fetch(
+      `https://graph.facebook.com/v19.0/${BRAVA_ID}/media?fields=user_id,caption,media_type,media_url,permalink,timestamp,like_count,comments_count&limit=10`,
+      {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.META_TOKEN}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch Instagram data");
     }
-  );
 
-  const bravaData = await bravaResponse.json();
+    const bravaData = await response.json();
+    return bravaData.data;
+  }
 
+  const response = await fetch("/api/rrss/instagram");
+  if (!response.ok) {
+    throw new Error("Failed to fetch Instagram data");
+  }
+
+  const bravaData = await response.json();
   return bravaData.data;
 }

@@ -3,7 +3,7 @@ interface Props extends React.ComponentProps<"a"> {
   href: string;
   class?: string;
   variant?: "light" | "dark";
-  size?: "base" | "md";
+  size?: "base" | "md" | "sm";
 }
 
 const { href, class: className, variant = "dark", size = "md" } = Astro.props;
@@ -12,9 +12,9 @@ const { href, class: className, variant = "dark", size = "md" } = Astro.props;
 <a
   href={href}
   class={`
-    px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-3 bg-blue-500 rounded-full font-inter font-semibold transition-all duration-75 cursor-pointer flex
+    px-4 py-2 sm:px-6 sm:py-3 lg:px-6 lg:py-2 bg-blue-500 rounded-full font-inter font-semibold transition-all duration-200 cursor-pointer flex
     ${variant === "light" ? "bg-white text-gray-900 gap-2 items-center hover:text-rojo hover:outline-2 hover:outline-rojo" : "bg-negro-400 text-white hover:text-gray-100 hover:outline-2 hover:outline-gray-300"} 
-    ${size === "md" ? "text-md sm:text-lg" : "text-sm sm:text-lg lg:text-xl"}
+    ${size === "md" ? "text-md sm:text-lg" : size === "sm" ? "text-sm sm:text-lg" : "text-lg"}
     ${className}
 `}
 >

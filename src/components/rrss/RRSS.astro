@@ -6,50 +6,54 @@ import TiktokCarousel from "./TiktokCarousel";
 import type { InstagramResponse } from "@/utils/fetchRRSS";
 
 type Props = {
-    rrss: InstagramResponse;
-}
+  rrss: InstagramResponse;
+};
 
 const { rrss } = Astro.props as Props;
 
-    const instagramData = {
-    socialLink: "https://www.instagram.com/bravaoficial/",
-    socialName: "Fm BRAVA 94.9",
-    socialHandle: "@bravaoficial",
-    socialImageUrl: "/images/instagram-logo.jpg",
-    socialBrandImageUrl: "/images/instagramBlack.svg",
+const instagramData = {
+  socialLink: "https://www.instagram.com/bravaoficial/",
+  socialName: "Fm BRAVA 94.9",
+  socialHandle: "@bravaoficial",
+  socialImageUrl: "/images/instagram-logo.jpg",
+  socialBrandImageUrl: "/images/instagramBlack.svg",
 };
 
 const tiktokData = {
-    socialLink: "https://www.tiktok.com/@bravaoficial",
-    socialName: "Brava",
-    socialHandle: "@bravaoficial",
-    socialImageUrl: "/images/tiktok-logo.jpeg",
-    socialBrandImageUrl: "/images/tiktokBlack.svg",
+  socialLink: "https://www.tiktok.com/@bravaoficial",
+  socialName: "Brava",
+  socialHandle: "@bravaoficial",
+  socialImageUrl: "/images/tiktok-logo.jpeg",
+  socialBrandImageUrl: "/images/tiktokBlack.svg",
 };
-
-console.log(rrss);
-
 ---
 
 <Container>
-    <section class="my-12">
-        <HeaderRRSS
-            socialHandle={instagramData.socialHandle}
-            socialLink={instagramData.socialLink}
-            socialName={instagramData.socialName}
-            socialImageUrl={instagramData.socialImageUrl}
-            socialBrandImageUrl={instagramData.socialBrandImageUrl}
-        />
-        <InstagramCarousel posts={rrss} client:load />
-    </section>
-    <section class="my-20">
-        <HeaderRRSS
-            socialHandle={tiktokData.socialHandle}
-            socialLink={tiktokData.socialLink}
-            socialName={tiktokData.socialName}
-            socialImageUrl={tiktokData.socialImageUrl}
-            socialBrandImageUrl={tiktokData.socialBrandImageUrl}
-        />
-        <TiktokCarousel client:load />
-    </section>
+  <h2 class="font-inter text-white font-semibold text-xl lg:text-2xl">
+    Es trending ahora
+  </h2>
+  <p class="text-base md:text-lg font-ibm text-gray-300">
+    Somos más redes, somos más tendencia. Somos lo que sucede y lo que queres
+    ver.
+  </p>
+  <section class="my-20">
+    <HeaderRRSS
+      socialHandle={instagramData.socialHandle}
+      socialLink={instagramData.socialLink}
+      socialName={instagramData.socialName}
+      socialImageUrl={instagramData.socialImageUrl}
+      socialBrandImageUrl={instagramData.socialBrandImageUrl}
+    />
+    <InstagramCarousel posts={rrss} client:load />
+  </section>
+  <!-- <section class="my-20">
+    <HeaderRRSS
+      socialHandle={tiktokData.socialHandle}
+      socialLink={tiktokData.socialLink}
+      socialName={tiktokData.socialName}
+      socialImageUrl={tiktokData.socialImageUrl}
+      socialBrandImageUrl={tiktokData.socialBrandImageUrl}
+    />
+    <TiktokCarousel client:load />
+  </section> -->
 </Container>

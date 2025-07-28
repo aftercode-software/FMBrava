@@ -10,7 +10,7 @@ const anuncio = anuncios.length > 0
 const uniqueId = `anuncio-entre-secciones-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<Container class="flex flex-col items-center w-full my-20">
+<Container class="flex flex-col items-center w-full my-40">
   <div
     id={uniqueId}
     data-anuncio-id={anuncio?.id}
@@ -60,7 +60,7 @@ const uniqueId = `anuncio-entre-secciones-${Math.random().toString(36).substr(2,
           },
           body: JSON.stringify({ id })
         });
-        console.log('Vista incrementada para:', id);
+        
         viewSent = true;
       } catch (error) {
         console.error('Error incrementando vista:', error);
@@ -81,7 +81,7 @@ const uniqueId = `anuncio-entre-secciones-${Math.random().toString(36).substr(2,
           },
           body: JSON.stringify({ id })
         });
-        console.log('Click incrementado para:', id);
+        
       } catch (error) {
         console.error('Error incrementando click:', error);
       } finally {
@@ -92,7 +92,7 @@ const uniqueId = `anuncio-entre-secciones-${Math.random().toString(36).substr(2,
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !viewSent) {
-          console.log('🟢 Anuncio visible en pantalla')
+          
           incrementViews(adId);
           obs.unobserve(entry.target) 
         }
@@ -103,7 +103,7 @@ const uniqueId = `anuncio-entre-secciones-${Math.random().toString(36).substr(2,
 
     const link = document.getElementById(uniqueId)
     link?.addEventListener('click', () => {
-      console.log('👉 Anuncio clickeado')
+      
       incrementClicks(adId);
     })
   })()

@@ -85,7 +85,6 @@ export async function incrementViews(adId: string): Promise<void> {
 }
 
 export async function incrementClicks(adId: string): Promise<void> {
-  console.log("incrementClicks called for adId:", adId);
   await secureFetch(`/ads/increment-click-count`, {
     method: "POST",
     body: { id: adId },

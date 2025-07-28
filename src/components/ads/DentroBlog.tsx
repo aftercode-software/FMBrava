@@ -31,7 +31,6 @@ export default function DentroBlog({ ad }: { ad: Anuncio | null }) {
     }
   };
   useEffect(() => {
-    console.log("DentroBlog useEffect", ad);
     if (!ad) return;
     handleImageFetch(ad);
   }, []);

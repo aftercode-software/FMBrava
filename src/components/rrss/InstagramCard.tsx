@@ -1,4 +1,5 @@
 import type { InstagramPost } from "@/utils/fetchRRSS";
+import { Instagram } from "lucide-react";
 
 interface Props {
   post: InstagramPost;
@@ -9,7 +10,7 @@ export default function InstagramCard({ post, className }: Props) {
   const { media_url, media_type, caption, id } = post;
   return (
     <a
-      href={`https://www.instagram.com/p/${id}`}
+      href={post.permalink}
       target="_blank"
       rel="noopener noreferrer"
       className={`block relative rounded-lg border-2 border-white overflow-hidden cursor-pointer ${className}`}
@@ -31,11 +32,11 @@ export default function InstagramCard({ post, className }: Props) {
         />
       )}
       <div className="absolute bottom-0 left-0 w-full h-12 bg-white flex items-center justify-between px-4">
-        <p className="text-lg font-ibm w-[80%] truncate">{caption}</p>
+        <p className="text-base font-ibm w-[80%] truncate">{caption}</p>
         <img
-          src="/images/instagramBlack.svg"
+          src="/svg/instagram.svg"
           alt="logo"
-          className="w-10 h-10 object-cover rounded-full"
+          className="w-8 md:w-10 h-8 md:h-10 object-cover rounded-full"
         />
       </div>
     </a>

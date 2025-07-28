@@ -50,7 +50,7 @@ export default function RadioSelector() {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-80 bg-black/90 backdrop-blur-xl border border-gray-800/50 text-white p-0 shadow-2xl shadow-black/50 rounded-2xl overflow-hidden"
+        className="w-80 bg-black/90 backdrop-blur-xl border *:font-ibm border-gray-800/50 text-white p-0 shadow-2xl shadow-black/50 rounded-2xl overflow-hidden"
         align="end"
         sideOffset={8}
       >
@@ -67,7 +67,7 @@ export default function RadioSelector() {
             </p>
           </div>
 
-          <div className="p-4 pt-0 space-y-2">
+          <div className="p-4 pt-0 space-y-2 *:font-ibm">
             {profiles.map((profile, index) => (
               <button
                 key={profile.id}

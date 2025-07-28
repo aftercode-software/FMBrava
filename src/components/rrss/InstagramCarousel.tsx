@@ -3,59 +3,13 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import InstagramCard from "./InstagramCard";
 
-// const instagramPosts: InstagramPost[] = [
-//   {
-//     href: "https://www.instagram.com/p/Cw0000000000000000000000000000000000000000/",
-//     imageUrl: "/images/hero.jpg",
-//     title: "Post de instagram :)",
-//     socialImageUrl: "/logo.png",
-//   },
-//   {
-//     href: "https://www.instagram.com/p/Cw0000000000000000000000000000000000000000/",
-//     imageUrl: "/images/hero.jpg",
-//     title: "Post de instagram :)",
-//     socialImageUrl: "/logo.png",
-//   },
-//   {
-//     href: "https://www.instagram.com/p/Cw0000000000000000000000000000000000000000/",
-//     imageUrl: "/images/hero.jpg",
-//     title: "Post de instagram :)",
-//     socialImageUrl: "/logo.png",
-//   },
-//   {
-//     href: "https://www.instagram.com/p/Cw0000000000000000000000000000000000000000/",
-//     imageUrl: "/images/hero.jpg",
-//     title: "Post de instagram :)",
-//     socialImageUrl: "/logo.png",
-//   },
-//   {
-//     href: "https://www.instagram.com/p/Cw0000000000000000000000000000000000000000/",
-//     imageUrl: "/images/hero.jpg",
-//     title: "Post de instagram :)",
-//     socialImageUrl: "/logo.png",
-//   },
-//   {
-//     href: "https://www.instagram.com/p/Cw0000000000000000000000000000000000000000/",
-//     imageUrl: "/images/hero.jpg",
-//     title: "Post de instagram :)",
-//     socialImageUrl: "/logo.png",
-//   },
-//   {
-//     href: "https://www.instagram.com/p/Cw0000000000000000000000000000000000000000/",
-//     imageUrl: "/images/hero.jpg",
-//     title: "Post de instagram :)",
-//     socialImageUrl: "/logo.png",
-//   },
-// ];
-
 export default function InstagramCarousel({
   posts,
 }: {
   posts: InstagramResponse;
 }) {
-  console.log(posts);
   const [emblaRef] = useEmblaCarousel({ align: "start", loop: true }, [
-    Autoplay({ delay: 1000, stopOnMouseEnter: true }),
+    Autoplay({ delay: 2000, stopOnMouseEnter: true }),
   ]);
 
   return (
