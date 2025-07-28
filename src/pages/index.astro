@@ -11,10 +11,12 @@ import ConocenosMas from "@/components/ConocenosMas.astro";
 import EntreSecciones from "@/components/ads/EntreSecciones.astro";
 import AgendaSection from "@/components/agenda/AgendaSection.astro";
 import SpotifyPlaylists from "@/components/SpotifyPlaylists.astro";
+import { fetchRRSS } from "@/utils/fetchRRSS";
 
 const programas: Programa[] = await fetchProgramas();
 const blogs = await fetchBlogs();
 const playlists = await fetchPlaylists();
+const rrss = await fetchRRSS();
 ---
 
 <Layout>
@@ -23,7 +25,7 @@ const playlists = await fetchPlaylists();
   <AgendaSection />
   <BravaNews blogs={blogs} client:load />
   <EntreSecciones />
-  <!-- <RRSS /> -->
+  <RRSS rrss={rrss} />
   <SpotifyPlaylists playlists={playlists} />
   <EntreSecciones />
   <ConocenosMas />

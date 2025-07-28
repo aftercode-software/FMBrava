@@ -3,8 +3,15 @@ import Container from "../containers/Container.astro";
 import HeaderRRSS from "./HeaderRRSS.astro";
 import InstagramCarousel from "./InstagramCarousel";
 import TiktokCarousel from "./TiktokCarousel";
+import type { InstagramResponse } from "@/utils/fetchRRSS";
 
-const instagramData = {
+type Props = {
+    rrss: InstagramResponse;
+}
+
+const { rrss } = Astro.props as Props;
+
+    const instagramData = {
     socialLink: "https://www.instagram.com/bravaoficial/",
     socialName: "Fm BRAVA 94.9",
     socialHandle: "@bravaoficial",
@@ -19,6 +26,9 @@ const tiktokData = {
     socialImageUrl: "/images/tiktok-logo.jpeg",
     socialBrandImageUrl: "/images/tiktokBlack.svg",
 };
+
+console.log(rrss);
+
 ---
 
 <Container>
@@ -30,7 +40,7 @@ const tiktokData = {
             socialImageUrl={instagramData.socialImageUrl}
             socialBrandImageUrl={instagramData.socialBrandImageUrl}
         />
-        <InstagramCarousel client:load />
+        <InstagramCarousel posts={rrss} client:load />
     </section>
     <section class="my-20">
         <HeaderRRSS

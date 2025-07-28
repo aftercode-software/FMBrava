@@ -1,11 +1,4 @@
-import React from "react";
-
-export interface InstagramPost {
-  href: string;
-  imageUrl: string;
-  title: string;
-  socialImageUrl: string;
-}
+import type { InstagramPost } from "@/utils/fetchRRSS";
 
 interface Props {
   post: InstagramPost;
@@ -13,24 +6,34 @@ interface Props {
 }
 
 export default function InstagramCard({ post, className }: Props) {
-  const { href, imageUrl, title, socialImageUrl } = post;
+  const { media_url, media_type, caption, id } = post;
   return (
     <a
-      href={href}
+      href={`https://www.instagram.com/p/${id}`}
       target="_blank"
       rel="noopener noreferrer"
       className={`block relative rounded-lg border-2 border-white overflow-hidden cursor-pointer ${className}`}
     >
-      <img
-        src={imageUrl}
-        draggable={false}
-        alt="Imagen del programa"
-        className="w-full h-full object-cover absolute top-0 left-0"
-      />
-      <div className="absolute bottom-0 left-0 w-full h-12 bg-white flex items-center justify-between px-4">
-        <p className="text-lg font-ibm w-[80%] truncate">{title}</p>
+      {media_type === "IMAGE" || media_type === "CAROUSEL_ALBUM" ? (
         <img
-          src={socialImageUrl}
+          src={media_url}
+          draggable={false}
+          alt="Imagen del programa"
+          className="w-full h-full object-cover absolute top-0 left-0"
+        />
+      ) : (
+        <video
+          src={media_url}
+          autoPlay
+          muted
+          loop
+          className="w-full h-full object-cover absolute top-0 left-0"
+        />
+      )}
+      <div className="absolute bottom-0 left-0 w-full h-12 bg-white flex items-center justify-between px-4">
+        <p className="text-lg font-ibm w-[80%] truncate">{caption}</p>
+        <img
+          src="/images/instagramBlack.svg"
           alt="logo"
           className="w-10 h-10 object-cover rounded-full"
         />
