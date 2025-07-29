@@ -3,8 +3,8 @@ import type React from "react";
 import { useState } from "react";
 import Badge from "../Badge";
 import Container from "../containers/Container";
-import VolumeSlider from "./VolumeSlider";
 import { Slider } from "../ui/slider";
+import VolumeSlider from "./VolumeSlider";
 
 type Props = {
   playing: boolean;
@@ -88,14 +88,14 @@ export default function FixedPlayer({
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="flex items-center gap-2 sm:gap-4">
                 <button
-                  className="p-2 rounded-full text-white hover:bg-white/10 active:scale-95 transition-all"
+                  className="p-2 rounded-full text-white hover:bg-white/10 active:scale-95 transition-all cursor-pointer"
                   onClick={() => manipulatePlayerTime(-5)}
                 >
                   <Undo2 className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
 
                 <button
-                  className="w-12 h-12 sm:w-14 sm:h-14 bg-white hover:bg-gray-100 rounded-full flex items-center justify-center active:scale-95 transition-all shadow-lg"
+                  className="w-12 h-12 sm:w-14 sm:h-14 bg-white hover:bg-gray-100 rounded-full flex items-center justify-center active:scale-95 transition-all shadow-lg cursor-pointer"
                   onClick={() => setIsPlaying(!playing)}
                 >
                   {playing ? (
@@ -106,7 +106,7 @@ export default function FixedPlayer({
                 </button>
 
                 <button
-                  className="p-2 rounded-full text-white hover:bg-white/10 active:scale-95 transition-all"
+                  className="p-2 rounded-full text-white hover:bg-white/10 active:scale-95 transition-all cursor-pointer"
                   onClick={() => manipulatePlayerTime(5)}
                 >
                   <Redo2 className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -117,13 +117,13 @@ export default function FixedPlayer({
             {/* Right Section - Volume */}
             <div className="flex items-center justify-end flex-1 pl-4">
               {/* Desktop Volume Slider */}
-              <div className="hidden sm:block">
+              <div className="hidden sm:block cursor-pointer">
                 <VolumeSlider volume={volume} setVolume={setVolume} />
               </div>
 
               {/* Mobile Volume Button */}
               <button
-                className="w-10 h-10 rounded-full text-white hover:bg-white/10 sm:hidden active:scale-95 transition-all"
+                className="w-10 h-10 rounded-full text-white hover:bg-white/10 sm:hidden active:scale-95 transition-all cursor-pointer"
                 onClick={() => setShowVolumeModal(true)}
               >
                 {volume > 0 ? (

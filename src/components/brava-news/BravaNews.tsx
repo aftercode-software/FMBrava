@@ -1,7 +1,8 @@
 import type { Blog } from "@/utils/fetchBlogs";
-import Container from "../containers/Container";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import Container from "../containers/Container";
+import VerMasButton from "../VerMasButton";
 
 interface Props {
   showAll?: boolean;
@@ -50,16 +51,11 @@ export default function BravaNews({ blogs, showAll = false }: Props) {
         ))}
       </div>
       <aside className="flex md:hidden w-full justify-end items-center mt-10">
-        <a
-          href="/brava-news"
-          className="font-inter flex gap-3 md:gap-4 items-center font-semibold md:font-bold text-white md:text-lg"
-        >
-          Ver todas
-          <span className="bg-white/30 px-6 py-2 rounded-full">
-            {blogs.length}
-          </span>
-          <ChevronRight />
-        </a>
+        <VerMasButton
+          cantidad={blogs.length}
+          link="/brava-news"
+          verTodasTexto="todas"
+        />
       </aside>
     </Container>
   );
@@ -71,7 +67,7 @@ export function BravaNewsCard({ blog }: { blog: Blog }) {
       href={`/brava-news/${blog.slug}`}
       key={blog.id}
       className="relative items-center justify-center rounded-lg hover:shadow-lg transition-shadow"
-      whileHover={{ y: -5, boxShadow: "0 8px 24px rgba(0,0,0,0.15)" }}
+      whileHover={{ y: -10, boxShadow: "0 8px 24px rgba(0,0,0,0.15)" }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
     >
       <picture>

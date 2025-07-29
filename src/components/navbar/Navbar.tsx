@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import Container from "../containers/Container";
 import RadioSelector from "./RadioSelector";
 
@@ -69,10 +69,10 @@ export default function Navbar() {
                 >
                   <a
                     href={item.href}
-                    className={`flex items-center space-x-2 font-inter font-medium text-lg rounded-full px-5 py-1 transition-colors duration-200 ${
+                    className={`flex items-center space-x-2 font-inter font-medium text-lg rounded-full px-5 py-2 transition-colors duration-200 ${
                       isActive
                         ? "bg-white text-black"
-                        : "text-white hover:bg-white/20"
+                        : "text-white hover:bg-white/20 box-border"
                     }`}
                   >
                     <span>{item.name}</span>

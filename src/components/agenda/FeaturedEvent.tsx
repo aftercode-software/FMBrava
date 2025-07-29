@@ -8,7 +8,7 @@ export default function FeaturedEvent({ event }: { event: Agenda }) {
   day = Number(day) < 10 ? `0${day}` : day;
 
   return (
-    <div className="relative h-full text-white rounded-[8px_8px_76px_8px] overflow-hidden border border-[#4d4d4d]">
+    <div className="group relative h-full text-white rounded-[8px_8px_76px_8px] overflow-hidden border border-[#4d4d4d] hover:border-white hover:scale-105 transition-all duration-200 cursor-pointer">
       <img
         src={event.imagen.url}
         alt={event.imagen.alt}

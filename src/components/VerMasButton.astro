@@ -11,11 +11,11 @@ const { cantidad, link, verTodasTexto } = Astro.props;
 
 <a
   href={link}
-  class="font-inter flex gap-3 md:gap-4 items-center font-semibold md:font-bold text-white md:text-lg"
+  class="group font-inter flex gap-3 md:gap-4 items-center font-semibold md:font-bold text-white md:text-lg *:transition-all *:duration-100"
 >
   Ver {verTodasTexto}
-  <span class="bg-white/30 px-6 py-2 rounded-full">
+  <span class="bg-white/30 px-4 py-1 rounded-xl group-hover:bg-rojo group-hover:scale-105">
     {cantidad}
   </span>
-  <ChevronRight />
+  <ChevronRight className="group-hover:translate-x-1" />
 </a>
