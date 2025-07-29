@@ -18,7 +18,12 @@ const blogs = await fetchBlogs();
 const blog = blogs.find((post) => post.slug === slug);
 ---
 
-<Layout>
+<Layout
+  title={blog?.title}
+  description={blog?.content[0]?.text || "Blog post content"}
+  pathname={`/brava-news/${blog?.slug}`}
+  type="article"
+>
   {
     blog ? (
       <main class="flex flex-col gap-10 w-full">

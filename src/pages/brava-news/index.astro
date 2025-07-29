@@ -4,13 +4,16 @@ import Container from "@/components/containers/Container.astro";
 import Layout from "@/layouts/Layout.astro";
 import { fetchBlogs } from "@/utils/fetchBlogs";
 
-// src/pages/brava-news/index.astro
-
-// Fetch de ejemplo: lista completa de posts
 const blogs = await fetchBlogs();
 ---
 
-<Layout>
+<Layout
+  title="Brava News"
+  description="Últimas noticias de Brava"
+  keywords={["brava", "noticias", "cultura"]}
+  pathname="/brava-news"
+  type="website"
+>
   <Container class="mt-30">
     <BravaNews blogs={blogs} showAll client:load />
   </Container>

@@ -19,7 +19,12 @@ const playlists = await fetchPlaylists();
 const rrss = await fetchRRSS();
 ---
 
-<Layout>
+<Layout
+  description="La radio que te acompaña"
+  keywords={["fm", "brava", "radio"]}
+  pathname="/"
+  type="website"
+>
   <Hero />
   <ProgramacionCarousel programas={programas} client:load />
   <AgendaSection />
