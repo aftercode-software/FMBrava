@@ -1,20 +1,19 @@
 ---
 import { fetchAgenda } from "@/utils/fetchAgenda";
-const events = await fetchAgenda();
-
 import HeroAgenda from "@/components/agenda/Hero.tsx";
-import BravaNews from "@/components/brava-news/BravaNews";
 import Container from "@/components/containers/Container.astro";
 import Layout from "@/layouts/Layout.astro";
-import { fetchBlogs } from "@/utils/fetchBlogs";
 
-// src/pages/brava-news/index.astro
-
-// Fetch de ejemplo: lista completa de posts
-const blogs = await fetchBlogs();
+const events = await fetchAgenda();
 ---
 
-<Layout>
+<Layout
+  title="Agenda"
+  description="Consulta nuestra agenda de eventos"
+  keywords={["agenda", "eventos", "cultura"]}
+  pathname="/agenda"
+  type="website"
+>
   <Container class="mt-20">
     <HeroAgenda events={events} client:load />
   </Container>

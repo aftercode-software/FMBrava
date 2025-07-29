@@ -1,13 +1,19 @@
 ---
-import { fetchProgramas, type Programa } from "../../utils/fetchProgramas";
+import { fetchProgramas } from "../../utils/fetchProgramas";
 import Container from "@/components/containers/Container.astro";
 import Layout from "@/layouts/Layout.astro";
 import ProgramasHero from "@/components/Programas/Hero";
 
-const programas: Programa[] = await fetchProgramas();
+const programas = await fetchProgramas();
 ---
 
-<Layout>
+<Layout
+  title="Programación"
+  description="Descubre nuestra programación diaria"
+  keywords={["programación", "eventos", "cultura"]}
+  pathname="/programacion"
+  type="website"
+>
   <Container class="mt-40">
     <ProgramasHero client:load programas={programas} />
   </Container>
