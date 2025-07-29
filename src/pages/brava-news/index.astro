@@ -10,9 +10,7 @@ const blogs = await fetchBlogs();
 <Layout
   title="Brava News"
   description="Últimas noticias de Brava"
-  keywords={["brava", "noticias", "cultura"]}
   pathname="/brava-news"
-  type="website"
 >
   <Container class="mt-30">
     <BravaNews blogs={blogs} showAll client:load />

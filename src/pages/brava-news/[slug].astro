@@ -22,7 +22,6 @@ const blog = blogs.find((post) => post.slug === slug);
   title={blog?.title}
   description={blog?.content[0]?.text || "Blog post content"}
   pathname={`/brava-news/${blog?.slug}`}
-  type="article"
 >
   {
     blog ? (

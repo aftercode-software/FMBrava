@@ -35,13 +35,13 @@ export default function BravaNews({ blogs, showAll = false }: Props) {
         <aside className="hidden md:block">
           <a
             href="/brava-news"
-            className="font-inter flex gap-3 md:gap-4 items-center font-semibold md:font-bold text-white md:text-lg"
+            className="group font-inter flex gap-3 md:gap-4 items-center font-semibold md:font-bold text-white md:text-lg *:transition-all *:duration-100"
           >
             Ver todas
-            <span className="bg-white/30 px-6 py-2 rounded-full">
+            <span className="bg-white/30 px-4 py-1 rounded-xl group-hover:bg-rojo group-hover:scale-105">
               {blogs.length}
             </span>
-            <ChevronRight />
+            <ChevronRight className="group-hover:translate-x-1" />
           </a>
         </aside>
       </div>

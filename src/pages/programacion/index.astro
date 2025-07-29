@@ -10,9 +10,7 @@ const programas = await fetchProgramas();
 <Layout
   title="Programación"
   description="Descubre nuestra programación diaria"
-  keywords={["programación", "eventos", "cultura"]}
   pathname="/programacion"
-  type="website"
 >
   <Container class="mt-40">
     <ProgramasHero client:load programas={programas} />

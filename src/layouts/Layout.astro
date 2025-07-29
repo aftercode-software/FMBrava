@@ -1,10 +1,9 @@
 ---
-import Navbar from "@/components/navbar/Navbar";
 import "../assets/base.css";
+import { SITE } from "@/config/seo";
+import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/Footer.astro";
 import SplashVideo from "@/components/SplashVideo";
-import { Seo } from "astro-seo-meta";
-import { SITE } from "@/config/seo";
 
 export const revalidate = 21600;
 Astro.response.headers.set(
@@ -16,29 +15,22 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
-  keywords?: string[];
   pathname?: string;
-  type?: "website" | "article";
-  date?: string;
-  author?: string;
 }
 
 const {
-  title,
-  description,
-  image,
-  keywords,
+  title = SITE.title,
+  description = SITE.description,
+  image = SITE.defaultImage,
   pathname,
-  type = "website",
-  date,
-  author,
 } = Astro.props as Props;
 
-const canonical = pathname ? new URL(pathname, SITE.url).href : SITE.url;
+const pageUrl = new URL(pathname ?? "/", SITE.url).href;
+const imageUrl = new URL(image, SITE.url).href;
 ---
 
 <!doctype html>
-<html lang="es" style="height: auto;">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -59,22 +51,24 @@ const canonical = pathname ? new URL(pathname, SITE.url).href : SITE.url;
     <link rel="manifest" href="/favicon/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#0a0a0a" />
-    <Seo
-      title={title}
-      description={description}
-      icon="/favicon/favicon.ico"
-      facebook={{
-        image: "/image.png",
-        url: "https://www.brava.com.ar/",
-        type: "website",
-      }}
-      twitter={{
-        image: "/image.png",
-        card: "summary",
-      }}
-      keywords={keywords}
-    />
-    <link rel="canonical" href={canonical} />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    <link rel="canonical" href={pageUrl} />
   </head>
   <body class="bg-negro-900">
     <SplashVideo client:load />
@@ -83,12 +77,3 @@ const canonical = pathname ? new URL(pathname, SITE.url).href : SITE.url;
     <Footer />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

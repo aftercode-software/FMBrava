@@ -19,20 +19,28 @@ const playlists = await fetchPlaylists();
 const rrss = await fetchRRSS();
 ---
 
-<Layout
-  title="Brava 94.9"
-  description="La radio que te acompaña"
-  keywords={["fm", "brava", "radio"]}
-  pathname="/"
-  type="website"
->
+<Layout title="Brava 94.9" description="La radio que te acompaña" pathname="/">
   <Hero />
-  <ProgramacionCarousel programas={programas} client:load />
-  <AgendaSection />
-  <BravaNews blogs={blogs} client:load />
+  <section class="flex flex-col md:gap-10 mt-10 relative">
+    <img
+      src="/backgrounds/gray-gradient.png"
+      alt="Gradient Background"
+      class="absolute inset-0 z-[-1] w-full h-full object-cover"
+    />
+    <ProgramacionCarousel programas={programas} client:load />
+    <AgendaSection />
+    <BravaNews blogs={blogs} client:load />
+  </section>
   <EntreSecciones />
   <RRSS rrss={rrss} />
-  <SpotifyPlaylists playlists={playlists} />
+  <section class="flex flex-col md:gap-10 mt-10 relative">
+    <SpotifyPlaylists playlists={playlists} />
+    <img
+      src="/backgrounds/gray-gradient.png"
+      alt="Gradient Background"
+      class="absolute inset-0 z-[-1] w-full h-full object-cover"
+    />
+    <ConocenosMas />
+  </section>
   <EntreSecciones />
-  <ConocenosMas />
 </Layout>

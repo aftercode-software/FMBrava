@@ -10,7 +10,7 @@ export default function Player() {
   const [volume, setVolume] = useState(0.5);
   return (
     <div className="w-full h-full relative">
-      <div className="hidden md:block bg-rojo h-[50%] w-[50%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[300px] pointer-events-none"></div>
+      <div className="hidden md:block bg-rojo h-[80%] w-[60%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[300px] pointer-events-none"></div>
 
       {scrollY > 400 && (
         <FixedPlayer

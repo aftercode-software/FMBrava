@@ -13,29 +13,29 @@ const destacadas = await fetchDestacadas();
           href={d.link}
           target="_blank"
           rel="noopener noreferrer"
-          class="flex flex-col group transition-transform duration-200"
+          class="flex flex-col group transition-transform duration-300 ease-in-out"
         >
           <div class="w-full aspect-square overflow-hidden rounded-lg">
             <img
               src={d.image.url}
               alt={d.image.alt}
-              class="w-full h-full object-cover rounded-sm group-hover:scale-101 transition-transform duration-300"
+              class="w-full h-full object-cover rounded-sm hover:scale-105 transition-transform duration-500 ease-in-out"
             />
           </div>
-          <span class="font-ibm text-white font-medium uppercase mt-2 group-hover:font-semibold transitions-all duration-300">
+          <span class="font-ibm text-white uppercase mt-2 font-semibold">
             {d.title}
           </span>
         </a>
       ) : (
-        <div class="flex flex-col group transition-transform duration-200">
+        <div class="flex flex-col group transition-transform duration-300 ease-in-out">
           <div class="w-full aspect-square overflow-hidden rounded-lg">
             <img
               src={d.image.url}
               alt={d.image.alt}
-              class="w-full h-full object-cover rounded-sm group-hover:scale-101 transition-transform duration-300"
+              class="w-full h-full object-cover rounded-sm hover:scale-105 transition-transform duration-500 ease-in-out"
             />
           </div>
-          <p class="font-ibm text-white font-medium uppercase mt-2 group-hover:font-semibold transitions-all duration-300">
+          <p class="font-ibm text-white uppercase mt-2 font-semibold">
             {d.title}
           </p>
         </div>
