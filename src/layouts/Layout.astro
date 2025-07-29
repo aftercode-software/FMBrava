@@ -3,8 +3,8 @@ import Navbar from "@/components/navbar/Navbar";
 import "../assets/base.css";
 import Footer from "@/components/Footer.astro";
 import SplashVideo from "@/components/SplashVideo";
+import { Seo } from "astro-seo-meta";
 import { SITE } from "@/config/seo";
-import Seo from "@/components/Seo.astro";
 
 export const revalidate = 21600;
 Astro.response.headers.set(
@@ -62,12 +62,17 @@ const canonical = pathname ? new URL(pathname, SITE.url).href : SITE.url;
     <Seo
       title={title}
       description={description}
-      image={image}
+      icon="/favicon/favicon.ico"
+      facebook={{
+        image: "/image.png",
+        url: "https://www.brava.com.ar/",
+        type: "website",
+      }}
+      twitter={{
+        image: "/image.png",
+        card: "summary",
+      }}
       keywords={keywords}
-      pathname={pathname}
-      type={type}
-      date={date}
-      author={author}
     />
     <link rel="canonical" href={canonical} />
   </head>
