@@ -10,11 +10,9 @@ const events = await fetchAgenda();
 <Layout
   title="Agenda"
   description="Consulta nuestra agenda de eventos"
-  keywords={["agenda", "eventos", "cultura"]}
   pathname="/agenda"
-  type="website"
 >
-  <Container class="mt-20">
+  <Container class="mt-30">
     <HeroAgenda events={events} client:load />
   </Container>
 </Layout>

@@ -40,7 +40,7 @@ export default function ProgramasHero({ programas }: Props) {
 
             <div className="gap-6 flex flex-wrap items-center text-lg md:text-xl font-semibold text-white/90 mb-2">
               <div className="flex flex-wrap md:flex-row items-center gap-3 md:gap-6 font-ibm text-xl mt-2">
-                <span className="text-green-400 font-medium text-base md:text-base">
+                <span className="text-green-400 font-medium text-lg md:text-xl">
                   100% match
                 </span>
                 <span className="font-bold flex gap-1 items-center text-base lg:text-xl font-ibm text-white ">
