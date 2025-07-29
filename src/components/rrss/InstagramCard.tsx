@@ -1,5 +1,4 @@
 import type { InstagramPost } from "@/utils/fetchRRSS";
-import { Instagram } from "lucide-react";
 
 interface Props {
   post: InstagramPost;
@@ -28,6 +27,7 @@ export default function InstagramCard({ post, className }: Props) {
           autoPlay
           muted
           loop
+          playsInline
           className="w-full h-full object-cover absolute top-0 left-0"
         />
       )}
