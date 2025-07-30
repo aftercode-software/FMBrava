@@ -27,8 +27,8 @@ const blog = blogs.find((post) => post.slug === slug);
     blog ? (
       <main class="flex flex-col gap-10 w-full">
         <BlogHero b={blog} />
-        <Container class="lg:max-w-[65vw]">
-          <RichTextRenderer nodes={blog.content} client:load />
+        <Container class="lg:max-w-[65vw] min-h-screen">
+          <RichTextRenderer nodes={blog.content} client:only="react" />
         </Container>
       </main>
     ) : (

@@ -1,4 +1,4 @@
-import type { InstagramPost, InstagramResponse } from "@/utils/fetchRRSS";
+import type { InstagramResponse } from "@/utils/fetchRRSS";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { memo } from "react";
@@ -11,14 +11,12 @@ function InstagramCarousel({ posts }: { posts: InstagramResponse }) {
 
   return (
     <div ref={emblaRef} className="overflow-hidden h-full rounded-lg">
-      <div className="flex items-center h-[50vh] gap-8">
+      <div className="flex items-center h-[45vh] sm:h-[40vh] lg:h-[50vh] gap-4 md:gap-8">
         {posts.map((p, i) => (
           <InstagramCard
             key={p.id}
             post={p}
-            className={`flex-shrink-0 w-[85%] md:w-[35%] lg:w-[23%] h-full ${
-              i === 0 ? "ml-[1.5em]" : ""
-            }`}
+            className={`flex-shrink-0 h-full ${i === 0 ? "ml-[1.5em]" : ""}`}
           />
         ))}
       </div>

@@ -1,12 +1,17 @@
 ---
+import { Facebook, Instagram } from "@lucide/astro";
 import Container from "./containers/Container.astro";
-import SomosMasFooter from "./SomosMasFooter";
+import SomosMasAnimacion from "./SomosMasAnimacion";
+
+const isHome = Astro.url.pathname === "/";
 ---
 
-<footer class="flex flex-col items-center w-full bg-negro-900 mb-20 lg:my-20">
+<footer
+  class={`flex flex-col items-center w-full bg-negro-900 ${isHome ? "mb-20 lg:my-20" : ""} `}
+>
   <div class="relative w-full flex justify-center pt-12">
     <div class="w-full flex justify-center">
-      <SomosMasFooter client:idle />
+      <SomosMasAnimacion client:idle />
     </div>
 
     <div
@@ -21,40 +26,84 @@ import SomosMasFooter from "./SomosMasFooter";
       </p>
     </div>
   </div>
-  <section class="bg-amarillo w-full py-4 z-10">
-    <Container
-      class="flex flex-col lg:flex-row justify-between items-left w-full px-4"
-    >
-      <div class="flex">
-        <p class="font-ibm text-negro-900 text-sm lg:text-lg">
-          <b class="font-medium md:font-semibold"
-            >Copyright ©{new Date().getFullYear()} Brava</b
+  <div class="bg-amarillo w-full py-4 md:py-6 z-10 text-negro">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        {/* Navigation Links */}
+        <nav
+          class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-center md:text-left"
+        >
+          <a
+            href="/programacion"
+            class="font-ibm text-lg text-negro-900 hover:font-semibold transition-all"
           >
-        </p>
+            Programación
+          </a>
+          <a
+            href="/agenda"
+            class="font-ibm text-lg text-negro-900 hover:font-semibold transition-all"
+          >
+            Agenda
+          </a>
+          <a
+            href="/brava-news"
+            class="font-ibm text-lg text-negro-900 hover:font-semibold transition-all"
+          >
+            Brava News
+          </a>
+        </nav>
+
+        {/* Social Media - Center */}
+        <div class="flex justify-center space-x-4">
+          <a
+            href="#"
+            class="w-10 h-10 bg-black/10 hover:bg-black/20 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+            aria-label="Instagram"
+          >
+            <Instagram class="w-5 h-5 text-black" />
+          </a>
+          <a
+            href="#"
+            class="w-10 h-10 bg-black/10 hover:bg-black/20 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+            aria-label="Facebook"
+          >
+            <Facebook class="w-5 h-5 text-black" />
+          </a>
+          <a
+            href="#"
+            class="w-10 h-10 bg-black/10 hover:bg-black/20 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+            aria-label="TikTok"
+          >
+            <Facebook />
+          </a>
+        </div>
+
+        {/* Copyright */}
+        <div class="text-center md:text-right">
+          <p class="font-ibm text-lg text-negro-900">© 2025 Brava</p>
+        </div>
       </div>
-      <div class="flex space-x-8 md:flex-row flex-col gap-2 mt-4 md:mt-0">
-        <a
-          href="/programas"
-          class="font-ibm text-lg text-negro-900 hover:font-semibold transition-all"
-          >Programas</a
+
+      {/* Divider */}
+      <div class="border-t border-black/10 mt-6 pt-6">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0"
         >
-        <a
-          href="/agenda"
-          class="font-ibm text-lg text-negro-90 hover:font-semibold transition-all"
-          >Agenda</a
-        >
-        <a
-          href="/brava-news"
-          class="font-ibm text-lg text-negro-90 hover:font-semibold transition-all"
-          >Brava News</a
-        >
+          <p class="text-base text-center md:text-left font-ibm text-negro">
+            Orgullosamente diseñado y desarrollado por {" "}
+            <a
+              href="https://www.aftercode.dev"
+              target="_blank"
+              class="font-medium text-[#F30C70] transition-colors duration-200"
+            >
+              Aftercode
+            </a>
+          </p>
+          <p class="text-base font-ibm text-negro">
+            Todos los derechos reservados
+          </p>
+        </div>
       </div>
     </Container>
-  </section>
-
-  <p class="text-white font-ibm py-8 font">
-    Orgullosamente diseñado y desarrollado por <b class="text-[#F30C70]"
-      >Aftercode</b
-    >.
-  </p>
+  </div>
 </footer>

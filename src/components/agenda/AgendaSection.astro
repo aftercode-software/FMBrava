@@ -16,7 +16,7 @@ const events = await fetchAgenda();
     cantidad={events.length}
     link="/agenda"
   />
-  <Agenda events={events} cantidad={4} client:load />
+  <Agenda events={events} cantidad={4} client:only="react" />
   <div class="flex md:hidden w-full justify-end items-center mt-10">
     <VerMasButton
       cantidad={events.length}

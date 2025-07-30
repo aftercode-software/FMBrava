@@ -41,7 +41,7 @@ export default function AgendaHero({ events }: { events: Agenda[] }) {
 
   return (
     <section className="bg-negro-900 text-white gridpy-12 lg:py-16 min-h-screen">
-      <Container className="space-y-12 lg:space-y-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <Container className="space-y-0 lg:space-y-16 grid grid-cols-1 lg:grid-cols-2 gap-20">
         <aside>
           <section className="text-left space-y-2">
             <div className="space-y-4">
@@ -68,7 +68,7 @@ export default function AgendaHero({ events }: { events: Agenda[] }) {
             </div>
           </section>
           <section className="relative" aria-labelledby="featured-event-title">
-            <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="relative  gap-8 lg:gap-12 items-center">
               <div className="space-y-6 lg:space-y-8">
                 <div className="flex items-start gap-4">
                   <div className="min-w-0 flex-1">
@@ -115,31 +115,33 @@ export default function AgendaHero({ events }: { events: Agenda[] }) {
           <FeaturedEvent event={featured} />
         </div>
       </Container>
-      <Container>
-        <section aria-labelledby="other-events-title">
-          <h3
-            id="other-events-title"
-            className="text-2xl lg:text-3xl font-inter font-bold my-8 text-center lg:text-left"
-          >
-            Otros eventos
-          </h3>
+      {events.length > 1 && (
+        <Container>
+          <section aria-labelledby="other-events-title">
+            <h3
+              id="other-events-title"
+              className="text-2xl lg:text-3xl font-inter font-bold my-8 text-center lg:text-left"
+            >
+              Otros eventos
+            </h3>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-            {rest.map((event) => (
-              <button
-                key={event.id}
-                onClick={() => handleEventSelect(event)}
-                className="group text-left transition-transform duration-200 hover:scale-105 focus:outline-none  rounded-lg"
-                aria-label={`Seleccionar evento: ${event.nombre}`}
-              >
-                <div className="transition-opacity duration-200 group-hover:opacity-90">
-                  <EventCard event={event} />
-                </div>
-              </button>
-            ))}
-          </div>
-        </section>
-      </Container>
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+              {rest.map((event) => (
+                <button
+                  key={event.id}
+                  onClick={() => handleEventSelect(event)}
+                  className="group text-left transition-transform duration-200 hover:scale-105 focus:outline-none  rounded-lg"
+                  aria-label={`Seleccionar evento: ${event.nombre}`}
+                >
+                  <div className="transition-opacity duration-200 group-hover:opacity-90">
+                    <EventCard event={event} />
+                  </div>
+                </button>
+              ))}
+            </div>
+          </section>
+        </Container>
+      )}
     </section>
   );
 }

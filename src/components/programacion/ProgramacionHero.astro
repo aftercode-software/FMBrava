@@ -1,0 +1,11 @@
+---
+import { fetchProgramas } from "@/utils/fetchProgramas";
+import Container from "../containers/Container.astro";
+import ProgramasHero from "./ProgramasHero";
+
+const programas = await fetchProgramas();
+---
+
+<Container class="mt-30 pt-16 min-h-screen">
+  <ProgramasHero programas={programas} client:only="react" />
+</Container>

@@ -1,0 +1,12 @@
+---
+import { fetchAgenda } from "@/utils/fetchAgenda";
+import Container from "../containers/Container.astro";
+import HeroAgenda from "@/components/agenda/Hero.tsx";
+
+const eventos = await fetchAgenda();
+---
+
+<Container class="mt-30 min-h-screen">
+  <HeroAgenda events={eventos} client:only="
+  react" />
+</Container>

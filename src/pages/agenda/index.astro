@@ -1,10 +1,6 @@
 ---
-import { fetchAgenda } from "@/utils/fetchAgenda";
-import HeroAgenda from "@/components/agenda/Hero.tsx";
-import Container from "@/components/containers/Container.astro";
 import Layout from "@/layouts/Layout.astro";
-
-const events = await fetchAgenda();
+import AgendaHero from "@/components/agenda/AgendaHero.astro";
 ---
 
 <Layout
@@ -12,7 +8,5 @@ const events = await fetchAgenda();
   description="Consulta nuestra agenda de eventos"
   pathname="/agenda"
 >
-  <Container class="mt-30">
-    <HeroAgenda events={events} client:load />
-  </Container>
+  <AgendaHero />
 </Layout>

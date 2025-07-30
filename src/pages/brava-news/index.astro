@@ -1,5 +1,6 @@
 ---
-import BravaNews from "@/components/brava-news/BravaNews";
+import BravaNewsEmpty from "@/components/brava-news/BravaNewsEmpty";
+import NewsSection from "@/components/brava-news/NewsSection.astro";
 import Container from "@/components/containers/Container.astro";
 import Layout from "@/layouts/Layout.astro";
 import { fetchBlogs } from "@/utils/fetchBlogs";
@@ -12,7 +13,15 @@ const blogs = await fetchBlogs();
   description="Últimas noticias de Brava"
   pathname="/brava-news"
 >
-  <Container class="mt-30">
-    <BravaNews blogs={blogs} showAll client:load />
-  </Container>
+  {
+    blogs.length > 0 ? (
+      <Container class="mt-30">
+        <NewsSection />
+      </Container>
+    ) : (
+      <Container class="mt-30 min-h-screen flex items-center justify-center">
+        <BravaNewsEmpty />
+      </Container>
+    )
+  }
 </Layout>

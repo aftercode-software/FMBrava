@@ -6,28 +6,28 @@ import ConocenosMas from "@/components/ConocenosMas.astro";
 import EntreSecciones from "@/components/ads/EntreSecciones.astro";
 import AgendaSection from "@/components/agenda/AgendaSection.astro";
 import SpotifyPlaylists from "@/components/SpotifyPlaylists.astro";
-import Programacion from "@/components/Programacion.astro";
-import BravaNews from "@/components/brava-news/BravaNews.astro";
+import NewsSection from "@/components/brava-news/NewsSection.astro";
+import Programacion from "@/components/programacion/Programacion.astro";
 ---
 
 <Layout title="Brava 94.9" description="La radio que te acompaña" pathname="/">
   <Hero />
   <section class="flex flex-col md:gap-10 mt-10 relative">
     <img
-      src="/backgrounds/gray-gradient.png"
+      src="/backgrounds/gray-gradient.webp"
       alt="Gradient Background"
       class="absolute inset-0 z-[-1] w-full h-full object-cover"
     />
     <Programacion />
     <AgendaSection />
-    <BravaNews />
+    <NewsSection />
   </section>
   <EntreSecciones />
   <RRSS />
   <section class="flex flex-col md:gap-10 mt-10 relative">
     <SpotifyPlaylists />
     <img
-      src="/backgrounds/gray-gradient.png"
+      src="/backgrounds/gray-gradient.webp"
       alt="Gradient Background"
       class="absolute inset-0 z-[-1] w-full h-full object-cover"
     />

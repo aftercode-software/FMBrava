@@ -41,7 +41,7 @@ const tiktokData = {
       socialImageUrl={instagramData.socialImageUrl}
       socialBrandImageUrl={instagramData.socialBrandImageUrl}
     />
-    <InstagramCarousel posts={rrss} client:load />
+    <InstagramCarousel posts={rrss} client:only="react" />
   </section>
   <!-- <section class="my-20">
     <HeaderRRSS
@@ -51,6 +51,6 @@ const tiktokData = {
       socialImageUrl={tiktokData.socialImageUrl}
       socialBrandImageUrl={tiktokData.socialBrandImageUrl}
     />
-    <TiktokCarousel client:load />
+    <TiktokCarousel client:only="react" />
   </section> -->
 </Container>
