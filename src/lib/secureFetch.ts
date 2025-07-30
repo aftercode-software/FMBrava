@@ -22,6 +22,7 @@ export async function secureFetch<T = any>(
     const res = await fetch(url, {
       method,
       headers: {
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=3600",
         Authorization: `users API-Key ${import.meta.env.CMS_API_KEY}`,
       },
       body: body ? JSON.stringify(body) : undefined,
@@ -71,6 +72,7 @@ export async function secureFetchRaw(
     const res = await fetch(url, {
       method,
       headers: {
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=3600",
         Authorization: `users API-Key ${import.meta.env.CMS_API_KEY}`,
       },
       ...initOverrides,
