@@ -7,7 +7,7 @@ export default function SplashVideo() {
   useEffect(() => {
     const played = sessionStorage.getItem("splashPlayed");
     if (!played) {
-      // setShowSplash(true);
+      setShowSplash(true);
     }
     // setShowSplash(true);
   }, []);
