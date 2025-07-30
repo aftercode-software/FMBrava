@@ -1,13 +1,10 @@
 import type { InstagramPost, InstagramResponse } from "@/utils/fetchRRSS";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
+import { memo } from "react";
 import InstagramCard from "./InstagramCard";
 
-export default function InstagramCarousel({
-  posts,
-}: {
-  posts: InstagramResponse;
-}) {
+function InstagramCarousel({ posts }: { posts: InstagramResponse }) {
   const [emblaRef] = useEmblaCarousel({ align: "start", loop: true }, [
     Autoplay({ delay: 2000, stopOnMouseEnter: true }),
   ]);
@@ -28,3 +25,6 @@ export default function InstagramCarousel({
     </div>
   );
 }
+
+// Memoize the carousel to prevent unnecessary re-renders
+export default memo(InstagramCarousel);

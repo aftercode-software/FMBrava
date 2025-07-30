@@ -1,22 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/home/Hero.astro";
-import { fetchPlaylists } from "../utils/fetchPlaylists";
-import { fetchProgramas, type Programa } from "../utils/fetchProgramas";
-import ProgramacionCarousel from "@/components/home/Programacion";
-import BravaNews from "@/components/brava-news/BravaNews";
-import { fetchBlogs } from "@/utils/fetchBlogs";
 import RRSS from "@/components/rrss/RRSS.astro";
 import ConocenosMas from "@/components/ConocenosMas.astro";
 import EntreSecciones from "@/components/ads/EntreSecciones.astro";
 import AgendaSection from "@/components/agenda/AgendaSection.astro";
 import SpotifyPlaylists from "@/components/SpotifyPlaylists.astro";
-import { fetchRRSS } from "@/utils/fetchRRSS";
-
-const programas: Programa[] = await fetchProgramas();
-const blogs = await fetchBlogs();
-const playlists = await fetchPlaylists();
-const rrss = await fetchRRSS();
+import Programacion from "@/components/Programacion.astro";
+import BravaNews from "@/components/brava-news/BravaNews.astro";
 ---
 
 <Layout title="Brava 94.9" description="La radio que te acompaña" pathname="/">
@@ -27,14 +18,14 @@ const rrss = await fetchRRSS();
       alt="Gradient Background"
       class="absolute inset-0 z-[-1] w-full h-full object-cover"
     />
-    <ProgramacionCarousel programas={programas} client:load />
+    <Programacion />
     <AgendaSection />
-    <BravaNews blogs={blogs} client:load />
+    <BravaNews />
   </section>
   <EntreSecciones />
-  <RRSS rrss={rrss} />
+  <RRSS />
   <section class="flex flex-col md:gap-10 mt-10 relative">
-    <SpotifyPlaylists playlists={playlists} />
+    <SpotifyPlaylists />
     <img
       src="/backgrounds/gray-gradient.png"
       alt="Gradient Background"

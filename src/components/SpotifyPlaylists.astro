@@ -1,10 +1,10 @@
 ---
-import type { Playlist } from "@/utils/fetchPlaylists";
+import { fetchPlaylists } from "@/utils/fetchPlaylists";
 import Container from "./containers/Container.astro";
 import SpotifyCard from "./spotify/SpotifyCard.astro";
 import Title from "./Title.astro";
 
-const { playlists } = Astro.props as { playlists: Playlist[] };
+const playlists = await fetchPlaylists();
 ---
 
 <Container class="my-20 w-full">

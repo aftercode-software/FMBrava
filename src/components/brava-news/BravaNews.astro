@@ -1,0 +1,19 @@
+---
+import { fetchBlogs } from "@/utils/fetchBlogs";
+import Container from "../containers/Container.astro";
+import Title from "../Title.astro";
+import BravaNewsCarousel from "./BravaNews.tsx";
+
+const blogs = await fetchBlogs();
+---
+<Container class="w-full my-6">
+  <Title
+    title="Brava News"
+    subtitle="Noticias de música, entretenimiento y cultura pop en Mendoza, con el sello Brava."
+    imageUrl="/sections-icons/brava-news-icon.webp"
+    cantidad={blogs.length}
+    link="/brava-news"
+    verTodasTexto="todas"
+  />
+  <BravaNewsCarousel blogs={blogs} client:load />
+</Container>

@@ -4,12 +4,9 @@ import HeaderRRSS from "./HeaderRRSS.astro";
 import InstagramCarousel from "./InstagramCarousel";
 import TiktokCarousel from "./TiktokCarousel";
 import type { InstagramResponse } from "@/utils/fetchRRSS";
+import { fetchRRSS } from "@/utils/fetchRRSS";
 
-type Props = {
-  rrss: InstagramResponse;
-};
-
-const { rrss } = Astro.props as Props;
+const rrss = await fetchRRSS();
 
 const instagramData = {
   socialLink: "https://www.instagram.com/bravaoficial/",

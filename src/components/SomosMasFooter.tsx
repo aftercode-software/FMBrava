@@ -1,17 +1,28 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const palabras = ["BRAVA", "STREAMING", "MÚSICA", "RADIO", "CONCIERTOS"];
 
 export default function SomosMasFooter() {
   const [index, setIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const iv = setInterval(
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    intervalRef.current = setInterval(
       () => setIndex((i) => (i + 1) % palabras.length),
-      2000
+      10000
     );
-    return () => clearInterval(iv);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, []);
 
   return (

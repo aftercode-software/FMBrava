@@ -12,39 +12,7 @@ interface Props {
 export default function BravaNews({ blogs, showAll = false }: Props) {
   if (blogs.length === 0) return null;
   return (
-    <Container className="my-6">
-      <div className="flex justify-between w-full items-center mt-40 mb-6">
-        <aside className="flex items-center">
-          <div>
-            <img
-              src="/sections-icons/brava-news-icon.webp"
-              alt="Brava News"
-              className="w-18 h-18 md:w-24 md:h-24 mr-2"
-            />
-          </div>
-          <div className="flex-1 md:min-w-[50%]">
-            <h2 className="font-inter text-white font-semibold text-xl lg:text-2xl">
-              Brava News
-            </h2>
-            <p className="text-base md:text-lg font-ibm text-gray-300">
-              Noticias de música, entretenimiento y cultura pop en Mendoza, con
-              el sello Brava.
-            </p>
-          </div>
-        </aside>
-        <aside className="hidden md:block">
-          <a
-            href="/brava-news"
-            className="group font-inter flex gap-3 md:gap-4 items-center font-semibold md:font-bold text-white md:text-lg *:transition-all *:duration-100"
-          >
-            Ver todas
-            <span className="bg-white/30 px-4 py-1 rounded-xl group-hover:bg-rojo group-hover:scale-105">
-              {blogs.length}
-            </span>
-            <ChevronRight className="group-hover:translate-x-1" />
-          </a>
-        </aside>
-      </div>
+    <>
       <div className="mt-16 grid gap-6 grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
         {(showAll ? blogs : blogs.slice(0, 4)).map((b) => (
           <BravaNewsCard key={b.id} blog={b} />
@@ -57,7 +25,7 @@ export default function BravaNews({ blogs, showAll = false }: Props) {
           verTodasTexto="todas"
         />
       </aside>
-    </Container>
+    </>
   );
 }
 

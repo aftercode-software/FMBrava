@@ -6,6 +6,7 @@ interface Props {
 }
 
 export default function InstagramCard({ post, className }: Props) {
+  console.log("InstagramCard render:", post.id); // ⚠️ ADD THIS
   const { media_url, media_type, caption, id } = post;
   return (
     <a

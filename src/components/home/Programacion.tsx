@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
-import Container from "../containers/Container";
 import { type Programa } from "@/utils/fetchProgramas";
 import { getStartEndDay, getStartEndHours } from "@/utils/utils";
+import Autoplay from "embla-carousel-autoplay";
+import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import Container from "../containers/Container";
 
 type Props = { programas: Programa[]; onSelect?: (index: number) => void };
 
@@ -42,9 +42,6 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
 
   return (
     <Container className="flex flex-col">
-      <h2 className="font-inter text-white font-semibold text-xl lg:text-2xl">
-        Nuestros programas
-      </h2>
       <section className="relative h-[20rem] md:h-[32rem] overflow-hidden mt-4">
         <div className="absolute top-0 left-0 md:w-[35%] w-[45%] h-full bg-black z-10" />
         <AnimatePresence mode="wait" initial={false}>

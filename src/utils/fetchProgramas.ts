@@ -32,6 +32,7 @@ let cachedProgramas: Programa[] | null = null;
 let cacheTimestamp: number = 0;
 
 export async function fetchProgramas(): Promise<Programa[]> {
+  console.log("?");
   const now = Date.now();
 
   if (cachedProgramas && now - cacheTimestamp < CACHE_DURATION) {
@@ -39,7 +40,9 @@ export async function fetchProgramas(): Promise<Programa[]> {
   }
 
   const { docs } = await secureFetch<{ docs: ProgramaRaw[] }>("programacion");
-  if (!docs) throw new Error("Error fetching programas ");
+  if (!docs) throw new Error("Error fetching programas from API");
+
+  console.warn("Docs", docs);
 
   const filtered = docs.filter((item) => new Date(item.fechaFin) > new Date());
 

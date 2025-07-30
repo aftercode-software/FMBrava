@@ -15,7 +15,7 @@ export default function Agenda({ events, cantidad }: Props) {
   };
 
   return (
-    <section className="mt-16">
+    <section className="mt-16 w-full">
       <div className="flex flex-col md:flex-row md:min-h-[600px] h-full w-full gap-y-10 md:gap-6">
         <div
           key={featured.id}
