@@ -106,7 +106,7 @@ export default function Navbar() {
             <img
               src="/logo-white.png"
               alt="Brava Radio"
-              className="h-10 w-auto"
+              className="h-12 w-auto"
             />
           </motion.a>
 
@@ -114,7 +114,7 @@ export default function Navbar() {
             onClick={toggleMenu}
             className="text-white transition-colors duration-200 hover:text-red-500"
           >
-            <Menu className="h-6 w-6 z-30" />
+            <Menu className="h-8 w-8 z-30" />
           </button>
         </Container>
       </motion.nav>
@@ -123,15 +123,27 @@ export default function Navbar() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="lg:hidden fixed inset-0 z-50 bg-gradient-to-b from-black via-rojo-700 to-black"
+            className="lg:hidden fixed inset-0 z-50 bg-gradient-to-b from-black via-rojo-500/50 to-black backdrop-blur-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between py-8 border-b border-gray-800">
-              <Container className="flex items-center justify-end w-full">
+            <div className="flex items-center justify-between py-6 border-b border-gray-800">
+              <Container className="flex items-center justify-between w-full">
+                <motion.a
+                  className="flex items-center"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                  href="/"
+                >
+                  <img
+                    src="/logo-white.png"
+                    alt="Brava Radio"
+                    className="h-12 w-auto"
+                  />
+                </motion.a>
                 <motion.button
                   onClick={toggleMenu}
                   className="text-white transition-colors duration-200 hover:text-red-500"
@@ -139,7 +151,7 @@ export default function Navbar() {
                   animate={{ rotate: 180 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <X className="h-6 w-6" />
+                  <X className="h-8 w-8" />
                 </motion.button>
               </Container>
             </div>
@@ -165,10 +177,10 @@ export default function Navbar() {
                       <a
                         href={item.href}
                         onClick={toggleMenu}
-                        className={`flex items-center space-x-3 justify-center font-inter rounded-full text-lg py-2 mx-2 transition-colors duration-200 ${
+                        className={`flex items-center space-x-3 justify-center font-inter rounded-full text-2xl py-4 mx-2 transition-colors duration-200 ${
                           isActive
-                            ? "bg-white text-black font-semibold"
-                            : "text-white font-normal hover:bg-white/20 "
+                            ? "bg-white text-black font-bold"
+                            : "text-white font-medium hover:bg-white/20 "
                         }`}
                       >
                         <span>{item.name}</span>

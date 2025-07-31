@@ -15,12 +15,12 @@ export default function Agenda({ events, cantidad }: Props) {
   };
 
   return (
-    <section className="mt-16 w-full">
+    <section className="mt-6 w-full">
       <div className="flex flex-col md:flex-row md:min-h-[600px] h-full w-full gap-y-10 md:gap-6">
         <div
           key={featured.id}
           onClick={() => goToEvent(featured.id)}
-          className="md:w-[38%] w-full cursor-pointer"
+          className="h-64 sm:h-auto md:w-[38%] w-full cursor-pointer"
         >
           <FeaturedEvent event={featured} />
         </div>

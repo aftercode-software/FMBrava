@@ -12,9 +12,9 @@ const { href, class: className, variant = "dark", size = "md" } = Astro.props;
 <a
   href={href}
   class={`
-    px-4 py-2 sm:px-6 sm:py-3 lg:px-6 lg:py-2 bg-blue-500 rounded-full font-inter font-semibold transition-all duration-100 cursor-pointer flex
+    px-6 py-3 lg:px-6 lg:py-2 bg-blue-500 rounded-full font-inter font-semibold transition-all duration-100 cursor-pointer flex
     ${variant === "light" ? "bg-white text-gray-900 gap-2 items-center hover:bg-rojo hover:text-white hover:outline-2 hover:outline-rojo" : "bg-negro-400 text-white hover:bg-negro-900 hover:text-gray-100 hover:outline-2 hover:outline-gray-300"} 
-    ${size === "md" ? "text-md sm:text-lg" : size === "sm" ? "text-sm sm:text-lg" : "text-lg"}
+    ${size === "md" ? "text-lg sm:text-lg" : size === "sm" ? "text-md sm:text-lg" : "text-lg"}
     ${className}
 `}
 >

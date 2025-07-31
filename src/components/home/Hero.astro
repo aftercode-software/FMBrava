@@ -6,19 +6,7 @@ import { Plus } from "@lucide/astro";
 ---
 
 <section
-  class="bg-negro-900 text-white py-8"
-  style=`
-        background-image: linear-gradient(
-            to bottom, 
-            rgba(10, 10, 10, 1) 0%, 
-            rgba(10, 10, 10, 0.86) 50%, 
-            rgba(10, 10, 10, 1) 100%
-        ), 
-        url('/images/hero.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    `
+  class="bg-negro-900 text-white py-8 hero-image"
 >
   <!-- <img
     src="/backgrounds/red-gradient.png"
@@ -56,7 +44,7 @@ import { Plus } from "@lucide/astro";
         <Button href="/programacion"> Escribinos </Button>
       </div>
     </div>
-    <div class="w-full lg:w-3/5 mt-10 md:mt-10">
+    <div class="w-full lg:w-3/5 mt-10 md:mt-10 h-[30vh] sm:h-auto">
       <Player client:only="react" />
     </div>
   </Container>

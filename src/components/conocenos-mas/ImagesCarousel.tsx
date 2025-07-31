@@ -8,15 +8,7 @@ export interface Image {
   title: string;
 }
 
-const imagesConst: Image[] = [
-  {
-    href: "https://www.instagram.com/p/Cw0000000000000000000000000000000000000000/",
-    imageUrl: "/images/hero.jpg",
-    title: "Post de instagram :)",
-  },
-];
-
-export default function InstagramCarousel({ images }: { images: Image[] }) {
+export default function ImagesCarousel({ images }: { images: Image[] }) {
   const [emblaRef] = useEmblaCarousel({ align: "start", loop: true }, [
     Autoplay({ delay: 1000, stopOnMouseEnter: true }),
   ]);

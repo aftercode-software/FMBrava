@@ -4,6 +4,8 @@ import { SITE } from "@/config/seo";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/Footer.astro";
 import SplashVideo from "@/components/SplashVideo";
+import { AstroFont } from "astro-font";
+import { join } from "node:path";
 
 export const revalidate = 21540;
 Astro.response.headers.set(
@@ -46,6 +48,41 @@ const imageUrl = new URL(image, SITE.url).href;
       type="image/png"
       sizes="32x32"
       href="/favicon/favicon-32x32.png"
+    />
+    <AstroFont
+      config={[
+        {
+          src: [],
+          name: "Inter",
+          googleFontsURL: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+          preload: true,
+          display: "swap",
+          selector: "body",
+          fallback: "sans-serif",
+        },
+        {
+          src: [],
+          name: "IBM Plex Sans",
+          googleFontsURL: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap",
+          preload: true,
+          display: "swap",
+          selector: "body",
+          fallback: "sans-serif",
+        },{
+          name: "Tusker Grotesk",
+          src: [
+            {
+              style: 'normal',
+              weight: '900',
+              path: join(process.cwd(), 'public', 'fonts', 'tusker-grotesk.ttf')
+            },
+          ],
+          preload: false,
+          display: "swap",
+          selector: "body",
+          fallback: "sans-serif",
+        }
+      ]}
     />
     <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
