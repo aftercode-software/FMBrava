@@ -12,12 +12,9 @@ import Programacion from "@/components/programacion/Programacion.astro";
 
 <Layout title="Brava 94.9" description="La radio que te acompaña" pathname="/">
   <Hero />
-  <section class="flex flex-col md:gap-10 mt-10 relative">
-    <img
-      src="/backgrounds/gray-gradient.webp"
-      alt="Gradient Background"
-      class="absolute inset-0 z-[-1] w-full h-full object-cover"
-    />
+  <section
+    class="flex flex-col md:gap-10 mt-10 relative"
+  >
     <Programacion />
     <AgendaSection />
     <NewsSection />
@@ -26,11 +23,6 @@ import Programacion from "@/components/programacion/Programacion.astro";
   <RRSS />
   <section class="flex flex-col md:gap-10 mt-10 relative">
     <SpotifyPlaylists />
-    <img
-      src="/backgrounds/gray-gradient.webp"
-      alt="Gradient Background"
-      class="absolute inset-0 z-[-1] w-full h-full object-cover"
-    />
     <ConocenosMas />
   </section>
   <EntreSecciones />

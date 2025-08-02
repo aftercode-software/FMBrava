@@ -5,9 +5,9 @@ import Title from "../Title.astro";
 import BravaNewsCarousel from "./BravaNews.tsx";
 
 const blogs = await fetchBlogs();
+if (!blogs.length) return null;
 ---
-<Container class="w-full my-6">
-  {blogs.length > 0 && (
+<Container class="w-full mt-26 sm:mt-16">
     <Title
     title="Brava News"
     subtitle="Noticias de música, entretenimiento y cultura pop en Mendoza, con el sello Brava."
@@ -15,7 +15,6 @@ const blogs = await fetchBlogs();
     cantidad={blogs.length}
     link="/brava-news"
     verTodasTexto="todas"
-    />
-    <BravaNewsCarousel blogs={blogs} client:only="react" />
-  )}
+  />
+  <BravaNewsCarousel blogs={blogs} client:only="react" />
 </Container>

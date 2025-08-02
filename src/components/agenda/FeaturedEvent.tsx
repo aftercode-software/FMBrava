@@ -26,7 +26,7 @@ export default function FeaturedEvent({ event }: { event: Agenda }) {
       <div className="relative z-20 h-full flex flex-col justify-end p-6">
         <div className="flex justify-between items-end w-full">
           <div className="text-left max-w-[60%]">
-            <h3 className="text-xl md:text-3xl font-semibold leading-tight">
+            <h3 className="text-4xl md:text-5xl font-semibold leading-tight">
               {event.nombre}
             </h3>
           </div>

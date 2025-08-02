@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import type { Programa } from "@/utils/fetchProgramas";
 import { getStartEndDay, getStartEndHours } from "@/utils/utils";
-import ProgramacionCarousel from "./ProgramacionCarousel";
+import { useState } from "react";
 import Container from "../containers/Container";
+import ProgramacionCarousel from "./ProgramacionCarousel";
 
 type Props = {
   programas: Programa[];
@@ -11,6 +12,7 @@ type Props = {
 export default function ProgramasHero({ programas }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selected = programas[selectedIndex];
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <>
@@ -18,23 +20,33 @@ export default function ProgramasHero({ programas }: Props) {
         <img
           src={selected.imagen.url}
           alt={selected.imagen.alt}
-          className="absolute right-0 top-0 w-[70%] h-full object-cover object-top z-0"
+          className="absolute right-0 top-0 h-[60%] md:h-full w-full md:w-[60%] object-cover object-top z-0"
         />
       )}
-      <div
-        className="absolute inset-0  z-10"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(0, 0, 0, 1) 36%, rgba(255, 255, 255, 0) 100%)",
-        }}
-      />
+      {!isMobile ? (
+        <div
+          className="absolute right-0 top-0 h-full md:w-[60%]"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(10, 10, 10, 1) 0%,  rgba(10, 10, 10, 0.6) 50%, rgba(10, 10, 10, 1) 100%)",
+          }}
+        />
+      ) : (
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.8) 38%, rgba(255, 255, 255, 0) 80%, rgba(10, 10, 10, 1) 100%)",
+          }}
+        />
+      )}
       <Container className="flex flex-col w-full">
-        <section className="relative w-full flex items-center h-[60vh] text-white overflow-hidden ">
+        <section className="relative w-full flex items-center h-[35vh] sm:h-[60vh] text-white overflow-hidden ">
           <div className="relative z-20 flex flex-col h-full max-w-[900px] justify-start">
             <span className="font-inter font-extrabold lg:text-xl tracking-[0.25em] text-negro-400">
               BRAVA PRESENTA
             </span>
-            <h1 className="text-6xl lg:text-8xl 3xl:text-9xl font-bold font-tusker tracking-wide mt-4 uppercase">
+            <h1 className="text-7xl lg:text-8xl 3xl:text-9xl font-bold font-tusker tracking-wide mt-4 uppercase">
               {selected?.nombre}
             </h1>
 

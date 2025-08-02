@@ -35,12 +35,14 @@ export default function FixedPlayer({
     <>
       {showVolumeModal && (
         <div
-          className="fixed inset-0 bg-gradient-to-b from-negro-900 to-negro/30 backdrop-blur-sm z-90 flex items-center justify-center sm:hidden"
+          className="fixed inset-0 bg-gradient-to-b from-negro-900 to-negro/30 backdrop-blur-sm z-[9999] flex items-center justify-center sm:hidden"
           onClick={() => setShowVolumeModal(false)}
         >
           <div className="bg-negro-900 backdrop-blur-xl rounded-2xl p-6 mx-4 w-full max-w-sm border border-gray-700">
             <div className="text-center mb-4">
-              <h3 className="text-white font-semibold">Volumen</h3>
+              <h3 className="text-white font-semibold font-inter text-xl">
+                Volumen
+              </h3>
             </div>
             <div className="flex items-center gap-4">
               <VolumeX className="w-5 h-5 text-white/70" />
@@ -55,17 +57,16 @@ export default function FixedPlayer({
               </div>
               <Volume2 className="w-5 h-5 text-white/70" />
             </div>
-            <div className="text-center mt-4">
+            <div className="text-center mt-4 font-inter">
               <span className="text-white/70 text-sm">{volume}%</span>
             </div>
           </div>
         </div>
       )}
 
-      <div className="fixed bottom-0 left-0 h-22 w-full py-1 bg-gradient-to-t from-negro-900 to-negro/30 backdrop-blur-xl z-50">
-        <Container className="py-3 sm:py-4">
+      <div className="fixed bottom-0 left-0 h-26 w-full py-1 bg-gradient-to-t from-negro-900 to-negro/30 backdrop-blur-xl z-50">
+        <Container className="py-3 sm:py-4 h-full">
           <div className="relative flex items-center h-full">
-            {/* Left Section - Album Art & Info */}
             <div className="flex items-center gap-3 flex-1 min-w-0 pr-4">
               <div className="hidden md:block relative flex-shrink-0">
                 <img
@@ -84,7 +85,6 @@ export default function FixedPlayer({
               </div>
             </div>
 
-            {/* Center Section - Controls (Absolutely Centered) */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="flex items-center gap-2 sm:gap-4">
                 <button
@@ -114,16 +114,13 @@ export default function FixedPlayer({
               </div>
             </div>
 
-            {/* Right Section - Volume */}
             <div className="flex items-center justify-end flex-1 pl-4">
-              {/* Desktop Volume Slider */}
               <div className="hidden sm:block cursor-pointer">
                 <VolumeSlider volume={volume} setVolume={setVolume} />
               </div>
 
-              {/* Mobile Volume Button */}
               <button
-                className="w-10 h-10 rounded-full text-white hover:bg-white/10 sm:hidden active:scale-95 transition-all cursor-pointer"
+                className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:bg-white/10 sm:hidden active:scale-95 transition-all cursor-pointer"
                 onClick={() => setShowVolumeModal(true)}
               >
                 {volume > 0 ? (
