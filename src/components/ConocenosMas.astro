@@ -4,6 +4,9 @@ import Container from "./containers/Container.astro";
 import Title from "./Title.astro";
 
 const destacadas = await fetchDestacadas();
+if (!destacadas || destacadas.length === 0) {
+  return;
+}
 ---
 
 <Container class="w-full">

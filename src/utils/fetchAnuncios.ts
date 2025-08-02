@@ -1,5 +1,4 @@
 import { secureFetch } from "@/lib/secureFetch";
-import { fetchImagenPresign } from "./fetchImagen";
 import { CACHE_DURATION } from "@/constants/cache";
 
 let cachedAnuncios: Anuncio[] | null = null;
@@ -47,7 +46,6 @@ export async function fetchAnuncios(): Promise<Anuncio[]> {
 
   cachedAnuncios = await Promise.all(
     filteredDocs.map(async (item) => {
-      const presignedUrl = await fetchImagenPresign(item.image.url);
       return {
         id: item.id,
         title: item.title,
@@ -57,7 +55,7 @@ export async function fetchAnuncios(): Promise<Anuncio[]> {
         link: item.link,
         text: item.text,
         image: {
-          url: presignedUrl,
+          url: import.meta.env.VITE_CMS_PUBLIC_URL + (item.image?.url || ""),
           alt: item.image.alt || "",
         },
       };

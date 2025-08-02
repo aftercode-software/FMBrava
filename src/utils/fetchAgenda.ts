@@ -1,6 +1,5 @@
 import { CACHE_DURATION } from "@/constants/cache";
 import { secureFetch } from "../lib/secureFetch";
-import { fetchImagenPresign } from "./fetchImagen";
 
 let cachedAgendas: Agenda[] | null = null;
 let cacheTimestamp: number = 0;
@@ -44,7 +43,6 @@ export async function fetchAgenda(): Promise<Agenda[]> {
 
   cachedAgendas = await Promise.all(
     filteredDocs.map(async (item) => {
-      const presignedUrl = await fetchImagenPresign(item.foto.url);
       return {
         id: item.id,
         nombre: item.name,
@@ -52,7 +50,7 @@ export async function fetchAgenda(): Promise<Agenda[]> {
         dia: item.dia,
         link: item.link,
         imagen: {
-          url: presignedUrl,
+          url: import.meta.env.VITE_CMS_PUBLIC_URL + (item.foto?.url || ""),
           alt: item.foto.alt || "",
         },
       };

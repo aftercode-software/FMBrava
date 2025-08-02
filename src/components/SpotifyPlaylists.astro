@@ -5,6 +5,9 @@ import SpotifyCard from "./spotify/SpotifyCard.astro";
 import Title from "./Title.astro";
 
 const playlists = await fetchPlaylists();
+if (!playlists || playlists.length === 0) {
+  return;
+}
 ---
 
 <Container class="my-20 w-full">

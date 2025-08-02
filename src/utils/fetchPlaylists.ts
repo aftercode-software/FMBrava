@@ -1,6 +1,5 @@
 import { CACHE_DURATION } from "@/constants/cache";
 import { secureFetch } from "../lib/secureFetch";
-import { fetchImagenPresign } from "./fetchImagen";
 
 let cachedPlaylists: Playlist[] | null = null;
 let cacheTimestamp: number = 0;
@@ -35,13 +34,12 @@ export async function fetchPlaylists(): Promise<Playlist[]> {
 
   cachedPlaylists = await Promise.all(
     docs.map(async (item) => {
-      const presignedUrl = await fetchImagenPresign(item.imagen.url);
       return {
         id: item.id,
         nombre: item.nombre,
         link: item.link,
         imagen: {
-          url: presignedUrl,
+          url: import.meta.env.VITE_CMS_PUBLIC_URL + (item.imagen?.url || ""),
           alt: item.imagen.alt || "",
         },
       };

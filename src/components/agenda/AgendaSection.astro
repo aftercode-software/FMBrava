@@ -5,6 +5,9 @@ import Title from "../Title.astro";
 import { fetchAgenda } from "@/utils/fetchAgenda";
 import VerMasButton from "../VerMasButton.astro";
 const events = await fetchAgenda();
+if (!events || events.length === 0) {
+  return;
+}
 ---
 
 <Container class="my-20 w-full">

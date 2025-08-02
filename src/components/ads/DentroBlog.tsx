@@ -3,7 +3,6 @@ import {
   fetchAnunciosEntreSecciones,
   type Anuncio,
 } from "@/utils/fetchAnuncios";
-import Container from "../containers/Container";
 
 export default function DentroBlog({ ad }: { ad: Anuncio | null }) {
   const [anuncio, setAnuncio] = useState<Anuncio | null>(ad || null);

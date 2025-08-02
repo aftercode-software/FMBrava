@@ -1,6 +1,5 @@
 import { CACHE_DURATION } from "@/constants/cache";
 import { secureFetch } from "../lib/secureFetch";
-import { fetchImagenPresign } from "./fetchImagen";
 
 export type Programa = {
   id: string;
@@ -48,7 +47,6 @@ export async function fetchProgramas(): Promise<Programa[]> {
 
   const programas = await Promise.all(
     filtered.map(async (item) => {
-      const url = await fetchImagenPresign(item.imagenPrincipal.url);
       return {
         id: item.id,
         nombre: item.nombre,
@@ -59,7 +57,12 @@ export async function fetchProgramas(): Promise<Programa[]> {
         fechaInicio: item.fechaInicio,
         fechaFin: item.fechaFin,
         participantes: item.participantes,
-        imagen: { url, alt: item.imagenPrincipal.alt || "" },
+        imagen: {
+          url:
+            import.meta.env.VITE_CMS_PUBLIC_URL +
+            (item.imagenPrincipal?.url || ""),
+          alt: item.imagenPrincipal.alt || "",
+        },
       };
     })
   );
