@@ -20,7 +20,7 @@ export default function ProgramasHero({ programas }: Props) {
         <img
           src={selected.imagen.url}
           alt={selected.imagen.alt}
-          className="absolute right-0 top-0 h-[60%] md:h-full w-full md:w-[60%] object-cover object-top z-0"
+          className="absolute right-0 top-0 h-[100%] md:h-full w-full md:w-[60%] object-cover object-top z-0"
         />
       )}
       {!isMobile ? (
@@ -41,7 +41,7 @@ export default function ProgramasHero({ programas }: Props) {
         />
       )}
       <Container className="flex flex-col w-full">
-        <section className="relative w-full flex items-center h-[35vh] sm:h-[60vh] text-white overflow-hidden ">
+        <section className="relative w-full flex items-center min-h-[40vh] sm:h-[60vh] text-white overflow-hidden ">
           <div className="relative z-20 flex flex-col h-full max-w-[900px] justify-start">
             <span className="font-inter font-extrabold lg:text-xl tracking-[0.25em] text-negro-400">
               BRAVA PRESENTA
