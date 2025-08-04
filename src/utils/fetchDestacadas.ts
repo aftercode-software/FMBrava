@@ -1,5 +1,6 @@
 import { CACHE_DURATION } from "@/constants/cache";
 import { secureFetch } from "@/lib/secureFetch";
+import { fetchImagenPresign } from "./fetchImagen";
 
 let cachedDestacadas: Destacada[] | null = null;
 let cacheTimestamp: number = 0;
@@ -42,7 +43,7 @@ export async function fetchDestacadas(): Promise<Destacada[]> {
         id: item.id,
         createdAt: new Date(item.createdAt),
         image: {
-          url: import.meta.env.VITE_CMS_PUBLIC_URL + (item.image?.url || ""),
+          url: (await fetchImagenPresign(item.image.url)) || "",
           alt: item.image.alt || "",
         },
         title: item.title,

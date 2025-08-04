@@ -1,5 +1,6 @@
 import { secureFetch } from "@/lib/secureFetch";
 import { CACHE_DURATION } from "@/constants/cache";
+import { fetchImagenPresign } from "./fetchImagen";
 
 let cachedAnuncios: Anuncio[] | null = null;
 let cacheTimestamp: number = 0;
@@ -55,7 +56,7 @@ export async function fetchAnuncios(): Promise<Anuncio[]> {
         link: item.link,
         text: item.text,
         image: {
-          url: import.meta.env.VITE_CMS_PUBLIC_URL + (item.image?.url || ""),
+          url: (await fetchImagenPresign(item.image.url)) || "",
           alt: item.image.alt || "",
         },
       };

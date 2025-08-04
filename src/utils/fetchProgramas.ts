@@ -1,5 +1,6 @@
 import { CACHE_DURATION } from "@/constants/cache";
 import { secureFetch } from "../lib/secureFetch";
+import { fetchImagenPresign } from "./fetchImagen";
 
 export type Programa = {
   id: string;
@@ -58,9 +59,7 @@ export async function fetchProgramas(): Promise<Programa[]> {
         fechaFin: item.fechaFin,
         participantes: item.participantes,
         imagen: {
-          url:
-            import.meta.env.VITE_CMS_PUBLIC_URL +
-            (item.imagenPrincipal?.url || ""),
+          url: (await fetchImagenPresign(item.imagenPrincipal.url)) || "",
           alt: item.imagenPrincipal.alt || "",
         },
       };
