@@ -11,12 +11,14 @@ function InstagramCarousel({ posts }: { posts: InstagramResponse }) {
 
   return (
     <div ref={emblaRef} className="overflow-hidden h-full rounded-lg">
-      <div className="flex items-center h-[45vh] sm:h-[40vh] lg:h-[50vh] gap-4 md:gap-8">
+      <div className="flex items-center h-[26rem] sm:h-[40vh] lg:h-[50vh] gap-4 md:gap-8">
         {posts.map((p, i) => (
           <InstagramCard
             key={p.id}
             post={p}
-            className={`flex-shrink-0 h-full ${i === 0 ? "ml-[1.5em]" : ""}`}
+            className={`flex-shrink-0 h-full w-[80%] md:w-[35%] lg:w-[25%] ${
+              i === 0 ? "ml-[1.5em]" : ""
+            }`}
           />
         ))}
       </div>
