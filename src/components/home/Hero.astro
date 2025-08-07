@@ -5,9 +5,7 @@ import Player from "./Player.tsx";
 import { Plus } from "@lucide/astro";
 ---
 
-<section
-  class="bg-negro-900 text-white py-8 hero-image"
->
+<section class="bg-negro-900 text-white py-8 hero-image">
   <!-- <img
     src="/backgrounds/red-gradient.png"
     alt="Gradient Background"
@@ -41,7 +39,12 @@ import { Plus } from "@lucide/astro";
         <Button href="/programacion" variant="light">
           <Plus />Programación
         </Button>
-        <Button href="/programacion"> Escribinos </Button>
+        <Button
+          target="_blank"
+          href="https://api.whatsapp.com/send?phone=542613440000&text=Hola%20Brava!!"
+        >
+          Escribinos
+        </Button>
       </div>
     </div>
     <div class="w-full lg:w-3/5 mt-10 md:mt-10 h-[30vh] sm:h-auto">

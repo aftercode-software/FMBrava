@@ -8,7 +8,14 @@ export default function FeaturedEvent({ event }: { event: Agenda }) {
   day = Number(day) < 10 ? `0${day}` : day;
 
   return (
-    <div className="group relative h-full text-white rounded-[8px_8px_76px_8px] overflow-hidden border border-[#4d4d4d] hover:border-white hover:scale-105 transition-all duration-200 cursor-pointer">
+    <div
+      className="group relative h-full text-white rounded-[8px_8px_76px_8px] overflow-hidden border border-[#4d4d4d] hover:border-white hover:scale-105 transition-all duration-200 cursor-pointer"
+      onClick={() => {
+        if (event.link) {
+          window.open(event.link, "_blank");
+        }
+      }}
+    >
       <img
         src={event.imagen.url}
         alt={event.imagen.alt}
@@ -26,7 +33,7 @@ export default function FeaturedEvent({ event }: { event: Agenda }) {
       <div className="relative z-20 h-full flex flex-col justify-end p-6">
         <div className="flex justify-between items-end w-full">
           <div className="text-left max-w-[60%]">
-            <h3 className="text-4xl md:text-5xl font-semibold leading-tight">
+            <h3 className="text-4xl md:text-5xl font-bold leading-tight font-inter">
               {event.nombre}
             </h3>
           </div>
