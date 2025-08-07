@@ -6,17 +6,17 @@ type Props = {
   verTodasTexto?: "todas" | "todos";
 };
 
-const VerMasButton: React.FC<Props> = ({
+const VerMasButton = ({
   cantidad,
   link = "#",
   verTodasTexto = "todas",
-}) => {
+}: Props) => {
   return (
     <a
       href={link}
       className="group font-inter flex gap-3 md:gap-4 items-center font-semibold md:font-bold text-white md:text-lg *:transition-all *:duration-100"
     >
-      Ver {verTodasTexto}asdasdasd
+      Ver {verTodasTexto}
       <span className="bg-white/30 px-4 py-1 rounded-xl group-hover:bg-rojo group-hover:scale-105">
         {cantidad}
       </span>

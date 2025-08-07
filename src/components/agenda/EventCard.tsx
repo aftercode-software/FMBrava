@@ -8,7 +8,14 @@ export default function EventCard({ event }: { event: Agenda }) {
   day = Number(day) < 10 ? `0${day}` : day;
 
   return (
-    <div className="group flex items-center gap-2 md:h-full w-full hover:text-white text-white/60 *:transition-all *:duration-200 cursor-pointer">
+    <div
+      className="group flex items-center gap-2 md:h-full w-full hover:text-white text-white/60 *:transition-all *:duration-200 cursor-pointer"
+      onClick={() => {
+        if (event.link) {
+          window.open(event.link, "_blank");
+        }
+      }}
+    >
       <div className="md:w-[50%] w-[49%] flex flex-col justify-center text-right">
         <p className="text-lg md:text-3xl font-ibm font-medium capitalize">
           {month}

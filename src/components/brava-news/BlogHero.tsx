@@ -14,7 +14,7 @@ export default function BlogHero({ b }: { b: Blog }) {
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
       <Container className="absolute bottom-0 left-0 right-0 py-8 md:py-12 lg:p-16">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl xl:max-w-5xl mx-auto *:font-ibm">
           <span className="font-bold mx-auto left-0 translate-x-1 text-sm font-inter bg-amarillo px-3 py-1 rounded-full mb-2">
             BRAVA NEWS
           </span>
