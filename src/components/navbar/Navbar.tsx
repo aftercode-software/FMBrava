@@ -130,7 +130,7 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between py-6 border-b border-gray-800">
+            <div className="flex items-center justify-between py-6 ">
               <Container className="flex items-center justify-between w-full">
                 <motion.a
                   className="flex items-center"
@@ -177,7 +177,7 @@ export default function Navbar() {
                       <a
                         href={item.href}
                         onClick={toggleMenu}
-                        className={`flex items-center space-x-3 justify-center font-inter rounded-full text-2xl py-4 mx-2 transition-colors duration-200 ${
+                        className={`flex items-center space-x-3 justify-center font-inter rounded-full text-lg py-3 mx-2 transition-colors duration-200 ${
                           isActive
                             ? "bg-white text-black font-bold"
                             : "text-white font-medium hover:bg-white/20 "

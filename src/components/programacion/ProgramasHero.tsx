@@ -36,7 +36,7 @@ export default function ProgramasHero({ programas }: Props) {
           className="absolute inset-0 z-10"
           style={{
             background:
-              "linear-gradient(180deg, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.8) 38%, rgba(255, 255, 255, 0) 80%, rgba(10, 10, 10, 1) 100%)",
+              "linear-gradient(180deg, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.8) 38%, rgba(10, 10, 10, 1) 80%, rgba(10, 10, 10, 1) 100%)",
           }}
         />
       )}

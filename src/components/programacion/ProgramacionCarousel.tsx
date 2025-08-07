@@ -42,7 +42,7 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
 
   return (
     <Container className="flex flex-col">
-      <section className="relative h-[30rem] md:h-[30rem] lg:h-[32rem] overflow-hidden mt-4">
+      <section className="relative h-[26rem] md:h-[30rem] lg:h-[32rem] overflow-hidden mt-4">
         <div className="absolute top-0 left-0 md:w-[35%] w-[60%] h-full bg-black z-10" />
         <AnimatePresence mode="wait" initial={false}>
           {programas[selected]?.imagen?.url && (
@@ -50,7 +50,7 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
               key={programas[selected].id}
               src={programas[selected].imagen.url}
               alt={programas[selected].imagen.alt || "Imagen del programa"}
-              className=" absolute top-0 left-0 md:w-[40%] w-[60%] h-full object-cover [object-position:50%_0%] border-white rounded-lg border-2 z-20 "
+              className=" absolute top-0 left-0 md:w-[40%] w-[80%] h-full object-cover [object-position:50%_0%] border-white rounded-lg border-2 z-20 "
               variants={slideVariants}
               initial="hidden"
               animate="visible"
@@ -71,7 +71,7 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
             {programas.map((p, i) => (
               <div
                 key={p.id}
-                className={`flex-shrink-0 w-[60%] md:w-[35%] lg:w-[25%] h-full relative rounded-lg${
+                className={`flex-shrink-0 w-[80%] md:w-[35%] lg:w-[25%] h-full relative rounded-lg${
                   i === 0 ? " ml-[1rem]" : ""
                 }`}
               >
