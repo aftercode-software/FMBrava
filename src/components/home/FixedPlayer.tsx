@@ -5,12 +5,14 @@ import Badge from "../Badge";
 import Container from "../containers/Container";
 import { Slider } from "../ui/slider";
 import VolumeSlider from "./VolumeSlider";
+import type { Programa } from "@/utils/fetchProgramas";
 
 type Props = {
   playing: boolean;
   setIsPlaying: (isPlaying: boolean) => void;
   playerRef: React.RefObject<any>;
   volume: number;
+  programa: Programa | undefined;
   setVolume: (volume: number) => void;
 };
 
@@ -19,6 +21,7 @@ export default function FixedPlayer({
   setIsPlaying,
   playerRef,
   volume,
+  programa,
   setVolume,
 }: Props) {
   const [showVolumeModal, setShowVolumeModal] = useState(false);
@@ -70,7 +73,7 @@ export default function FixedPlayer({
             <div className="flex items-center gap-3 flex-1 min-w-0 pr-4">
               <div className="hidden md:block relative flex-shrink-0">
                 <img
-                  src="/images/reproductor.png"
+                  src={programa?.imagen.url || "/images/reproductor.png"}
                   alt="player"
                   className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-lg"
                 />
@@ -79,8 +82,8 @@ export default function FixedPlayer({
                 <Badge className="animate-pulse w-fit text-xs sm:text-sm">
                   EN VIVO
                 </Badge>
-                <span className="hidden md:flex font-bold text-sm sm:text-lg text-white truncate font-ibm">
-                  SOMOS MÁS BRAVA
+                <span className="hidden md:flex font-bold text-sm sm:text-lg text-white truncate font-ibm uppercase">
+                  {programa?.nombre || "Somos Más Brava"}
                 </span>
               </div>
             </div>
