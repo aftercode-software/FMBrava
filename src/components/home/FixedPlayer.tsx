@@ -91,13 +91,6 @@ export default function FixedPlayer({
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="flex items-center gap-2 sm:gap-4">
                 <button
-                  className="p-2 rounded-full text-white hover:bg-white/10 active:scale-95 transition-all cursor-pointer"
-                  onClick={() => manipulatePlayerTime(-5)}
-                >
-                  <Undo2 className="w-5 h-5 sm:w-6 sm:h-6" />
-                </button>
-
-                <button
                   className="w-12 h-12 sm:w-14 sm:h-14 bg-white hover:bg-gray-100 rounded-full flex items-center justify-center active:scale-95 transition-all shadow-lg cursor-pointer"
                   onClick={() => setIsPlaying(!playing)}
                 >
@@ -106,13 +99,6 @@ export default function FixedPlayer({
                   ) : (
                     <Play className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 ml-0.5" />
                   )}
-                </button>
-
-                <button
-                  className="p-2 rounded-full text-white hover:bg-white/10 active:scale-95 transition-all cursor-pointer"
-                  onClick={() => manipulatePlayerTime(5)}
-                >
-                  <Redo2 className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </div>
             </div>

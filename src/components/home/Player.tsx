@@ -73,7 +73,7 @@ export default function Player({
       >
         <img
           src={nowPlaying?.imagen?.url || "/images/reproductor.webp"}
-          alt="Chori y Chinchulo"
+          alt={nowPlaying?.nombre || "Programa en vivo"}
           className="w-full h-full object-cover z-60 aspect-video object-[50%_20%] "
         />
         <ReactPlayer
