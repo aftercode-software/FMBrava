@@ -1,15 +1,51 @@
-import { lazy, useRef, useState } from "react";
+import { lazy, useEffect, useRef, useState } from "react";
 import useScrollOffset from "../../hooks/useScrollOffset";
 import FixedPlayer from "./FixedPlayer";
 import type { Programa } from "@/utils/fetchProgramas";
 
 const ReactPlayer = lazy(() => import("react-player"));
 
+function nowInAR() {
+  return new Date(
+    new Date().toLocaleString("en-US", {
+      timeZone: "America/Argentina/Buenos_Aires",
+    })
+  );
+}
+
+function minsOfDay(d: Date) {
+  return d.getHours() * 60 + d.getMinutes();
+}
+function minsOfDayFromISO(iso: string, tz = "America/Argentina/Buenos_Aires") {
+  const base = new Date(iso);
+  const inTz = new Date(base.toLocaleString("en-US", { timeZone: tz }));
+  return minsOfDay(inTz);
+}
+
 export default function Player({
-  programa,
+  programas,
 }: {
-  programa: Programa | undefined;
+  programas: Programa[] | undefined;
 }) {
+  const [nowPlaying, setNowPlaying] = useState<Programa | null>(null);
+
+  useEffect(() => {
+    if (!programas || programas.length === 0) return;
+    const compute = () => {
+      const now = nowInAR();
+      const nowM = minsOfDay(now);
+      const current =
+        programas.find((p) => {
+          const s = minsOfDayFromISO(p.horarioInicio);
+          const e = minsOfDayFromISO(p.horarioFin);
+          return e > s ? nowM >= s && nowM < e : nowM >= s || nowM < e;
+        }) || null;
+      setNowPlaying(current);
+    };
+    compute();
+    const id = setInterval(compute, 30 * 1000);
+    return () => clearInterval(id);
+  }, [programas]);
   const [playing, setPlaying] = useState(false);
   const scrollY = useScrollOffset();
   const playerRef = useRef<any>(null);
@@ -25,7 +61,7 @@ export default function Player({
           setIsPlaying={setPlaying}
           playerRef={playerRef}
           volume={volume}
-          programa={programa}
+          programa={nowPlaying}
           setVolume={setVolume}
         />
       )}
@@ -36,9 +72,9 @@ export default function Player({
         aria-hidden={scrollY > 400}
       >
         <img
-          src={programa?.imagen?.url || "/images/reproductor.webp"}
+          src={nowPlaying?.imagen?.url || "/images/reproductor.webp"}
           alt="Chori y Chinchulo"
-          className="w-full h-full object-cover z-60 aspect-video"
+          className="w-full h-full object-cover z-60 aspect-video object-[50%_20%] "
         />
         <ReactPlayer
           src="https://26673.live.streamtheworld.com/BRAVA_FM949.mp3"

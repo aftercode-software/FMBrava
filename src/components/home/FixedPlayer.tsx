@@ -12,7 +12,7 @@ type Props = {
   setIsPlaying: (isPlaying: boolean) => void;
   playerRef: React.RefObject<any>;
   volume: number;
-  programa: Programa | undefined;
+  programa: Programa | null;
   setVolume: (volume: number) => void;
 };
 
