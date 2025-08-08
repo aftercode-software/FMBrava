@@ -29,7 +29,6 @@ const isHome = Astro.url.pathname === "/";
   <div class="bg-amarillo w-full py-4 md:py-6 z-10 text-negro">
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-        {/* Navigation Links */}
         <nav
           class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-center md:text-left"
         >
@@ -53,38 +52,30 @@ const isHome = Astro.url.pathname === "/";
           </a>
         </nav>
 
-        {/* Social Media - Center */}
         <div class="flex justify-center space-x-4">
           <a
-            href="#"
+            href="https://www.instagram.com/bravaoficial"
+            target="_blank"
             class="w-10 h-10 bg-black/10 hover:bg-black/20 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
             aria-label="Instagram"
           >
             <Instagram class="w-5 h-5 text-black" />
           </a>
           <a
-            href="#"
+            href="https://www.facebook.com/brava94.9/"
+            target="_blank"
             class="w-10 h-10 bg-black/10 hover:bg-black/20 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
             aria-label="Facebook"
           >
             <Facebook class="w-5 h-5 text-black" />
           </a>
-          <a
-            href="#"
-            class="w-10 h-10 bg-black/10 hover:bg-black/20 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
-            aria-label="TikTok"
-          >
-            <Facebook />
-          </a>
         </div>
 
-        {/* Copyright */}
         <div class="text-center md:text-right">
           <p class="font-ibm text-lg text-negro-900">© 2025 Brava</p>
         </div>
       </div>
 
-      {/* Divider */}
       <div class="border-t border-black/10 mt-6 pt-6">
         <div
           class="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0"

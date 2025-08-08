@@ -1,5 +1,5 @@
 ---
-import BravaNewsEmpty from "@/components/brava-news/BravaNewsEmpty";
+import BravaNewsEmpty from "@/components/brava-news/EmptySection";
 import NewsSection from "@/components/brava-news/NewsSection.astro";
 import Container from "@/components/containers/Container.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -20,7 +20,10 @@ const blogs = await fetchBlogs();
       </Container>
     ) : (
       <Container class="mt-30 min-h-screen flex items-center justify-center">
-        <BravaNewsEmpty />
+        <BravaNewsEmpty
+          title="Brava News"
+          description="Pronto tendrás aquí las últimas noticias y novedades de la radio."
+        />
       </Container>
     )
   }

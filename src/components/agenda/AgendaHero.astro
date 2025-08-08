@@ -2,10 +2,22 @@
 import { fetchAgenda } from "@/utils/fetchAgenda";
 import Container from "../containers/Container.astro";
 import HeroAgenda from "@/components/agenda/Hero.tsx";
+import BravaNewsEmpty from "../brava-news/EmptySection";
 
 const eventos = await fetchAgenda();
 ---
 
 <Container class="mt-30 min-h-screen">
-  <HeroAgenda events={eventos} client:only="react" />
+  {
+    eventos.length > 0 ? (
+      <HeroAgenda events={eventos} client:only="react" />
+    ) : (
+      <Container class="">
+        <BravaNewsEmpty
+          title="Agenda"
+          description="Pronto tendrás aquí los ultimos eventos y novedades de la radio."
+        />
+      </Container>
+    )
+  }
 </Container>
