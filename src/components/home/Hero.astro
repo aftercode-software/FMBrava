@@ -7,8 +7,13 @@ import { fetchProgramas } from "@/utils/fetchProgramas";
 
 const programas = await fetchProgramas();
 
+const now = new Date();
+const nowArgentina = new Date(
+  now.toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" })
+);
+const nowHour = nowArgentina.getHours();
+
 const nowPlaying = programas.find((programa) => {
-  const nowHour = new Date().getHours();
   const inicioHour = new Date(programa.horarioInicio).getHours();
   const finHour = new Date(programa.horarioFin).getHours();
   return nowHour >= inicioHour && nowHour < finHour;
