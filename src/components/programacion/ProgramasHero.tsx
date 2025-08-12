@@ -41,8 +41,8 @@ export default function ProgramasHero({ programas }: Props) {
         />
       )}
       <Container className="flex flex-col w-full">
-        <section className="relative w-full flex items-center min-h-[40vh] sm:h-[60vh] text-white overflow-hidden ">
-          <div className="relative z-20 flex flex-col h-full max-w-[900px] justify-start">
+        <section className="relative w-full flex items-center min-h-[40vh] sm:h-[50vh] text-white overflow-hidden ">
+          <div className="relative z-20 flex flex-col h-full max-w-[900px] md:mt-30 justify-start">
             <span className="font-inter font-extrabold lg:text-xl tracking-[0.25em] text-negro-400">
               BRAVA PRESENTA
             </span>
@@ -51,11 +51,11 @@ export default function ProgramasHero({ programas }: Props) {
             </h1>
 
             <div className="gap-6 flex flex-wrap items-center text-lg md:text-xl font-semibold text-white/90 mb-2">
-              <div className="flex flex-wrap md:flex-row items-center gap-3 md:gap-6 font-ibm text-xl mt-2">
-                <span className="text-green-400 font-medium text-lg md:text-xl">
+              <div className="flex flex-wrap md:flex-row items-center gap-2 md:gap-6 font-ibm text-xl mt-2">
+                {/* <span className="text-green-400 font-medium text-lg md:text-xl uppercase">
                   100% match
-                </span>
-                <span className="font-bold flex gap-1 items-center text-base lg:text-xl font-ibm text-white ">
+                </span> */}
+                <span className="font-bold flex flex-wrap gap-1 items-center text-base lg:text-xl font-ibm text-white uppercase">
                   <p>
                     {(() => {
                       const result = getStartEndDay(selected.diasSemana);
@@ -82,7 +82,7 @@ export default function ProgramasHero({ programas }: Props) {
               </div>
             </div>
 
-            <p className="text-xl text-[#F6F6F6]/68 lg:text-2xl tracking-tight font-ibm mt-2">
+            <p className="text-2xl text-[#F6F6F6]/68 lg:text-xl tracking-tight font-ibm mt-2">
               {selected?.descripcion}
             </p>
             <div className="mt-4 flex flex-wrap gap-2">

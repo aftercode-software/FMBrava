@@ -106,3 +106,23 @@ export function getStartEndHours(
     }),
   };
 }
+
+export function nowInAR() {
+  return new Date(
+    new Date().toLocaleString("en-US", {
+      timeZone: "America/Argentina/Buenos_Aires",
+    })
+  );
+}
+
+export function minsOfDay(d: Date) {
+  return d.getHours() * 60 + d.getMinutes();
+}
+export function minsOfDayFromISO(
+  iso: string,
+  tz = "America/Argentina/Buenos_Aires"
+) {
+  const base = new Date(iso);
+  const inTz = new Date(base.toLocaleString("en-US", { timeZone: tz }));
+  return minsOfDay(inTz);
+}

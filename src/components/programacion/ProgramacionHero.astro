@@ -6,6 +6,6 @@ import ProgramasHero from "./ProgramasHero";
 const programas = await fetchProgramas();
 ---
 
-<Container class="mt-20 md:mt-30 pt-16 min-h-screen">
+<Container class="mt-30 min-h-screen">
   <ProgramasHero programas={programas} client:only="react" />
 </Container>

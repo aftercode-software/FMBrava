@@ -6,6 +6,7 @@ import Footer from "@/components/Footer.astro";
 import SplashVideo from "@/components/SplashVideo";
 import { AstroFont } from "astro-font";
 import { join } from "node:path";
+import PlayerNav from "@/components/home/PlayerNav.astro";
 
 export const revalidate = 3600;
 Astro.response.headers.set(
@@ -119,5 +120,6 @@ const imageUrl = new URL(image, SITE.url).href;
     <Navbar client:only="react" />
     <slot />
     <Footer />
+    <PlayerNav />
   </body>
 </html>

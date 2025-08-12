@@ -1,0 +1,8 @@
+---
+import { fetchProgramas } from "@/utils/fetchProgramas";
+import FixedPlayer from "./FixedPlayer";
+
+const programas = await fetchProgramas();
+---
+
+<FixedPlayer programas={programas} client:only="react" />

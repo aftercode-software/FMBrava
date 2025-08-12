@@ -32,7 +32,6 @@ let cachedProgramas: Programa[] | null = null;
 let cacheTimestamp: number = 0;
 
 export async function fetchProgramas(): Promise<Programa[]> {
-  console.log("?");
   const now = Date.now();
 
   if (cachedProgramas && now - cacheTimestamp < CACHE_DURATION) {

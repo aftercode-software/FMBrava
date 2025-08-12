@@ -1,30 +1,20 @@
 import { Pause, Play, Redo2, Undo2, Volume2, VolumeX } from "lucide-react";
-import type React from "react";
-import { useState } from "react";
+import { lazy, useEffect, useRef, useState } from "react";
 import Badge from "../Badge";
 import Container from "../containers/Container";
 import { Slider } from "../ui/slider";
 import VolumeSlider from "./VolumeSlider";
+import useScrollOffset from "@/hooks/useScrollOffset";
 import type { Programa } from "@/utils/fetchProgramas";
+import { minsOfDay, minsOfDayFromISO, nowInAR } from "@/utils/utils";
+const ReactPlayer = lazy(() => import("react-player"));
 
-type Props = {
-  playing: boolean;
-  setIsPlaying: (isPlaying: boolean) => void;
-  playerRef: React.RefObject<any>;
-  volume: number;
-  programa: Programa | null;
-  setVolume: (volume: number) => void;
-};
-
-export default function FixedPlayer({
-  playing,
-  setIsPlaying,
-  playerRef,
-  volume,
-  programa,
-  setVolume,
-}: Props) {
+export default function FixedPlayer({ programas }: { programas: Programa[] }) {
   const [showVolumeModal, setShowVolumeModal] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const scrollY = useScrollOffset();
+  const playerRef = useRef<any>(null);
+  const [volume, setVolume] = useState(0.5);
 
   const manipulatePlayerTime = (time: number) => {
     const player = playerRef.current?.api;
@@ -33,6 +23,26 @@ export default function FixedPlayer({
       player.seekTo(currentTime + time);
     }
   };
+
+  const [nowPlaying, setNowPlaying] = useState<Programa | null>(null);
+
+  useEffect(() => {
+    if (!programas || programas.length === 0) return;
+    const compute = () => {
+      const now = nowInAR();
+      const nowM = minsOfDay(now);
+      const current =
+        programas.find((p) => {
+          const s = minsOfDayFromISO(p.horarioInicio);
+          const e = minsOfDayFromISO(p.horarioFin);
+          return e > s ? nowM >= s && nowM < e : nowM >= s || nowM < e;
+        }) || null;
+      setNowPlaying(current);
+    };
+    compute();
+    const id = setInterval(compute, 30 * 1000);
+    return () => clearInterval(id);
+  }, [programas]);
 
   return (
     <>
@@ -73,7 +83,7 @@ export default function FixedPlayer({
             <div className="flex items-center gap-3 flex-1 min-w-0 pr-4">
               <div className="hidden md:block relative flex-shrink-0">
                 <img
-                  src={programa?.imagen.url || "/images/reproductor.png"}
+                  src={nowPlaying?.imagen.url || "/images/reproductor.png"}
                   alt="player"
                   className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-lg"
                 />
@@ -83,7 +93,7 @@ export default function FixedPlayer({
                   EN VIVO
                 </Badge>
                 <span className="hidden md:flex font-bold text-sm sm:text-lg text-white truncate font-ibm uppercase">
-                  {programa?.nombre || "Somos Más Brava"}
+                  {nowPlaying?.nombre || "Somos Más Brava"}
                 </span>
               </div>
             </div>
@@ -92,7 +102,7 @@ export default function FixedPlayer({
               <div className="flex items-center gap-2 sm:gap-4">
                 <button
                   className="w-12 h-12 sm:w-14 sm:h-14 bg-white hover:bg-gray-100 rounded-full flex items-center justify-center active:scale-95 transition-all shadow-lg cursor-pointer"
-                  onClick={() => setIsPlaying(!playing)}
+                  onClick={() => setPlaying(!playing)}
                 >
                   {playing ? (
                     <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900" />
@@ -122,6 +132,14 @@ export default function FixedPlayer({
           </div>
         </Container>
       </div>
+      <ReactPlayer
+        src="https://26673.live.streamtheworld.com/BRAVA_FM949.mp3"
+        width="0"
+        height="0"
+        playing={playing}
+        volume={volume}
+        className="hidden"
+      />
     </>
   );
 }

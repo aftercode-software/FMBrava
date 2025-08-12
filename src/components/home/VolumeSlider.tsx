@@ -12,12 +12,12 @@ export default function VolumeSlider({
     <div className="flex items-center justify-center w-48 h-full gap-2">
       {volume === 0 ? (
         <VolumeX
-          className="w-6 h-6 cursor-pointer"
+          className="w-6 h-6 cursor-pointer text-white"
           onClick={() => setVolume(0.5)}
         />
       ) : (
         <Volume2
-          className="w-6 h-6 cursor-pointer"
+          className="w-6 h-6 cursor-pointer text-white"
           onClick={() => setVolume(0)}
         />
       )}
