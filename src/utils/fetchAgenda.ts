@@ -38,8 +38,14 @@ export async function fetchAgenda(): Promise<Agenda[]> {
   const { docs } = await secureFetch<{ docs: AgendaRaw[] }>("agenda");
   if (!docs) throw new Error("Error fetching agenda");
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const filteredDocs = docs
-    .filter((item) => new Date(item.dia) > new Date())
+    .filter((item) => {
+      const itemDate = new Date(item.dia);
+      itemDate.setHours(0, 0, 0, 0);
+      return itemDate >= today;
+    })
     .sort((a, b) => new Date(a.dia).getTime() - new Date(b.dia).getTime());
 
   cachedAgendas = await Promise.all(

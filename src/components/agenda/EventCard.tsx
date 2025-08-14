@@ -18,7 +18,7 @@ export default function EventCard({ event }: { event: Agenda }) {
     >
       <div className="md:w-[50%] w-[49%] flex flex-col justify-center text-right">
         <p className="text-lg md:text-3xl font-ibm font-medium capitalize">
-          {month}
+          Noviembre
         </p>
         <p className="text-6xl md:text-9xl font-inter font-extrabold tracking-tighter ">
           {day}

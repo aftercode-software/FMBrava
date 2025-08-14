@@ -20,7 +20,7 @@ export default function Agenda({ events, cantidad }: Props) {
         <div
           key={featured.id}
           onClick={() => goToEvent(featured.id)}
-          className="h-64 sm:h-auto md:w-[38%] w-full cursor-pointer"
+          className="h-98 sm:h-auto md:w-[38%] w-full cursor-pointer"
         >
           <FeaturedEvent event={featured} />
         </div>

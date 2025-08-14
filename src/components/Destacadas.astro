@@ -13,7 +13,7 @@ const destacadas = await fetchDestacadas();
           href={d.link}
           target="_blank"
           rel="noopener noreferrer"
-          class="flex flex-col group transition-transform duration-300 ease-in-out"
+          class="flex flex-col group transition-transform *:duration-200 ease-in-out"
         >
           <div class="w-full aspect-square overflow-hidden rounded-lg">
             <img
@@ -27,7 +27,7 @@ const destacadas = await fetchDestacadas();
           </span>
         </a>
       ) : (
-        <div class="flex flex-col group transition-transform duration-300 ease-in-out">
+        <div class="flex flex-col group transition-transform *:duration-200 ease-in-out">
           <div class="w-full aspect-square overflow-hidden rounded-lg">
             <img
               src={d.image.url}
