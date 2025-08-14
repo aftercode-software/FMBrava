@@ -1,0 +1,22 @@
+---
+import Badge from "./Badge";
+---
+
+<section
+  class="fixed bottom-4 max-w-[50%] flex flex-col right-4 z-50 aspect-video bg-negro-900 p-2 rounded-xl"
+>
+  <iframe
+    src="https://player.kick.com/fmbrava"
+    class="w-full h-full rounded-xl"
+    frameborder="0"
+    scrolling="no"
+    allowfullscreen="true"></iframe>
+  <div class="flex items-center gap-2 mt-2">
+    <Badge className="animate-pulse w-fit text-xs sm:text-sm"> EN VIVO </Badge>
+    <p
+      class="font-bold hidden md:block text-sm sm:text-lg text-white truncate font-ibm uppercase"
+    >
+      Somos más brava
+    </p>
+  </div>
+</section>

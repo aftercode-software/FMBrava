@@ -1,31 +1,7 @@
-import { useEffect, useState } from "react";
-import type { Programa } from "@/utils/fetchProgramas";
-import { minsOfDay, minsOfDayFromISO, nowInAR } from "@/utils/utils";
+import useScrollOffset from "@/hooks/useScrollOffset";
 
-export default function Player({
-  programas,
-}: {
-  programas: Programa[] | undefined;
-}) {
-  const [nowPlaying, setNowPlaying] = useState<Programa | null>(null);
-
-  useEffect(() => {
-    if (!programas || programas.length === 0) return;
-    const compute = () => {
-      const now = nowInAR();
-      const nowM = minsOfDay(now);
-      const current =
-        programas.find((p) => {
-          const s = minsOfDayFromISO(p.horarioInicio);
-          const e = minsOfDayFromISO(p.horarioFin);
-          return e > s ? nowM >= s && nowM < e : nowM >= s || nowM < e;
-        }) || null;
-      setNowPlaying(current);
-    };
-    compute();
-    const id = setInterval(compute, 30 * 1000);
-    return () => clearInterval(id);
-  }, [programas]);
+export default function Player() {
+  const scrollY = useScrollOffset();
 
   return (
     <div className="w-full h-full relative">
@@ -37,11 +13,13 @@ export default function Player({
         }`}
         aria-hidden={scrollY > 400}
       >
-        <img
-          src={nowPlaying?.imagen?.url || "/images/reproductor.webp"}
-          alt={nowPlaying?.nombre || "Programa en vivo"}
-          className="aspect-7/6 w-full object-cover z-60  object-[50%_20%] "
-        />
+        <iframe
+          src="https://player.kick.com/fmbrava"
+          className="w-full h-full"
+          frameBorder="0"
+          scrolling="no"
+          allowFullScreen={true}
+        ></iframe>
       </div>
     </div>
   );

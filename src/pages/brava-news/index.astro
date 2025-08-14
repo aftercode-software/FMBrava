@@ -2,6 +2,7 @@
 import BravaNewsEmpty from "@/components/brava-news/EmptySection";
 import NewsSection from "@/components/brava-news/NewsSection.astro";
 import Container from "@/components/containers/Container.astro";
+import MiniPlayer from "@/components/MiniPlayer.astro";
 import Layout from "@/layouts/Layout.astro";
 import { fetchBlogs } from "@/utils/fetchBlogs";
 
@@ -27,4 +28,5 @@ const blogs = await fetchBlogs();
       </Container>
     )
   }
+  <MiniPlayer />
 </Layout>

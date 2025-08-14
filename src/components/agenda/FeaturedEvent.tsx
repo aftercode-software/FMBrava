@@ -33,15 +33,15 @@ export default function FeaturedEvent({ event }: { event: Agenda }) {
       <div className="relative z-20 h-full flex flex-col justify-end p-6">
         <div className="flex justify-between items-end w-full">
           <div className="text-left max-w-[60%]">
-            <h3 className="text-3xl md:text-5xl font-bold leading-tight font-inter">
+            <h3 className="text-3xl lg:text-5xl font-bold leading-tight font-inter">
               {event.nombre}
             </h3>
           </div>
           <div className="flex flex-col text-right justify-end h-full">
-            <p className="capitalize font-inter tracking-wider text-xl md:text-3xl">
+            <p className="capitalize font-inter tracking-wider text-xl lg:text-3xl">
               {month}
             </p>
-            <p className="text-6xl md:text-9xl font-extrabold font-inter tracking-tight">
+            <p className="text-6xl lg:text-9xl font-extrabold font-inter tracking-tight">
               {day}
             </p>
           </div>
