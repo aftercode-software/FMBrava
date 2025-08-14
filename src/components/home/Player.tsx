@@ -14,7 +14,7 @@ export default function Player() {
         aria-hidden={scrollY > 400}
       >
         <iframe
-          src="https://player.kick.com/fmbrava"
+          src="https://player.kick.com/fmbrava?muted=false"
           className="w-full h-full"
           frameBorder="0"
           scrolling="no"
