@@ -6,7 +6,6 @@ import Footer from "@/components/Footer.astro";
 import SplashVideo from "@/components/SplashVideo";
 import { AstroFont } from "astro-font";
 import { join } from "node:path";
-import PlayerNav from "@/components/home/PlayerNav.astro";
 
 export const revalidate = 3600;
 Astro.response.headers.set(
@@ -17,6 +16,7 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  keywords?: string[];
   pathname?: string;
 }
 
@@ -24,6 +24,7 @@ const {
   title = SITE.title,
   description = SITE.description,
   image = SITE.defaultImage,
+  keywords = SITE.keywords,
   pathname,
 } = Astro.props as Props;
 
@@ -99,6 +100,7 @@ const imageUrl = new URL(image, SITE.url).href;
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(", ")} />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />

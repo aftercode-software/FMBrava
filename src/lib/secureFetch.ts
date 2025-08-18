@@ -9,7 +9,6 @@ export async function secureFetch<T = any>(
   endpoint: string,
   { method = "GET", body, query }: SecureFetchOptions = {}
 ): Promise<T> {
-  console.log("secureFetch", endpoint, { method, body, query });
   if (import.meta.env.SSR) {
     let url = `${import.meta.env.CMS_API_BASE}/${endpoint}`;
     if (query) {
@@ -68,7 +67,6 @@ export async function secureFetchRaw(
 
   if (import.meta.env.SSR) {
     const url = `${import.meta.env.VITE_CMS_PUBLIC_URL}${urlPath}`;
-    console.log("secureFetchRaw", url, { method, initOverrides });
     const res = await fetch(url, {
       method,
       headers: {

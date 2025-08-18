@@ -26,5 +26,4 @@ function InstagramCarousel({ posts }: { posts: InstagramResponse }) {
   );
 }
 
-// Memoize the carousel to prevent unnecessary re-renders
 export default memo(InstagramCarousel);

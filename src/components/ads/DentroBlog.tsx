@@ -25,7 +25,7 @@ export default function DentroBlog({ ad }: { ad: Anuncio | null }) {
         },
       });
     } catch (error) {
-      console.error("Error fetching image:", error);
+      console.error("error showing add");
       return ad;
     }
   };
@@ -69,7 +69,7 @@ export default function DentroBlog({ ad }: { ad: Anuncio | null }) {
         });
         viewSent.current = true;
       } catch (error) {
-        // Optionally handle error
+        console.log("error showing add");
       } finally {
         viewInProgress.current = false;
       }
@@ -85,7 +85,7 @@ export default function DentroBlog({ ad }: { ad: Anuncio | null }) {
           body: JSON.stringify({ id }),
         });
       } catch (error) {
-        // Optionally handle error
+        console.log("error showing add");
       } finally {
         clickInProgress.current = false;
       }

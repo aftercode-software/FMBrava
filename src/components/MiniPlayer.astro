@@ -3,15 +3,20 @@ import Badge from "./Badge";
 ---
 
 <section
-  class="fixed bottom-4 max-w-[50%] flex flex-col right-4 z-50 aspect-video bg-negro-900 p-2 rounded-xl"
+  id="miniPlayer"
+  class="fixed bottom-4 max-w-[50%] flex flex-col gap-2 right-4 z-50 aspect-video bg-negro-900 rounded-xl select-none border-2 border-[#4d4d4d]"
 >
-  <iframe
-    src="https://player.kick.com/fmbrava"
-    class="w-full h-full rounded-xl"
-    frameborder="0"
-    scrolling="no"
-    allowfullscreen="true"></iframe>
-  <div class="flex items-center gap-2 mt-2">
+  <div id="dragHandle" class="cursor-move">
+    <iframe
+      src="https://player.kick.com/fmbrava"
+      class="w-full h-full rounded-t-xl aspect-video"
+      frameborder="0"
+      scrolling="no"
+      allowfullscreen="true"></iframe>
+  </div>
+  <div
+    class="flex items-center justify-center md:justify-start gap-2 cursor-move p-2 md:p-4 pt-1 md:pt-2"
+  >
     <Badge className="animate-pulse w-fit text-xs sm:text-sm"> EN VIVO </Badge>
     <p
       class="font-bold hidden md:block text-sm sm:text-lg text-white truncate font-ibm uppercase"
@@ -20,3 +25,50 @@ import Badge from "./Badge";
     </p>
   </div>
 </section>
+
+<script>
+  let isDragging = false;
+  let currentX = 0;
+  let currentY = 0;
+  let initialX = 0;
+  let initialY = 0;
+  let xOffset = 0;
+  let yOffset = 0;
+
+  const miniPlayer = document.getElementById("miniPlayer");
+  const dragHandle = document.getElementById("dragHandle");
+  const bottomSection = miniPlayer?.querySelector(".flex.items-center");
+
+  dragHandle?.addEventListener("mousedown", dragStart);
+  bottomSection?.addEventListener("mousedown", dragStart);
+  document.addEventListener("mousemove", drag);
+  document.addEventListener("mouseup", dragEnd);
+
+  function dragStart(e: Event) {
+    const mouseEvent = e as MouseEvent;
+    initialX = mouseEvent.clientX - xOffset;
+    initialY = mouseEvent.clientY - yOffset;
+    isDragging = true;
+  }
+
+  function drag(e: MouseEvent) {
+    if (isDragging) {
+      e.preventDefault();
+      currentX = e.clientX - initialX;
+      currentY = e.clientY - initialY;
+
+      xOffset = currentX;
+      yOffset = currentY;
+
+      if (miniPlayer) {
+        miniPlayer.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      }
+    }
+  }
+
+  function dragEnd() {
+    initialX = currentX;
+    initialY = currentY;
+    isDragging = false;
+  }
+</script>

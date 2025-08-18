@@ -44,9 +44,9 @@ const uniqueId = `anuncio-entre-secciones-${Math.random().toString(36).substr(2,
     if (!target) return
 
     const adId = target.dataset.anuncioId;
-    if (!adId) return console.error('adId no encontrado');
+    if (!adId) return console.error('error showing add');;
 
-    // Variables para evitar llamadas duplicadas
+    
     let viewSent = false;
     let viewInProgress = false;
     let clickInProgress = false;
@@ -66,7 +66,7 @@ const uniqueId = `anuncio-entre-secciones-${Math.random().toString(36).substr(2,
         
         viewSent = true;
       } catch (error) {
-        console.error('Error incrementando vista:', error);
+        console.error('error showing add');
       } finally {
         viewInProgress = false;
       }
@@ -86,7 +86,7 @@ const uniqueId = `anuncio-entre-secciones-${Math.random().toString(36).substr(2,
         });
         
       } catch (error) {
-        console.error('Error incrementando click:', error);
+       console.error('error showing add');
       } finally {
         clickInProgress = false;
       }

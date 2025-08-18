@@ -37,19 +37,14 @@ export function useMediaQuery(
 
     handleChange();
 
-    // Use deprecated `addListener` and `removeListener` to support Safari < 14 (#135)
-    if (matchMedia.addListener) {
-      matchMedia.addListener(handleChange);
+    if (matchMedia.matches) {
+      matchMedia.addEventListener("change", handleChange);
     } else {
       matchMedia.addEventListener("change", handleChange);
     }
 
     return () => {
-      if (matchMedia.removeListener) {
-        matchMedia.removeListener(handleChange);
-      } else {
-        matchMedia.removeEventListener("change", handleChange);
-      }
+      matchMedia.removeEventListener("change", handleChange);
     };
   }, [query]);
 

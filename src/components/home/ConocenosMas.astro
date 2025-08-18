@@ -1,7 +1,8 @@
 ---
 import { fetchDestacadas } from "@/utils/fetchDestacadas";
-import Container from "./containers/Container.astro";
-import Title from "./Title.astro";
+
+import Title from "../Title.astro";
+import Container from "../containers/Container.astro";
 
 const destacadas = await fetchDestacadas();
 if (!destacadas || destacadas.length === 0) {

@@ -11,8 +11,30 @@ const blogs = await fetchBlogs();
 
 <Layout
   title="Brava News"
-  description="Últimas noticias de Brava"
+  description="Enterate de lo que suena, lo que pasa y lo que viene en el mundo Brava."
   pathname="/brava-news"
+  keywords={[
+    "Brava News",
+    "noticias FM Brava",
+    "últimas noticias Brava Mendoza",
+    "reportes de música Mendoza",
+    "noticias de espectáculos Mendoza",
+    "shows en Mendoza 2025",
+    "novedades de música urbana",
+    "tendencias musicales Mendoza",
+    "estrenos y lanzamientos Brava",
+    "agenda de espectáculos Mendoza",
+    "noticias de conciertos Mendoza",
+    "reportes de radio Brava",
+    "actualidad musical Mendoza",
+    "lo último en música urbana",
+    "eventos culturales Mendoza",
+    "novedades FM Brava",
+    "noticias de artistas en Mendoza",
+    "reportes juveniles Mendoza",
+    "Brava espectáculos y música",
+    "noticias de la movida mendocina",
+  ]}
 >
   {
     blogs.length > 0 ? (
