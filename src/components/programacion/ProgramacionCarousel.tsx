@@ -18,6 +18,14 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
   const touchStartX = useRef(0);
   const [direction, setDirection] = useState(0);
   const [selected, setSelected] = useState(0);
+
+  const MIN_SLIDES = 10;
+  const slides = useMemo(() => {
+    if (!programas?.length) return [];
+    const factor = Math.max(1, Math.ceil(MIN_SLIDES / programas.length));
+    return Array.from({ length: factor }, () => programas).flat();
+  }, [programas]);
+
   const autoplayPlugin = useMemo(
     () =>
       Autoplay({
@@ -32,10 +40,11 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
   );
 
   useEffect(() => {
-    if (!emblaApi) return;
+    if (!emblaApi || !programas.length) return;
 
     const onSelectEvent = () => {
-      const idx = emblaApi.selectedScrollSnap();
+      const snap = emblaApi.selectedScrollSnap();
+      const idx = snap % programas.length;
 
       const dir =
         idx > prevIndex.current ||
@@ -72,9 +81,13 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
     }
   };
 
+  useEffect(() => {
+    emblaApi?.reInit();
+  }, [emblaApi, slides.length]);
+
   return (
-    <Container className="flex flex-col">
-      <section className="relative h-[30rem] md:h-[30rem] overflow-hidden mt-4">
+    <Container className="flex flex-col w-full">
+      <section className="relative h-[30rem] md:h-[30rem]  overflow-hidden mt-4">
         <div className="absolute top-0 left-0 aspect-5/7 lg:aspect-7/6 xl:aspect-8/6 h-full bg-black z-10 ml-4" />
         <div
           className="absolute top-0 left-0 aspect-5/7 lg:aspect-7/6 xl:aspect-8/6 h-full z-20"
@@ -109,10 +122,11 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
                     ml-0               
                     md:ml-0           
                     lg:ml-[clamp(1rem,20vw,21%)]
-                    xl:ml-[clamp(1rem,20vw,17.5%)]"
+                    xl:ml-[clamp(1rem,20vw,17.5%)]
+                    2xl:ml-[clamp(1rem,20vw,13%)]"
         >
           <div className="flex items-center h-full gap-4">
-            {programas.map((p, i) => (
+            {slides.map((p, i) => (
               <div
                 key={p.id}
                 className={`flex-shrink-0 aspect-5/7 h-full relative rounded-lg${
