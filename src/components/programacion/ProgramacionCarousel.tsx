@@ -3,7 +3,7 @@ import { getStartEndDay, getStartEndHours } from "@/utils/utils";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import Container from "../containers/Container";
 
 type Props = { programas: Programa[]; onSelect?: (index: number) => void };
@@ -18,6 +18,9 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
   const touchStartX = useRef(0);
   const [direction, setDirection] = useState(0);
   const [selected, setSelected] = useState(0);
+  const featureRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [padLeft, setPadLeft] = useState(0);
 
   const MIN_SLIDES = 10;
   const slides = useMemo(() => {
@@ -35,9 +38,60 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
     []
   );
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { align: "start", loop: true },
+    { align: "start", loop: true, containScroll: "trimSnaps" },
     [autoplayPlugin]
   );
+
+  useEffect(() => {
+    const featureEl = featureRef.current;
+    const trackEl = trackRef.current;
+    if (!featureEl || !trackEl) return;
+
+    const XL = "(min-width: 1023px)";
+    const mql = window.matchMedia(XL);
+
+    const compute = () => {
+      if (!mql.matches) {
+        setPadLeft(0);
+        return;
+      }
+
+      const featureWidth = featureEl.getBoundingClientRect().width;
+
+      const firstSlideEl = trackEl.firstElementChild as HTMLElement | null;
+      const slideWidth = firstSlideEl?.getBoundingClientRect().width ?? 0;
+
+      const styles = getComputedStyle(trackEl);
+      const trackGap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+
+      const DESIRED_VIS_GAP = 8;
+      const EPS = 2;
+
+      const pl = Math.max(
+        0,
+        featureWidth + DESIRED_VIS_GAP - slideWidth - trackGap + EPS
+      );
+      setPadLeft(pl);
+    };
+
+    const ro1 = new ResizeObserver(compute);
+    const ro2 = new ResizeObserver(compute);
+    ro1.observe(featureEl);
+    const first = trackEl.firstElementChild as Element | null;
+    if (first) ro2.observe(first);
+
+    mql.addEventListener("change", compute);
+    window.addEventListener("resize", compute);
+
+    compute();
+
+    return () => {
+      ro1.disconnect();
+      ro2.disconnect();
+      mql.removeEventListener("change", compute);
+      window.removeEventListener("resize", compute);
+    };
+  }, []);
 
   useEffect(() => {
     if (!emblaApi || !programas.length) return;
@@ -83,14 +137,15 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
 
   useEffect(() => {
     emblaApi?.reInit();
-  }, [emblaApi, slides.length]);
+  }, [emblaApi, padLeft, slides.length]);
 
   return (
     <Container className="flex flex-col w-full">
-      <section className="relative h-[30rem] md:h-[30rem]  overflow-hidden mt-4">
+      <section className="relative h-[30rem] md:h-[30rem] overflow-hidden mt-4">
         <div className="absolute top-0 left-0 aspect-5/7 lg:aspect-7/6 xl:aspect-8/6 h-full bg-black z-10 ml-4" />
         <div
           className="absolute top-0 left-0 aspect-5/7 lg:aspect-7/6 xl:aspect-8/6 h-full z-20"
+          ref={featureRef}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -101,7 +156,7 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
                 src={programas[selected].imagen.url}
                 alt={programas[selected].imagen.alt || ""}
                 onPointerDown={() => autoplayPlugin.stop()}
-                className="absolute top-0 left-0 h-full w-full object-cover [object-position:50%_0%] rounded-lg border-2 border-white"
+                className="absolute top-0 left-0 h-full w-full object-cover [object-position:50%_20%] rounded-lg border-2 border-white"
                 custom={direction}
                 variants={imageVariants}
                 initial="enter"
@@ -118,20 +173,14 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
 
         <div
           ref={emblaRef}
-          className="overflow-hidden h-full rounded-xl
-                    ml-0               
-                    md:ml-0           
-                    lg:ml-[clamp(1rem,20vw,21%)]
-                    xl:ml-[clamp(1rem,20vw,17.5%)]
-                    2xl:ml-[clamp(1rem,20vw,13%)]"
+          className="overflow-hidden h-full rounded-xl"
+          style={{ paddingLeft: padLeft }}
         >
-          <div className="flex items-center h-full gap-4">
-            {slides.map((p, i) => (
+          <div ref={trackRef} className="flex items-center h-full gap-4">
+            {slides.map((p) => (
               <div
-                key={p.id}
-                className={`flex-shrink-0 aspect-5/7 h-full relative rounded-lg${
-                  i === 0 ? " ml-[1rem]" : ""
-                }`}
+                key={useId()}
+                className="flex-shrink-0 aspect-5/7 h-full relative rounded-lg"
               >
                 <img
                   src={p.imagen.url}
