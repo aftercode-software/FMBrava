@@ -2,8 +2,6 @@
 import Container from "../containers/Container.astro";
 import HeaderRRSS from "./HeaderRRSS.astro";
 import InstagramCarousel from "./InstagramCarousel";
-import TiktokCarousel from "./TiktokCarousel";
-import type { InstagramResponse } from "@/utils/fetchRRSS";
 import { fetchRRSS } from "@/utils/fetchRRSS";
 
 const rrss = await fetchRRSS();

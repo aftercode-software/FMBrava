@@ -5,8 +5,6 @@ export default function Player() {
 
   return (
     <div className="w-full h-full relative rounded-xl">
-      {/* <div className="hidden md:block bg-rojo h-[80%] w-[60%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[300px] pointer-events-none"></div> */}
-
       <div
         className={`w-full h-[30vh] md:h-[50vh] rounded-xl overflow-hidden z-50 aspect-video ${
           scrollY > 400 ? "invisible" : ""

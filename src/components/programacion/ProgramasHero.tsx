@@ -52,9 +52,6 @@ export default function ProgramasHero({ programas }: Props) {
 
             <div className="gap-6 flex flex-wrap items-center text-lg md:text-xl font-semibold text-white/90 mb-2">
               <div className="flex flex-wrap md:flex-row items-center gap-2 md:gap-6 font-ibm text-xl mt-2">
-                {/* <span className="text-green-400 font-medium text-lg md:text-xl uppercase">
-                  100% match
-                </span> */}
                 <span className="font-bold flex flex-wrap gap-1 items-center text-base lg:text-xl font-ibm text-white uppercase">
                   <p>
                     {(() => {
@@ -82,7 +79,7 @@ export default function ProgramasHero({ programas }: Props) {
               </div>
             </div>
 
-            <p className="text-2xl text-[#F6F6F6]/68 lg:text-xl tracking-tight font-ibm mt-2">
+            <p className="text-xl text-[#F6F6F6]/68 lg:text-xl tracking-tight font-ibm mt-2">
               {selected?.descripcion}
             </p>
             <div className="mt-4 flex flex-wrap gap-2">

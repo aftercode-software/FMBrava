@@ -15,7 +15,8 @@ import Badge from "./Badge";
       allowfullscreen="true"></iframe>
   </div>
   <div
-    class="flex items-center justify-center md:justify-start gap-2 cursor-move p-2 md:p-4 pt-1 md:pt-2"
+    id="bottomBar"
+    class="flex items-center justify-center md:justify-start gap-2 cursor-move p-2 md:p-4 pt-1 md:pt-2 touch-none"
   >
     <Badge className="animate-pulse w-fit text-xs sm:text-sm"> EN VIVO </Badge>
     <p
@@ -28,47 +29,96 @@ import Badge from "./Badge";
 
 <script>
   let isDragging = false;
-  let currentX = 0;
-  let currentY = 0;
-  let initialX = 0;
-  let initialY = 0;
-  let xOffset = 0;
-  let yOffset = 0;
+  let startX = 0,
+    startY = 0;
+  let curX = 0,
+    curY = 0;
+  let offsetX = 0,
+    offsetY = 0;
 
-  const miniPlayer = document.getElementById("miniPlayer");
-  const dragHandle = document.getElementById("dragHandle");
-  const bottomSection = miniPlayer?.querySelector(".flex.items-center");
+  const miniPlayer = document.getElementById("miniPlayer")!;
+  const bottomBar = document.getElementById("bottomBar")!;
 
-  dragHandle?.addEventListener("mousedown", dragStart);
-  bottomSection?.addEventListener("mousedown", dragStart);
-  document.addEventListener("mousemove", drag);
-  document.addEventListener("mouseup", dragEnd);
+  let base = { left: 0, top: 0, right: 0, bottom: 0, width: 0, height: 0 };
 
-  function dragStart(e: Event) {
-    const mouseEvent = e as MouseEvent;
-    initialX = mouseEvent.clientX - xOffset;
-    initialY = mouseEvent.clientY - yOffset;
+  function computeBaseRect() {
+    const prev = miniPlayer.style.transform;
+    miniPlayer.style.transform = "translate(0px, 0px)";
+    const r = miniPlayer.getBoundingClientRect();
+    base = {
+      left: r.left,
+      top: r.top,
+      right: r.right,
+      bottom: r.bottom,
+      width: r.width,
+      height: r.height,
+    };
+
+    miniPlayer.style.transform = prev;
+  }
+  computeBaseRect();
+
+  function clampToViewport(x: number, y: number) {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    const minX = -base.left;
+    const maxX = vw - base.right;
+    const minY = -base.top;
+    const maxY = vh - base.bottom;
+
+    return [
+      Math.min(Math.max(x, minX), maxX),
+      Math.min(Math.max(y, minY), maxY),
+    ];
+  }
+
+  function onPointerDown(e: any) {
+    if (e.pointerType === "touch") e.preventDefault();
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+
+    startX = e.clientX - offsetX;
+    startY = e.clientY - offsetY;
     isDragging = true;
+
+    miniPlayer.style.pointerEvents = "none";
   }
 
-  function drag(e: MouseEvent) {
-    if (isDragging) {
-      e.preventDefault();
-      currentX = e.clientX - initialX;
-      currentY = e.clientY - initialY;
-
-      xOffset = currentX;
-      yOffset = currentY;
-
-      if (miniPlayer) {
-        miniPlayer.style.transform = `translate(${currentX}px, ${currentY}px)`;
-      }
-    }
-  }
-
-  function dragEnd() {
-    initialX = currentX;
-    initialY = currentY;
+  function onPointerUp(e: any) {
     isDragging = false;
+    miniPlayer.style.pointerEvents = "";
   }
+
+  function onPointerMove(e: {
+    preventDefault: () => void;
+    clientX: number;
+    clientY: number;
+  }) {
+    if (!isDragging) return;
+    e.preventDefault();
+
+    curX = e.clientX - startX;
+    curY = e.clientY - startY;
+
+    [curX, curY] = clampToViewport(curX, curY);
+
+    offsetX = curX;
+    offsetY = curY;
+
+    miniPlayer.style.transform = `translate(${curX}px, ${curY}px)`;
+  }
+
+  bottomBar.addEventListener("pointerdown", onPointerDown, { passive: false });
+  bottomBar.addEventListener("pointermove", onPointerMove, { passive: false });
+  bottomBar.addEventListener("pointerup", onPointerUp, { passive: false });
+  bottomBar.addEventListener("pointercancel", onPointerUp, { passive: false });
+  bottomBar.addEventListener("lostpointercapture", onPointerUp, {
+    passive: false,
+  });
+
+  window.addEventListener("resize", () => {
+    computeBaseRect();
+    [offsetX, offsetY] = clampToViewport(offsetX, offsetY);
+    miniPlayer.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+  });
 </script>
