@@ -142,7 +142,7 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
   return (
     <Container className="flex flex-col w-full">
       <section className="relative h-[30rem] md:h-[30rem] overflow-hidden mt-4">
-        <div className="absolute top-0 left-0 aspect-5/7 lg:aspect-7/6 xl:aspect-8/6 h-full bg-black z-10 ml-4" />
+        <div className="absolute top-0 left-0 aspect-5/7 lg:aspect-7/6 xl:aspect-8/6 h-full bg-negro-900 z-10 ml-4" />
         <div
           className="absolute top-0 left-0 aspect-5/7 lg:aspect-7/6 xl:aspect-8/6 h-full z-20"
           ref={featureRef}
@@ -180,7 +180,9 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
             {slides.map((p) => (
               <div
                 key={useId()}
-                className="flex-shrink-0 aspect-5/7 h-full relative rounded-lg"
+                className={`flex-shrink-0 aspect-5/7 h-full relative rounded-lg${
+                  slides.indexOf(p) === 0 ? " ml-[0.5rem]" : ""
+                }`}
               >
                 <img
                   src={p.imagen.url}
