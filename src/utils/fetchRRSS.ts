@@ -15,7 +15,17 @@ export interface InstagramPost {
 
 export type InstagramResponse = InstagramPost[];
 
-export async function fetchRRSS(): Promise<InstagramResponse> {
+let cacheData: InstagramResponse | null = null;
+let cacheTimestamp: number = 0;
+const CACHE_DURATION = 30 * 60 * 1000;
+
+export async function fetchRRSS(): Promise<InstagramResponse | null> {
+  const now = Date.now();
+
+  if (cacheData && now - cacheTimestamp < CACHE_DURATION) {
+    return cacheData;
+  }
+
   if (import.meta.env.SSR) {
     const response = await fetch(
       `https://graph.facebook.com/v19.0/${BRAVA_ID}/media?fields=user_id,caption,media_type,media_url,permalink,timestamp,like_count,comments_count&limit=10`,
@@ -31,7 +41,9 @@ export async function fetchRRSS(): Promise<InstagramResponse> {
     }
 
     const bravaData = await response.json();
-    return bravaData.data;
+    cacheData = bravaData.data;
+    cacheTimestamp = now;
+    return cacheData;
   }
 
   const response = await fetch("/api/rrss/instagram");
@@ -40,5 +52,7 @@ export async function fetchRRSS(): Promise<InstagramResponse> {
   }
 
   const bravaData = await response.json();
-  return bravaData.data;
+  cacheData = bravaData.data;
+  cacheTimestamp = now;
+  return cacheData;
 }
