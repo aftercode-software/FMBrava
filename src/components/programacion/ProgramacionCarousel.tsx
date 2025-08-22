@@ -33,7 +33,7 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
     () =>
       Autoplay({
         delay: 3000,
-        stopOnInteraction: true,
+        stopOnInteraction: false,
       }),
     []
   );
