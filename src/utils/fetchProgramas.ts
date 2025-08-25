@@ -63,8 +63,12 @@ export async function fetchProgramas(): Promise<Programa[]> {
     })
   );
 
-  cachedProgramas = programas;
+  cachedProgramas = programas.sort((a, b) =>
+    a.horarioInicio.localeCompare(b.horarioInicio)
+  );
   cacheTimestamp = now;
 
-  return programas;
+  return programas.sort((a, b) =>
+    a.horarioInicio.localeCompare(b.horarioInicio)
+  );
 }

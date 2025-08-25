@@ -74,6 +74,8 @@ export default function RadioSelector() {
                 className={`group w-full flex items-center gap-4 p-4 rounded-xl transition-all duration-300 ease-out hover:bg-white/5 hover:scale-[1.02] $`}
                 onClick={() => {
                   setIsOpen(false);
+                  if ((profile.id = 2))
+                    window.open("https://www.fmayer.net.ar/", "_blank");
                 }}
                 style={{
                   animationDelay: `${index * 50}ms`,
@@ -101,7 +103,15 @@ export default function RadioSelector() {
           </div>
 
           <div className="p-4 border-t border-gray-800/50">
-            <button className="w-full rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white font-semibold py-4 px-6 transition-all duration-200 hover:scale-[1.02] uppercase tracking-wide text-sm">
+            <button
+              className="w-full rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white font-semibold py-4 px-6 transition-all duration-200 hover:scale-[1.02] uppercase tracking-wide text-sm"
+              onClick={() =>
+                window.open(
+                  "https://api.whatsapp.com/send?phone=542613440000&text=Hola%20Brava!!",
+                  "_blank"
+                )
+              }
+            >
               <span className="flex items-center justify-center gap-2">
                 Escribinos
               </span>
