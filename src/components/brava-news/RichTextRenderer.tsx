@@ -1,9 +1,5 @@
 import { fetchImagenPresign } from "@/utils/fetchImagen";
-import {
-  createElement,
-  Fragment,
-  type ReactNode,
-} from "react";
+import { createElement, Fragment, type ReactNode } from "react";
 import DentroBlog from "../ads/DentroBlog";
 import type {
   BlogEntryProps,
@@ -117,7 +113,6 @@ export function RichTextRenderer({
         );
       }
       case "upload": {
-        console.log("upload node:", node);
         const { url, alt } = (node as RichTextUpload).value;
         if (!url) {
           return null;
