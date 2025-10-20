@@ -16,6 +16,6 @@ COPY --from=builder /app/.env ./
 RUN npm ci --production
 
 ENV NODE_ENV=production
-ENV HOST=0.0.0.0  
+ENV HOST=0.0.0.0
 EXPOSE 4321
 CMD ["node", "dist/server/entry.mjs"]

@@ -60,15 +60,15 @@ export async function fetchProgramas(): Promise<Programa[]> {
           alt: item.imagenPrincipal.alt || "",
         },
       };
-    })
+    }),
   );
 
   cachedProgramas = programas.sort((a, b) =>
-    a.horarioInicio.localeCompare(b.horarioInicio)
+    a.horarioInicio.localeCompare(b.horarioInicio),
   );
   cacheTimestamp = now;
 
   return programas.sort((a, b) =>
-    a.horarioInicio.localeCompare(b.horarioInicio)
+    a.horarioInicio.localeCompare(b.horarioInicio),
   );
 }

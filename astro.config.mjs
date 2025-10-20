@@ -9,8 +9,8 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   integrations: [react()],
   output: "server",
-  adapter: vercel({}),
-  // adapter: node({ mode: "standalone" }),
+  // adapter: vercel({}),
+  adapter: node({ mode: "standalone" }),
   vite: {
     plugins: [tailwindcss()],
   },

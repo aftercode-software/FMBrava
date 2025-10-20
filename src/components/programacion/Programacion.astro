@@ -4,11 +4,14 @@ import Container from "../containers/Container.astro";
 import ProgramacionCarousel from "./ProgramacionCarousel";
 
 const programas = await fetchProgramas();
+if (!programas || programas.length === 0) {
+    return;
+}
 ---
 
 <Container class="flex flex-col w-full">
-  <h2 class="font-inter text-white font-bold text-2xl uppercase">
-    Nuestros programas
-  </h2>
-  <ProgramacionCarousel programas={programas} client:only="react" />
+    <h2 class="font-inter text-white font-bold text-2xl uppercase">
+        Nuestros programas
+    </h2>
+    <ProgramacionCarousel programas={programas} client:only="react" />
 </Container>

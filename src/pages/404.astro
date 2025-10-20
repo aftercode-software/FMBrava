@@ -1,0 +1,84 @@
+---
+import Button from "@/components/Button.astro";
+import Layout from "@/layouts/Layout.astro";
+import { Home, Radio } from "@lucide/astro";
+---
+
+<Layout
+    title="Página no encontrada"
+    description="Ups... parece que esta frecuencia no existe. La página que buscás no está disponible o fue movida a otra dirección."
+    pathname="/404"
+    keywords={[
+        "FM Brava 94.9",
+        "404 Brava",
+        "página no encontrada",
+        "error 404 Mendoza",
+        "Brava radio",
+        "Brava Mendoza",
+        "frecuencia Brava",
+        "sitio oficial FM Brava",
+    ]}
+>
+    <div
+        class="min-h-screen bg-negro-900 text-white flex items-center justify-center px-4 relative overflow-hidden"
+    >
+        <div class="absolute inset-0 opacity-10">
+            <div
+                class="absolute top-20 left-10 w-72 h-72 bg-rojo-500 rounded-full blur-[120px]"
+            >
+            </div>
+            <div
+                class="absolute bottom-20 right-10 w-96 h-96 bg-amarillo-500 rounded-full blur-[150px]"
+            >
+            </div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <p
+                class="text-2xl md:text-3xl mb-8 lg:text-4xl font-inter font-extrabold tracking-[0.15em] text-negro-400"
+            >
+                SEÑAL PERDIDA
+            </p>
+
+            <div class="mb-8">
+                <h1
+                    class="text-[12rem] md:text-[18rem] lg:text-[20rem] font-bold leading-none tracking-tight font-tusker"
+                >
+                    <span class="text-rojo-500">4</span>
+                    <span class="text-white-500">0</span>
+                    <span class="text-rojo-500">4</span>
+                </h1>
+            </div>
+
+            <div class="space-y-4 mb-12">
+                <p
+                    class="text-lg md:text-xl text-negro-300 max-w-2xl mx-auto font-inter"
+                >
+                    Parece que esta frecuencia no existe. La página que buscás
+                    no está disponible o fue movida a otra dirección.
+                </p>
+            </div>
+
+            <div
+                class="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+                <Button href="/" variant="dark">
+                    <Home class="w-5 h-5 mr-2 md:mt-1" />
+                    Volver al inicio
+                </Button>
+                <Button
+                    href="https://www.instagram.com/bravaoficial/"
+                    target="_blank"
+                    variant="light"
+                >
+                    <Radio class="w-5 h-5 mr-2" />
+                    Seguinos
+                </Button>
+            </div>
+
+            <p class="mt-12 text-negro-400 text-sm tracking-wide font-inter">
+                FM BRAVA 94.9 • MENDOZA
+            </p>
+        </div>
+    </div>
+</Layout>
