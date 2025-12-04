@@ -40,8 +40,10 @@ export async function fetchPlaylists(): Promise<Playlist[]> {
         nombre: item.nombre,
         link: item.link,
         imagen: {
-          url: (await fetchImagenPresign(item.imagen.url)) || "",
-          alt: item.imagen.alt || "",
+          url: item.imagen?.url
+            ? await fetchImagenPresign(item.imagen.url)
+            : "",
+          alt: item.imagen?.alt || "",
         },
       };
     })

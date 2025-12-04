@@ -56,19 +56,21 @@ export async function fetchProgramas(): Promise<Programa[]> {
         fechaFin: item.fechaFin,
         participantes: item.participantes,
         imagen: {
-          url: (await fetchImagenPresign(item.imagenPrincipal.url)) || "",
-          alt: item.imagenPrincipal.alt || "",
+          url: item.imagenPrincipal?.url
+            ? await fetchImagenPresign(item.imagenPrincipal.url)
+            : "",
+          alt: item.imagenPrincipal?.alt || "",
         },
       };
-    }),
+    })
   );
 
   cachedProgramas = programas.sort((a, b) =>
-    a.horarioInicio.localeCompare(b.horarioInicio),
+    a.horarioInicio.localeCompare(b.horarioInicio)
   );
   cacheTimestamp = now;
 
   return programas.sort((a, b) =>
-    a.horarioInicio.localeCompare(b.horarioInicio),
+    a.horarioInicio.localeCompare(b.horarioInicio)
   );
 }

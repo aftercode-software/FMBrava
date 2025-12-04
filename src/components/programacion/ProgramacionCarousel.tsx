@@ -196,7 +196,7 @@ export default function ProgramacionCarousel({ programas, onSelect }: Props) {
       </section>
 
       {programas[selected] && (
-        <div className="mt-3 lg:max-w-[40%] rounded-lg text-white ">
+        <div className="mt-3 lg:max-w-[35%] rounded-lg text-white ">
           <section className="flex flex-wrap items-center gap-2 *:md:text-xl uppercase">
             {onSelect ? null : (
               <>
